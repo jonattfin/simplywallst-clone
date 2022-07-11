@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Divider, Grid, Stack } from "@mui/material";
+import { Divider, Grid, Stack, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 
 import RadialBarComponent from "./radialBar-component";
@@ -47,25 +47,57 @@ export default function DashboardContainer() {
               <SpecialDivider />
             </Grid>
             <Grid item xs={10}>
-              Earnings per share (EPS)
+              <Tooltip
+                title="Earnings per share (EPS) is calculated as a company's profit divided by the outstanding shares of its common stock. 
+                The resulting number serves as an indicator of a company's profitability. 
+                It is common for a company to report EPS that is adjusted for extraordinary items and potential share dilution."
+                placement="top"
+                arrow
+              >
+                <SpecialParagraph>Earnings per share (EPS)</SpecialParagraph>
+              </Tooltip>
             </Grid>
             <Grid item xs={2}>
               1.12
             </Grid>
             <Grid item xs={10}>
-              Gross Margin
+              <Tooltip
+                title="Earnings per share (EPS) is calculated as a company's profit divided by the outstanding shares of its common stock. 
+                The resulting number serves as an indicator of a company's profitability. 
+                It is common for a company to report EPS that is adjusted for extraordinary items and potential share dilution."
+                placement="top"
+                arrow
+              >
+                <SpecialParagraph>Gross Margin</SpecialParagraph>
+              </Tooltip>
             </Grid>
             <Grid item xs={2}>
               24.65%
             </Grid>
             <Grid item xs={10}>
-              Net Profit Margin
+              <Tooltip
+                title="Earnings per share (EPS) is calculated as a company's profit divided by the outstanding shares of its common stock. 
+                The resulting number serves as an indicator of a company's profitability. 
+                It is common for a company to report EPS that is adjusted for extraordinary items and potential share dilution."
+                placement="top"
+                arrow
+              >
+                <SpecialParagraph>Net Profit Margin</SpecialParagraph>
+              </Tooltip>
             </Grid>
             <Grid item xs={2}>
               1.12
             </Grid>
             <Grid item xs={10}>
-              Debt/Equity Ratio
+              <Tooltip
+                title="Earnings per share (EPS) is calculated as a company's profit divided by the outstanding shares of its common stock. 
+                The resulting number serves as an indicator of a company's profitability. 
+                It is common for a company to report EPS that is adjusted for extraordinary items and potential share dilution."
+                placement="top"
+                arrow
+              >
+                <SpecialParagraph>Debt/Equity Ratio</SpecialParagraph>
+              </Tooltip>
             </Grid>
             <Grid item xs={2}>
               333.3%
@@ -95,4 +127,9 @@ export default function DashboardContainer() {
 
 const SpecialDivider = styled(Divider)`
   margin: 10px 0px;
+`;
+
+const SpecialParagraph = styled.p`
+  display: inline;
+  padding: 10px;
 `;
