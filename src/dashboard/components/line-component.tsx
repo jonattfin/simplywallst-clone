@@ -8,10 +8,20 @@ const commonProperties = {
   enableSlices: "x",
 };
 
-export default function LineComponent() {
+export interface LineProps {
+  height: number;
+  width: number;
+}
+
+export default function LineComponent(props?: LineProps) {
+  const lineProps = {
+    ...commonProperties,
+    ...props,
+  };
+
   return (
     <Line
-      {...commonProperties}
+      {...lineProps}
       data={generateData()}
       xScale={{
         type: "time",

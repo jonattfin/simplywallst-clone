@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import {
   CompetitorsComponent,
   HeaderComponent,
+  HistoryComponent,
   MenuComponent,
   OverviewComponent,
 } from "./components";
@@ -29,10 +30,16 @@ export default function DashboardComponent() {
             <OverviewComponent />
           </InnerContainer>
         </Paper>
-        <br/>
+        <br />
         <Paper elevation={3}>
           <InnerContainer>
             <CompetitorsComponent />
+          </InnerContainer>
+        </Paper>
+        <br />
+        <Paper elevation={3}>
+          <InnerContainer>
+            <HistoryComponent />
           </InnerContainer>
         </Paper>
       </Grid>
