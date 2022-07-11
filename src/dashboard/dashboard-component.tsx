@@ -1,7 +1,7 @@
 import { Grid, Paper, Stack } from "@mui/material";
 // import styled from "@emotion/styled";
 
-import { HeaderComponent } from "./components";
+import { HeaderComponent, MenuComponent } from "./components";
 
 export default function DashboardComponent() {
   return (
@@ -10,7 +10,9 @@ export default function DashboardComponent() {
         <HeaderComponent />
       </Grid>
       <Grid item xs={2}>
-        <Paper elevation={3}>{"menu"}</Paper>
+        <Paper elevation={3}>
+          <MenuComponent/>
+        </Paper>
       </Grid>
       <Grid item xs>
         <Paper elevation={3}>{"content"}</Paper>
