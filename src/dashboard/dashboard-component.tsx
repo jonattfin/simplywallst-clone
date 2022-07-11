@@ -2,6 +2,7 @@ import { Grid, Paper } from "@mui/material";
 import styled from "@emotion/styled";
 
 import {
+  CompanyComponent,
   CompetitorsComponent,
   HeaderComponent,
   HistoryComponent,
@@ -40,6 +41,12 @@ export default function DashboardComponent() {
         <Paper elevation={3}>
           <InnerContainer>
             <HistoryComponent />
+          </InnerContainer>
+        </Paper>
+        <br />
+        <Paper elevation={3}>
+          <InnerContainer>
+            <CompanyComponent />
           </InnerContainer>
         </Paper>
       </Grid>

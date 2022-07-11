@@ -15,6 +15,8 @@ import {
   Stack,
 } from "@mui/material";
 
+const tabValues = ["1M", "3M", "1Y", "3Y", "5Y", "Max"];
+
 export default function HistoryComponent() {
   const [value, setValue] = useState(0);
 
@@ -28,12 +30,9 @@ export default function HistoryComponent() {
       <Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange} centered>
-            <Tab label="1M" />
-            <Tab label="3M" />
-            <Tab label="1Y" />
-            <Tab label="3Y" />
-            <Tab label="5Y" />
-            <Tab label="Max" />
+            {tabValues.map((tabValue, index) => (
+              <Tab key={`tab_${index}`} label={tabValue} />
+            ))}
           </Tabs>
         </Box>
         <Grid container spacing={2} justifyContent="center" alignItems="center">
@@ -42,15 +41,11 @@ export default function HistoryComponent() {
           </Grid>
           <Grid item xs>
             <ContentDiv>
-              <TabPanel value={value} index={0}>
-                <LineComponent {...{ height: 100, width: 800 }} />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <LineComponent {...{ height: 100, width: 800 }} />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <LineComponent {...{ height: 100, width: 800 }} />
-              </TabPanel>
+              {tabValues.map((_tabValue, index) => (
+                <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
+                  <LineComponent {...{ height: 100, width: 800 }} />
+                </TabPanel>
+              ))}
             </ContentDiv>
           </Grid>
           <Grid item xs={3}>
@@ -114,7 +109,7 @@ interface TabPanelProps {
 function TabPanel(props: TabPanelProps) {
   const { children, value, index } = props;
 
-  return value === index ? <Box>{children}</Box> : <div>&nbsp;</div>;
+  return value === index ? <Box>{children}</Box> : <Fragment />;
 }
 
 // Styled Components
