@@ -1,21 +1,33 @@
-import { Grid, Paper, Stack } from "@mui/material";
-// import styled from "@emotion/styled";
+import { Grid, Paper } from "@mui/material";
+import styled from "@emotion/styled";
 
-import { HeaderComponent, MenuComponent } from "./components";
+import {
+  HeaderComponent,
+  MenuComponent,
+  OverviewComponent,
+} from "./components";
 
 export default function DashboardComponent() {
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item xs={12}>
-        <HeaderComponent />
+        <Paper elevation={3}>
+          <InnerContainer>
+            <HeaderComponent />
+          </InnerContainer>
+        </Paper>
       </Grid>
       <Grid item xs={2}>
         <Paper elevation={3}>
-          <MenuComponent/>
+          <MenuComponent />
         </Paper>
       </Grid>
       <Grid item xs>
-        <Paper elevation={3}>{"content"}</Paper>
+        <Paper elevation={3}>
+          <InnerContainer>
+            <OverviewComponent />
+          </InnerContainer>
+        </Paper>
       </Grid>
     </Grid>
   );
@@ -23,6 +35,6 @@ export default function DashboardComponent() {
 
 // Styled Components
 
-function renderContent(content: string, color: string) {
-  return;
-}
+const InnerContainer = styled.div`
+  padding: 1% 3%;
+`;

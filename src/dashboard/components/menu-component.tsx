@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { MenuList, MenuItem, ListItemText } from "@mui/material";
 import { useState } from "react";
 
@@ -16,6 +15,7 @@ export default function MenuComponent() {
     <MenuList>
       {menuItems.map((menuItem, index) => (
         <MenuItem
+          key={`menuItem_${index}`}
           selected={index === selectedItem}
           onClick={(event) => handleMenuItemClick(event, index)}
         >
@@ -40,10 +40,5 @@ const menuItems = [
   "Other Information",
 ];
 
-// Styled Components
 
-const SelectedMenuItem = styled(MenuItem)`
-  /* border-left: 2px solid goldenrod; */
-`;
 
-const NormalMenuItem = styled(MenuItem)``;
