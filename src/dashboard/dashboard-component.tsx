@@ -2,6 +2,7 @@ import { Grid, Paper } from "@mui/material";
 import styled from "@emotion/styled";
 
 import {
+  CompetitorsComponent,
   HeaderComponent,
   MenuComponent,
   OverviewComponent,
@@ -9,7 +10,7 @@ import {
 
 export default function DashboardComponent() {
   return (
-    <Grid container spacing={2} justifyContent="center" alignItems="center">
+    <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
       <Grid item xs={12}>
         <Paper elevation={3}>
           <InnerContainer>
@@ -26,6 +27,12 @@ export default function DashboardComponent() {
         <Paper elevation={3}>
           <InnerContainer>
             <OverviewComponent />
+          </InnerContainer>
+        </Paper>
+        <br/>
+        <Paper elevation={3}>
+          <InnerContainer>
+            <CompetitorsComponent />
           </InnerContainer>
         </Paper>
       </Grid>

@@ -3,7 +3,7 @@ import { Button, Grid, Stack } from "@mui/material";
 import { Fragment } from "react";
 import RadarComponent from "./radar-component";
 
-export default function DashboardContainer() {
+export default function OverviewContainer() {
   return (
     <Fragment>
       <Grid container>
