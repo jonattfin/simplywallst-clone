@@ -9,6 +9,7 @@ import {
   HistoryComponent,
   MenuComponent,
   OverviewComponent,
+  OwnershipComponent,
 } from "./components";
 
 import MainHeaderComponent from "./header-component";
@@ -20,6 +21,7 @@ const PaperComponents: any[] = [
   HistoryComponent,
   CompanyComponent,
   FundamentalsComponent,
+  OwnershipComponent,
 ];
 
 export default function DashboardComponent() {

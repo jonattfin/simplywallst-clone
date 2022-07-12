@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Divider, Grid, Stack, Tooltip } from "@mui/material";
+import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 
 import RadialBarComponent from "./radialBar-component";
