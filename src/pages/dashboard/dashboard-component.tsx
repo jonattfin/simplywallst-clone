@@ -12,7 +12,6 @@ import {
   OwnershipComponent,
 } from "./components";
 
-import MainHeaderComponent from "./header-component";
 import { Fragment } from "react";
 
 const PaperComponents: any[] = [
@@ -27,9 +26,6 @@ const PaperComponents: any[] = [
 export default function DashboardComponent() {
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
-      <Grid item xs={12}>
-        <MainHeaderComponent />
-      </Grid>
       <Grid item xs={12}>
         <Paper elevation={3}>
           <InnerContainer>

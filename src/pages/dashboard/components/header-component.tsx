@@ -1,7 +1,8 @@
 import { Button, Breadcrumbs, Stack, Link } from "@mui/material";
 import styled from "@emotion/styled";
-import LineComponent from "./line-component";
 import { Fragment } from "react";
+
+import { LineComponent } from "../../../_shared_";
 
 export default function HeaderComponent() {
   return (

@@ -2,8 +2,6 @@ import { Fragment, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-
-import LineComponent from "./line-component";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -14,6 +12,8 @@ import {
   ListItemText,
   Stack,
 } from "@mui/material";
+
+import { LineComponent } from "../../../_shared_";
 
 const tabValues = ["1M", "3M", "1Y", "3Y", "5Y", "Max"];
 

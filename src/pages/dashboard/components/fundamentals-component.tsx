@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 
-import RadialBarComponent from "./radialBar-component";
-import BarComponent from "./bar-component";
+import { RadialBarComponent, BarComponent } from "../../../_shared_";
 
 export default function DashboardContainer() {
   return (

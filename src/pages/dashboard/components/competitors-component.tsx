@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
 import { Fragment } from "react";
-import RadarComponent from "./radar-component";
+import { RadarComponent } from "../../../_shared_";
 
 export default function Competitors() {
   return (

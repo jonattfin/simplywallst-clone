@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { Button, Grid, Stack } from "@mui/material";
 import { Fragment } from "react";
-import RadarComponent from "./radar-component";
+
+import { RadarComponent } from "../../../_shared_";
 
 export default function OverviewContainer() {
   return (

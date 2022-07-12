@@ -9,7 +9,8 @@ import {
   TableRow,
 } from "@mui/material";
 import { Fragment } from "react";
-import LineComponent from "./line-component";
+
+import { LineComponent } from "../../../_shared_";
 
 export default function OwnershipComponent() {
   return (
