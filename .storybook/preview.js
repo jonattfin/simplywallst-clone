@@ -1,6 +1,8 @@
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+const backgroundColor = "#151B24";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -18,7 +20,7 @@ export const parameters = {
     values: [
       {
         name: "SimplyWallSt",
-        value: "#151B24",
+        value: backgroundColor,
       },
     ],
   },
@@ -27,6 +29,10 @@ export const parameters = {
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+    background: {
+      default: backgroundColor,
+      paper: backgroundColor
+    },
     primary: {
       main: "#1976d2",
     },
