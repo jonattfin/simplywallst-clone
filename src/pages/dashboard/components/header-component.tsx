@@ -86,7 +86,9 @@ export default function HeaderComponent(props: HeaderProps) {
         </div>
         <div>
           <p>&nbsp;</p>
-          <LineComponent {...{ height: 20, width: 300 }} />
+          <LineContainer>
+            <LineComponent />
+          </LineContainer>
         </div>
         <div>
           <p>&nbsp;</p>
@@ -110,4 +112,9 @@ const TickerDiv = styled.div`
   padding: 20px;
   border: 1px solid white;
   border-radius: 5px;
+`;
+
+const LineContainer = styled.div`
+  height: 30px;
+  width: 400px;
 `;

@@ -27,9 +27,9 @@ export default function OwnershipComponent() {
       <p>Top 25 shareholders own 35.63% of the company</p>
       {renderShareholdersTable()}
       <p>Number of Employees</p>
-      <LineWrapper>
-        <LineComponent {...{ height: 100, width: 800 }} />
-      </LineWrapper>
+      <LineContainer>
+        <LineComponent />
+      </LineContainer>
     </Fragment>
   );
 }
@@ -169,8 +169,6 @@ const NegativeParagraph = styled.p`
   color: red;
 `;
 
-const LineWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const LineContainer = styled.div`
+  height: 100px;
 `;

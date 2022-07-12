@@ -52,7 +52,7 @@ function getCustomViewports() {
     fhd: {
       name: "FHD",
       styles: {
-        width: "1200px",
+        width: "960px",
         height: "1080px",
       },
     },

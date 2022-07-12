@@ -26,18 +26,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Fragment>
       <ThemeProvider theme={darkTheme}>
         <Grid container>
-          <Grid item xs></Grid>
-          <Grid item xs={6}>
+          <Grid item xl={3}></Grid>
+          <Grid item xl={6}>
             <nav>
               <HeaderComponent />
             </nav>
-            <br />
             <main>
               <Component {...pageProps} />
             </main>
             <footer></footer>
           </Grid>
-          <Grid item xs></Grid>
+          <Grid item xl={3}></Grid>
         </Grid>
       </ThemeProvider>
     </Fragment>

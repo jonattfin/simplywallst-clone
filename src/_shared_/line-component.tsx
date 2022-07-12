@@ -1,29 +1,21 @@
 import { NoSsr } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
-import { Line } from "@nivo/line";
+import { ResponsiveLine } from "@nivo/line";
 import _ from "lodash";
 
 const commonProperties = {
-  height: 20,
-  width: 250,
   animate: true,
   enableSlices: "x",
 };
 
-export interface LineProps {
-  height: number;
-  width: number;
-}
-
-export default function LineComponent(props?: LineProps) {
+export default function LineComponent() {
   const lineProps = {
     ...commonProperties,
-    ...props,
   };
 
   return (
     <NoSsr>
-      <Line
+      <ResponsiveLine
         {...lineProps}
         data={generateData()}
         xScale={{

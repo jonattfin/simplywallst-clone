@@ -45,22 +45,16 @@ export default function HistoryComponent(props: HistoryProps) {
           </Tabs>
         </Box>
         <Grid container spacing={2} justifyContent="center" alignItems="center">
-          <Grid item xs={3}>
-            &nbsp;
-          </Grid>
           <Grid item xs>
             <ContentDiv>
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
-                  <LineWrapper>
-                    <LineComponent {...{ height: 100, width: 800 }} />
-                  </LineWrapper>
+                  <LineContainer>
+                    <LineComponent />
+                  </LineContainer>
                 </TabPanel>
               ))}
             </ContentDiv>
-          </Grid>
-          <Grid item xs={3}>
-            &nbsp;
           </Grid>
         </Grid>
         <Grid container spacing={2} justifyContent="right" alignItems="center">
@@ -120,8 +114,6 @@ const CustomListItemText = styled(ListItemText)`
   width: 80%;
 `;
 
-const LineWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const LineContainer = styled.div`
+  height: 100px;
 `;
