@@ -57,7 +57,7 @@ function renderTransactionsTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -113,10 +113,10 @@ function renderShareholdersTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Ownership</TableCell>
+            <TableCell>Ownership</TableCell>
             <TableCell>Name</TableCell>
             <TableCell align="right">Shares</TableCell>
             <TableCell align="right">Current Value</TableCell>
@@ -127,7 +127,7 @@ function renderShareholdersTable() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="right">{row.ownership}%</TableCell>
+              <TableCell>{row.ownership}%</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell align="right">{row.shares.toLocaleString()}</TableCell>
               <TableCell align="right">
