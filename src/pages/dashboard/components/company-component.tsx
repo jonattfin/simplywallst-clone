@@ -20,7 +20,7 @@ export default function CompanyComponent() {
         </div>
         <div>
           <p>Website</p>
-          <a href="https://www.ing.com" target="_blank" rel="noopener">https://www.ing.com</a>
+          <a href="https://www.ing.com" target="_blank" rel="noreferrer">https://www.ing.com</a>
         </div>
         <p></p>
       </Stack>

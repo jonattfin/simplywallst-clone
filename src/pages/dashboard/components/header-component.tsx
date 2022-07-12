@@ -75,7 +75,7 @@ export default function HeaderComponent() {
         </div>
         <div>
           <p>&nbsp;</p>
-          <LineComponent />
+          {/* <LineComponent /> */}
         </div>
         <div>
           <p>&nbsp;</p>

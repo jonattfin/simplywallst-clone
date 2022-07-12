@@ -28,7 +28,7 @@ export default function OwnershipComponent() {
       {renderShareholdersTable()}
       <p>Number of Employees</p>
       <LineWrapper>
-        <LineComponent {...{ height: 100, width: 800 }} />
+        {/* <LineComponent {...{ height: 100, width: 800 }} /> */}
       </LineWrapper>
     </Fragment>
   );

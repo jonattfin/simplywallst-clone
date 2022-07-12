@@ -131,12 +131,12 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <Fragment key={setting}>
+                <div key={setting}>
                   {setting == "Logout" && <Divider />}
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                </Fragment>
+                </div>
               ))}
             </Menu>
           </Box>

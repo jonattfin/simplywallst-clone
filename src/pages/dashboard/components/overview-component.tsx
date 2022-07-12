@@ -39,7 +39,7 @@ export default function OverviewContainer() {
         <Grid item xs>
           <Stack spacing={2}>
             <RadarContainer>
-              <RadarComponent {...{ width: 200, height: 200 }} />
+              {/* <RadarComponent {...{ width: 200, height: 200 }} /> */}
             </RadarContainer>
             <p>Snowflake Analysis</p>
             <p>Undervalued with excellent balance sheet and pays a dividend.</p>
