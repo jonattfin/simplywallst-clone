@@ -40,13 +40,13 @@ export default function HeaderComponent() {
         justifyContent="right"
         alignItems="center"
       >
-        <Button variant="contained" size="small" startIcon={<StarIcon />}>
+        <Button variant="outlined" size="small" startIcon={<StarIcon />}>
           Add to watchlist
         </Button>
-        <Button variant="contained" size="small">
+        <Button variant="outlined" size="small">
           Add to portfolio
         </Button>
-        <Button variant="contained" size="small">
+        <Button variant="outlined" size="small">
           ...
         </Button>
       </Stack>

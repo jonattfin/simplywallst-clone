@@ -31,7 +31,7 @@ const darkTheme = createTheme({
     mode: "dark",
     background: {
       default: backgroundColor,
-      paper: backgroundColor
+      paper: backgroundColor,
     },
     primary: {
       main: "#1976d2",

@@ -44,7 +44,9 @@ export default function HistoryComponent() {
             <ContentDiv>
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
-                  <LineComponent {...{ height: 100, width: 800 }} />
+                  <LineWrapper>
+                    <LineComponent {...{ height: 100, width: 800 }} />
+                  </LineWrapper>
                 </TabPanel>
               ))}
             </ContentDiv>
@@ -125,4 +127,10 @@ const ContentDiv = styled.div`
 
 const CustomListItemText = styled(ListItemText)`
   width: 80%;
+`;
+
+const LineWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

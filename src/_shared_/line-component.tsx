@@ -1,3 +1,4 @@
+import { linearGradientDef } from "@nivo/core";
 import { Line } from "@nivo/line";
 import _ from "lodash";
 
@@ -30,18 +31,13 @@ export default function LineComponent(props?: LineProps) {
         precision: "day",
       }}
       xFormat="time:%Y-%m-%d"
-      yScale={{
-        type: "linear",
-      }}
       axisLeft={{
         legend: "linear scale",
-        legendOffset: 12,
       }}
       axisBottom={{
         format: "%b %d",
         tickValues: "every 2 days",
         legend: "time scale",
-        legendOffset: -12,
       }}
       enablePointLabel={true}
       enableGridX={false}
@@ -54,6 +50,19 @@ export default function LineComponent(props?: LineProps) {
       }}
       useMesh={true}
       enableSlices={false}
+      enableArea={true}
+      yScale={{
+        type: "linear",
+        stacked: true,
+      }}
+      colors={['goldenrod']}
+      defs={[
+        linearGradientDef("gradientA", [
+          { offset: 0, color: "inherit" },
+          { offset: 100, color: "inherit", opacity: 0 },
+        ]),
+      ]}
+      fill={[{ match: "*", id: "gradientA" }]}
     />
   );
 }

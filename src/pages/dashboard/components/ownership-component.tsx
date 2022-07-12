@@ -22,12 +22,14 @@ export default function OwnershipComponent() {
 
       <p>Recent Insider Transactions</p>
       {renderTransactionsTable()}
-
+      <br />
       <p>Top Shareholders</p>
       <p>Top 25 shareholders own 35.63% of the company</p>
       {renderShareholdersTable()}
       <p>Number of Employees</p>
-      <LineComponent {...{ height: 200, width: 800 }} />
+      <LineWrapper>
+        <LineComponent {...{ height: 100, width: 800 }} />
+      </LineWrapper>
     </Fragment>
   );
 }
@@ -70,7 +72,10 @@ function renderTransactionsTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow
+              key={row.name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
               <TableCell>{row.date.toDateString()}</TableCell>
               <TableCell>{row.value.toLocaleString()}</TableCell>
               <TableCell>{row.name}</TableCell>
@@ -126,7 +131,10 @@ function renderShareholdersTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow
+              key={row.name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
               <TableCell>{row.ownership}%</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell align="right">{row.shares.toLocaleString()}</TableCell>
@@ -159,4 +167,10 @@ const PositiveParagraph = styled.p`
 const NegativeParagraph = styled.p`
   display: inline;
   color: red;
+`;
+
+const LineWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
