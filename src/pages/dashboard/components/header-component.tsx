@@ -1,6 +1,7 @@
 import { Button, Breadcrumbs, Stack, Link } from "@mui/material";
 import styled from "@emotion/styled";
 import { Fragment } from "react";
+import StarIcon from '@mui/icons-material/Star';
 
 import { LineComponent } from "../../../_shared_";
 
@@ -39,7 +40,7 @@ export default function HeaderComponent() {
         justifyContent="right"
         alignItems="center"
       >
-        <Button variant="contained" size="small">
+        <Button variant="contained" size="small" startIcon={<StarIcon />}>
           Add to watchlist
         </Button>
         <Button variant="contained" size="small">

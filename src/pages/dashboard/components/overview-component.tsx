@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { Button, Grid, Stack } from "@mui/material";
 import { Fragment } from "react";
+import InfoIcon from "@mui/icons-material/Info";
+import SubjectIcon from '@mui/icons-material/Subject';
 
 import { RadarComponent } from "../../../_shared_";
 
@@ -17,7 +19,11 @@ export default function OverviewContainer() {
               Poland, Rest of Europe, North America, Latin America, Asia, and
               Australia.
             </p>
-            <p>About the company</p>
+            <div>
+              <Button variant="outlined" startIcon={<InfoIcon />} size="small">
+                About the company
+              </Button>
+            </div>
             <p>REWARDS</p>
             <ul>
               <li>Trading at 67% below our estimate of its fair value</li>
@@ -43,7 +49,11 @@ export default function OverviewContainer() {
               justifyContent="right"
               alignItems="center"
             >
-              <Button variant="outlined" size="small">
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<SubjectIcon />}
+              >
                 Data
               </Button>
               <Button variant="outlined" size="small">

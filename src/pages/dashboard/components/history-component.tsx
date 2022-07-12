@@ -12,6 +12,7 @@ import {
   ListItemText,
   Stack,
 } from "@mui/material";
+import SubjectIcon from "@mui/icons-material/Subject";
 
 import { LineComponent } from "../../../_shared_";
 
@@ -55,7 +56,11 @@ export default function HistoryComponent() {
         <Grid container spacing={2} justifyContent="right" alignItems="center">
           <Grid item xs={2}>
             <Stack spacing={2} direction="row">
-              <Button variant="outlined" size="small">
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<SubjectIcon />}
+              >
                 Data
               </Button>
               <Button variant="outlined" size="small">
