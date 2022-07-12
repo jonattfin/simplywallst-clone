@@ -1,11 +1,22 @@
 import { Button, Breadcrumbs, Stack, Link } from "@mui/material";
 import styled from "@emotion/styled";
 import { Fragment } from "react";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 
 import { LineComponent } from "../../../_shared_";
 
-export default function HeaderComponent() {
+export interface HeaderProps {
+  ticker: string;
+  name: string;
+  exchangeName: string;
+  lastPrice: number;
+  marketCap: number;
+  priceLastSevenDays: number;
+  priceLastYear: number;
+  lastUpdated: Date;
+}
+
+export default function HeaderComponent(props: HeaderProps) {
   return (
     <Fragment>
       <div>
@@ -27,10 +38,10 @@ export default function HeaderComponent() {
         justifyContent="left"
         alignItems="center"
       >
-        <TickerDiv>INGA</TickerDiv>
+        <TickerDiv>{props.ticker}</TickerDiv>
         <div>
-          <h2>ING Groep</h2>
-          <h4>ENXTAM:INGA Stock Report</h4>
+          <h2>{props.name}</h2>
+          <h4>{`${props.exchangeName}:${props.ticker} Stock Report`}</h4>
         </div>
       </Stack>
 
@@ -59,27 +70,27 @@ export default function HeaderComponent() {
       >
         <div>
           <p>LAST PRICE</p>
-          <p>€9.42</p>
+          <p>{props.lastPrice}</p>
         </div>
         <div>
           <p>MARKET CAP</p>
-          <p>€35.3b</p>
+          <p>{props.marketCap}</p>
         </div>
         <div>
           <p>7D</p>
-          <p>-0.1%</p>
+          <p>{props.priceLastSevenDays}</p>
         </div>
         <div>
           <p>1Y</p>
-          <p>-13.4%</p>
+          <p>{props.priceLastYear}</p>
         </div>
         <div>
           <p>&nbsp;</p>
-          <LineComponent {...{height: 20, width: 300}}/>
+          <LineComponent {...{ height: 20, width: 300 }} />
         </div>
         <div>
           <p>&nbsp;</p>
-          <p>UPDATED 10 Jul, 2022</p>
+          <p>UPDATED {props.lastUpdated.toDateString()}</p>
         </div>
         <div>
           <p>&nbsp;</p>

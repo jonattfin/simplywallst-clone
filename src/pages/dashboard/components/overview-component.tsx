@@ -2,23 +2,25 @@ import styled from "@emotion/styled";
 import { Button, Grid, Stack } from "@mui/material";
 import { Fragment } from "react";
 import InfoIcon from "@mui/icons-material/Info";
-import SubjectIcon from '@mui/icons-material/Subject';
+import SubjectIcon from "@mui/icons-material/Subject";
 
 import { RadarComponent } from "../../../_shared_";
 
-export default function OverviewContainer() {
+export interface OverviewProps {
+  ticker: string;
+  description: string;
+  rewards: string[];
+  risks: string[];
+}
+
+export default function OverviewContainer(props: OverviewProps) {
   return (
     <Fragment>
       <Grid container>
         <Grid item xs={8}>
           <Stack spacing={2}>
-            <p>INGA Stock Overview</p>
-            <p>
-              ING Groep N.V., a financial institution, provides various banking
-              products and services in the Netherlands, Belgium, Germany,
-              Poland, Rest of Europe, North America, Latin America, Asia, and
-              Australia.
-            </p>
+            <p>{props.ticker} Stock Overview</p>
+            <p>{props.description}</p>
             <div>
               <Button variant="outlined" startIcon={<InfoIcon />} size="small">
                 About the company
@@ -26,13 +28,15 @@ export default function OverviewContainer() {
             </div>
             <p>REWARDS</p>
             <ul>
-              <li>Trading at 67% below our estimate of its fair value</li>
-              <li>Earnings are forecast to grow 12.35% per year</li>
-              <li>Earnings grew by 48.9% over the past year</li>
+              {props.rewards.map((reward, index) => (
+                <li key={`reward_${index}`}>{reward}</li>
+              ))}
             </ul>
             <p>RISK ANALYSIS</p>
             <ul>
-              <li>Unstable dividend track record</li>
+              {props.risks.map((risk, index) => (
+                <li key={`risk_${index}`}>{risk}</li>
+              ))}
             </ul>
           </Stack>
         </Grid>

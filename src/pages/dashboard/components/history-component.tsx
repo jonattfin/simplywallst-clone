@@ -16,9 +16,17 @@ import SubjectIcon from "@mui/icons-material/Subject";
 
 import { LineComponent } from "../../../_shared_";
 
-const tabValues = ["1M", "3M", "1Y", "3Y", "5Y", "Max"];
+export interface HistoryNews {
+  date: Date;
+  type: string;
+  value: string;
+}
 
-export default function HistoryComponent() {
+export interface HistoryProps {
+  news: HistoryNews[];
+}
+
+export default function HistoryComponent(props: HistoryProps) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -73,39 +81,22 @@ export default function HistoryComponent() {
         </Grid>
         Recent News &amp; Updates
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="May 18" />
-              <ListItemText primary="Inbox" />
-              <CustomListItemText primary="ING Groep N.V. commences an Equity Buyback Plan, under the authorization approved on April 25, 2022." />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="May 09" />
-              <ListItemText primary="Inbox" />
-              <CustomListItemText primary="First quarter 2022 earnings: EPS exceeds analyst expectations" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Apr 20" />
-              <ListItemText primary="Inbox" />
-              <CustomListItemText primary="Upcoming dividend of €0.41 per share" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Apr 07" />
-              <ListItemText primary="Inbox" />
-              <CustomListItemText primary="Boursorama Société Anonyme agreed to acquire Retail Banking Business of ING Groep NV in France from ING Groep N.V. (ENXTAM:INGA) " />
-            </ListItemButton>
-          </ListItem>
+          {props.news.map((news, index) => (
+            <ListItem key={`news_${index}`} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={news.date.toDateString()} />
+                <ListItemText primary={news.type} />
+                <CustomListItemText primary={news.value} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Box>
     </Fragment>
   );
 }
+
+const tabValues = ["1M", "3M", "1Y", "3Y", "5Y", "Max"];
 
 interface TabPanelProps {
   children?: React.ReactNode;
