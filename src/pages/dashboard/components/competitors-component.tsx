@@ -16,7 +16,7 @@ export default function Competitors() {
         {competitors.map((competitor, index) => (
           <Grid item xs={3} key={`competitor_${index}`}>
             <RadarContainer>
-              {/* <RadarComponent {...{ width: 100, height: 100 }} /> */}
+              <RadarComponent {...{ width: 100, height: 100 }} />
               <CompetitorWrapperDiv>
                 <p>{competitor.name}</p>
                 <p>{competitor.marketCap}</p>

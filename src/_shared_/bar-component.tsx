@@ -1,5 +1,6 @@
 import { generateCountriesData } from "@nivo/generators";
 import { Bar } from "@nivo/bar";
+import { NoSsr } from "@mui/material";
 
 const keys = ["hot dogs", "burgers", "sandwich", "kebab", "fries", "donut"];
 
@@ -21,5 +22,9 @@ const commonProps = {
 };
 
 export default function BarComponent() {
-  return <Bar {...commonProps} groupMode="grouped" />;
+  return (
+    <NoSsr>
+      <Bar {...commonProps} groupMode="grouped" />
+    </NoSsr>
+  );
 }

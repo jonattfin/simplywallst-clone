@@ -75,7 +75,7 @@ export default function HeaderComponent() {
         </div>
         <div>
           <p>&nbsp;</p>
-          {/* <LineComponent /> */}
+          <LineComponent {...{height: 100, width: 200}}/>
         </div>
         <div>
           <p>&nbsp;</p>

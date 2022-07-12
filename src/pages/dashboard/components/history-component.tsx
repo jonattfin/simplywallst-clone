@@ -45,7 +45,7 @@ export default function HistoryComponent() {
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineWrapper>
-                    {/* <LineComponent {...{ height: 100, width: 800 }} /> */}
+                    <LineComponent {...{ height: 100, width: 800 }} />
                   </LineWrapper>
                 </TabPanel>
               ))}

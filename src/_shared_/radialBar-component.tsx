@@ -1,3 +1,4 @@
+import { NoSsr } from "@mui/material";
 import { RadialBar } from "@nivo/radial-bar";
 
 const multipleCategoriesData = [
@@ -79,5 +80,9 @@ const commonProperties = {
 };
 
 export default function RadialBarComponent() {
-  return <RadialBar {...commonProperties} />;
+  return (
+    <NoSsr>
+      <RadialBar {...commonProperties} />
+    </NoSsr>
+  );
 }

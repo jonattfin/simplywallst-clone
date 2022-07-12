@@ -1,35 +1,6 @@
-import dynamic from "next/dynamic";
+export { default as BarComponent } from "./bar-component";
+export { default as LineComponent } from "./line-component";
+export { default as RadarComponent } from "./radar-component";
+export { default as RadialBarComponent } from "./radialBar-component";
 
-export const BarComponent = getBarComponent();
-
-export const LineComponent = getLineComponent();
-
-export const RadarComponent = getRadarComponent();
-
-export const RadialBarComponent = getRadialBarComponent();
-
-export { default as HeaderComponent } from "./header-component";
-
-function getBarComponent() {
-  return dynamic(() => import("./bar-component"), {
-    ssr: false,
-  });
-}
-
-function getLineComponent() {
-  return dynamic(() => import("./line-component"), {
-    ssr: false,
-  });
-}
-
-function getRadarComponent() {
-  return dynamic(() => import("./radar-component"), {
-    ssr: false,
-  });
-}
-
-function getRadialBarComponent() {
-  return dynamic(() => import("./radialBar-component"), {
-    ssr: false,
-  });
-}
+export { default as HeaderComponent } from './header-component';

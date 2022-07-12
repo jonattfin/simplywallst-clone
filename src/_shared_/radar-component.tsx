@@ -1,3 +1,4 @@
+import { NoSsr } from "@mui/material";
 import { generateWinesTastes } from "@nivo/generators";
 import { Radar } from "@nivo/radar";
 
@@ -20,5 +21,9 @@ export default function RadarContainer(props?: RadarProps) {
     ...{ ...generateWinesTastes() },
   };
 
-  return <Radar {...radarProps} gridShape="linear" curve="catmullRomClosed" />;
+  return (
+    <NoSsr>
+      <Radar {...radarProps} gridShape="linear" curve="catmullRomClosed" />
+    </NoSsr>
+  );
 }
