@@ -70,16 +70,16 @@ export function fetchDashboardData(): DashboardDataType {
     },
     competitors: getCompetitors(),
     fundamentals: {
-      radialData: generateRadialBarData()
-    }
+      radialData: generateRadialBarData(),
+    },
   };
 }
 
 function generateData(start: number = 10): LineDataType[] {
-  const randomValue = start * 0.2;
+  const randomValue = start * 0.4;
 
   const year = 2022;
-  const months = _.range(1, 6);
+  const months = _.range(1, 12);
   const days = _.range(1, 28, 5);
 
   const data: any = [];

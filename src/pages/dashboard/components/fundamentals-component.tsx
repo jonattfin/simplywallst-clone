@@ -32,7 +32,11 @@ export default function FundamentalsComponent(data: FundamentalsDataType) {
       Earnings &amp; Revenue
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
-          <BarComponent />
+          <BarWrapper>
+            <BarContainer>
+              <BarComponent />
+            </BarContainer>
+          </BarWrapper>
         </Grid>
         <Grid item xs={6}>
           <Grid container>
@@ -149,4 +153,17 @@ const RadialBarWrapper = styled.div`
   align-items: center;
 
   padding: 20px;
+`;
+
+const BarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+`;
+
+const BarContainer = styled.div`
+  width: 300px;
+  height: 150px;
 `;

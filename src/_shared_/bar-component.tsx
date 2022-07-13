@@ -1,18 +1,15 @@
 import { generateCountriesData } from "@nivo/generators";
-import { Bar } from "@nivo/bar";
+import { ResponsiveBar } from "@nivo/bar";
 import { NoSsr } from "@mui/material";
 
-const keys = ["hot dogs", "burgers", "sandwich", "kebab", "fries", "donut"];
+const keys = ["Revenue", "Cost Of Revenue", "Gross Profit", "Other Expenses", "Earnings"];
 
 export interface BarDatum {
   [key: string]: string | number;
 }
 
 const commonProps = {
-  width: 500,
-  height: 300,
-  margin: { top: 60, right: 110, bottom: 60, left: 80 },
-  data: generateCountriesData(keys, { size: 7 }) as BarDatum[],
+  data: generateCountriesData(keys, { size: 1 }) as BarDatum[],
   indexBy: "country",
   keys,
   padding: 0.2,
@@ -24,7 +21,7 @@ const commonProps = {
 export default function BarComponent() {
   return (
     <NoSsr>
-      <Bar {...commonProps} groupMode="grouped" />
+      <ResponsiveBar {...commonProps} groupMode="grouped" />
     </NoSsr>
   );
 }
