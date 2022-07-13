@@ -17,7 +17,7 @@ import { Fragment } from "react";
 import { DashboardDataType } from "../../api/data-types";
 
 export default function DashboardComponent(data: DashboardDataType) {
-  const PaperComponents = getPaperComponents(data);
+  const AppComponents = getApplicationComponents(data);
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
@@ -34,7 +34,7 @@ export default function DashboardComponent(data: DashboardDataType) {
         </Paper>
       </Grid>
       <Grid item xs>
-        {PaperComponents.map(([CustomComponent, customProps], index) => (
+        {AppComponents.map(([CustomComponent, customProps], index) => (
           <Fragment key={`paper_${index}`}>
             <Paper elevation={3}>
               <InnerContainer>
@@ -49,8 +49,8 @@ export default function DashboardComponent(data: DashboardDataType) {
   );
 }
 
-function getPaperComponents(data: DashboardDataType) {
-  const PaperComponents: any[][] = [
+function getApplicationComponents(data: DashboardDataType) {
+  const appComponents: any[][] = [
     [OverviewComponent, data.overview],
     [CompetitorsComponent, data.competitors],
     [HistoryComponent, data.history],
@@ -60,7 +60,7 @@ function getPaperComponents(data: DashboardDataType) {
     [OwnershipComponent, data.ownership],
   ];
 
-  return PaperComponents;
+  return appComponents;
 }
 
 // Styled Components
