@@ -19,6 +19,8 @@ export interface HistoryNews {
 export interface HistoryDataType {
   news: HistoryNews[];
   history: LineDataType[];
+
+  getHistory: (numberOfYears: number) => LineDataType[];
 }
 
 export interface OverviewDataType {

@@ -41,7 +41,7 @@ export default function HistoryComponent(data: HistoryDataType) {
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineContainer>
-                    <LineComponent data={data.history}/>
+                    <LineComponent data={data.getHistory(index + 1)} />
                   </LineContainer>
                 </TabPanel>
               ))}
@@ -81,7 +81,7 @@ export default function HistoryComponent(data: HistoryDataType) {
   );
 }
 
-const tabValues = ["1M", "3M", "1Y", "3Y", "5Y", "Max"];
+const tabValues = ["1Y", "2Y", "3Y", "4Y"];
 
 interface TabPanelProps {
   children?: React.ReactNode;

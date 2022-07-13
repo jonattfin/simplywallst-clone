@@ -9,7 +9,7 @@ import {
 export function fetchDashboardData(): DashboardDataType {
   const ticker = "INGA";
 
-  const historyData = generateData(9);
+  const historyData = generateData({ start: 9 });
 
   return {
     header: {
@@ -64,51 +64,71 @@ export function fetchDashboardData(): DashboardDataType {
         },
       ],
       history: historyData,
+      getHistory: (numberOfYears) => generateData({ start: 10, numberOfYears }),
     },
     ownership: {
-      history: generateData(100000),
+      history: generateData({ start: 100000 }),
     },
     competitors: getCompetitors(),
     fundamentals: {
       radialData: generateRadialBarData(),
     },
     financialHealth: {
-      history: generateData(100, 2),
+      history: generateData({ start: 100, dimensions: 2 }),
     },
   };
 }
 
-function generateData(
-  start: number = 10,
-  dimensions: number = 1
-): LineDataType[] {
-  const randomValue = start * 0.4;
+interface HistoryData {
+  start: number;
+  dimensions?: number;
+  numberOfYears?: number;
+}
 
-  return _.range(0, dimensions).map((item) => {
+function generateData(historyData: HistoryData): LineDataType[] {
+  if (!historyData.dimensions) {
+    historyData.dimensions = 1;
+  }
+
+  if (!historyData.numberOfYears) {
+    historyData.numberOfYears = 1;
+  }
+
+  return _.range(0, historyData.dimensions).map((item) => {
     return {
       id: `INGB ${item}`,
-      data: renderData(),
+      data: getData(historyData),
     };
   });
+}
 
-  function renderData() {
-    const year = 2022;
-    const months = _.range(1, 12);
-    const days = _.range(1, 28, 5);
+function getData(historyData: HistoryData) {
+  const years = _.range(0, historyData.numberOfYears)
+    .map((year) => 2022 - year)
+    .sort((a, b) => a - b);
 
-    const data: any = [];
+  const months = _.range(1, 12);
+  const days = _.range(1, 28, 5);
+
+  const randomValue = historyData.start * 0.4;
+
+  const data: any = [];
+
+  years.forEach((year) => {
     months.forEach((month) => {
       days.forEach((day) => {
         const obj = {
           x: `${year}-${month}-${day}`,
-          y: (start + _.random(-randomValue, randomValue)).toFixed(2),
+          y: (historyData.start + _.random(-randomValue, randomValue)).toFixed(
+            2
+          ),
         };
         data.push(obj);
       });
     });
+  });
 
-    return data;
-  }
+  return data;
 }
 
 function getCompetitors(): CompetitorsDataType {
