@@ -171,5 +171,5 @@ const NegativeParagraph = styled.p`
 `;
 
 const LineContainer = styled.div`
-  height: 100px;
+  height: 150px;
 `;

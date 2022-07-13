@@ -72,33 +72,43 @@ export function fetchDashboardData(): DashboardDataType {
     fundamentals: {
       radialData: generateRadialBarData(),
     },
+    financialHealth: {
+      history: generateData(100, 2),
+    },
   };
 }
 
-function generateData(start: number = 10): LineDataType[] {
+function generateData(
+  start: number = 10,
+  dimensions: number = 1
+): LineDataType[] {
   const randomValue = start * 0.4;
 
-  const year = 2022;
-  const months = _.range(1, 12);
-  const days = _.range(1, 28, 5);
-
-  const data: any = [];
-  months.forEach((month) => {
-    days.forEach((day) => {
-      const obj = {
-        x: `${year}-${month}-${day}`,
-        y: (start + _.random(-randomValue, randomValue)).toFixed(2),
-      };
-      data.push(obj);
-    });
+  return _.range(0, dimensions).map((item) => {
+    return {
+      id: `INGB ${item}`,
+      data: renderData(),
+    };
   });
 
-  return [
-    {
-      id: "INGB",
-      data,
-    },
-  ];
+  function renderData() {
+    const year = 2022;
+    const months = _.range(1, 12);
+    const days = _.range(1, 28, 5);
+
+    const data: any = [];
+    months.forEach((month) => {
+      days.forEach((day) => {
+        const obj = {
+          x: `${year}-${month}-${day}`,
+          y: (start + _.random(-randomValue, randomValue)).toFixed(2),
+        };
+        data.push(obj);
+      });
+    });
+
+    return data;
+  }
 }
 
 function getCompetitors(): CompetitorsDataType {

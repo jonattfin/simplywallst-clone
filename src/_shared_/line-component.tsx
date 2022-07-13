@@ -53,7 +53,6 @@ export default function LineComponent({ data }: { data: LineDataType[] }) {
           type: "linear",
           stacked: true,
         }}
-        colors={["goldenrod"]}
         defs={[
           linearGradientDef("gradientA", [
             { offset: 0, color: "inherit" },

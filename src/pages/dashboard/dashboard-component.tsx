@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import {
   CompanyComponent,
   CompetitorsComponent,
+  FinancialHealthComponent,
   FundamentalsComponent,
   HeaderComponent,
   HistoryComponent,
@@ -55,6 +56,7 @@ function getPaperComponents(data: DashboardDataType) {
     [HistoryComponent, data.history],
     [CompanyComponent, {}],
     [FundamentalsComponent, data.fundamentals],
+    [FinancialHealthComponent, data.financialHealth],
     [OwnershipComponent, data.ownership],
   ];
 

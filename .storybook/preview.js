@@ -43,8 +43,8 @@ export const decorators = [
   (Story) => (
     // <Story />
     <ThemeProvider theme={darkTheme}>
-    //   <Story />
-    // </ThemeProvider>
+      <Story />
+    </ThemeProvider>
   ),
 ];
 

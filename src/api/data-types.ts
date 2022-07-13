@@ -26,7 +26,7 @@ export interface OverviewDataType {
   description: string;
   rewards: string[];
   risks: string[];
-  radarData: any
+  radarData: any;
 }
 
 export interface DashboardDataType {
@@ -34,8 +34,9 @@ export interface DashboardDataType {
   overview: OverviewDataType;
   history: HistoryDataType;
   ownership: OwnershipDataType;
-  competitors: CompetitorsDataType,
-  fundamentals: FundamentalsDataType
+  competitors: CompetitorsDataType;
+  fundamentals: FundamentalsDataType;
+  financialHealth: FinancialHealthDataType;
 }
 
 export interface OwnershipDataType {
@@ -48,20 +49,24 @@ export interface PointType {
 }
 
 export interface LineDataType {
-  id: string,
-  data: PointType[]
+  id: string;
+  data: PointType[];
 }
 
 export interface CompetitorType {
-  name: string,
-  marketCap: string,
-  radarData: any
+  name: string;
+  marketCap: string;
+  radarData: any;
 }
 
 export interface CompetitorsDataType {
-  competitors: CompetitorType[]
+  competitors: CompetitorType[];
 }
 
 export interface FundamentalsDataType {
-  radialData: any
+  radialData: any;
+}
+
+export interface FinancialHealthDataType {
+  history: LineDataType[];
 }
