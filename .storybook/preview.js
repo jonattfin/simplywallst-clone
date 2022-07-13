@@ -1,5 +1,6 @@
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const backgroundColor = "#151B24";
 
@@ -39,11 +40,16 @@ const darkTheme = createTheme({
   },
 });
 
+// Create a client
+const queryClient = new QueryClient();
+
 export const decorators = [
   (Story) => (
     // <Story />
     <ThemeProvider theme={darkTheme}>
-      <Story />
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
     </ThemeProvider>
   ),
 ];
