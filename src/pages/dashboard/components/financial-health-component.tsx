@@ -13,7 +13,7 @@ export default function FinancialHealthComponent(
     <Fragment>
       <p>Financial Health</p>
       <p>
-        How is ING Groep's financial position? (This company is analysed
+        How is ING Groep&apos;s financial position? (This company is analysed
         differently as a bank or financial institution)
       </p>
 
