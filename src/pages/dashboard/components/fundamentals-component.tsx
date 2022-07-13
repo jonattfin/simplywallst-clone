@@ -164,6 +164,6 @@ const BarWrapper = styled.div`
 `;
 
 const BarContainer = styled.div`
-  width: 300px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
 `;
