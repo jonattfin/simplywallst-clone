@@ -6,6 +6,6 @@ export default function Index() {
 }
 
 export const Dashboard = () => {
-  const props = fetchDashboardData();
-  return <DashboardComponent {...props} />;
+  const data = fetchDashboardData();
+  return <DashboardComponent {...data} />;
 };

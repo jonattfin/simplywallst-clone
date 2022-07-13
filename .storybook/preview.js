@@ -41,9 +41,10 @@ const darkTheme = createTheme({
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={darkTheme}>
-      <Story />
-    </ThemeProvider>
+    <Story />
+    // <ThemeProvider theme={darkTheme}>
+    //   <Story />
+    // </ThemeProvider>
   ),
 ];
 

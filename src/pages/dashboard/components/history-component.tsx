@@ -17,11 +17,7 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { LineComponent } from "../../../_shared_";
 import { HistoryDataType } from "../../../api/data-types";
 
-export interface HistoryProps {
-  data: HistoryDataType;
-}
-
-export default function HistoryComponent({ data }: HistoryProps) {
+export default function HistoryComponent(data: HistoryDataType) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -45,7 +41,7 @@ export default function HistoryComponent({ data }: HistoryProps) {
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineContainer>
-                    <LineComponent />
+                    <LineComponent data={data.history}/>
                   </LineContainer>
                 </TabPanel>
               ))}

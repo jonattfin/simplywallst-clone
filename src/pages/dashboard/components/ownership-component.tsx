@@ -9,10 +9,11 @@ import {
   TableRow,
 } from "@mui/material";
 import { Fragment } from "react";
+import { OwnershipDataType } from "../../../api/data-types";
 
 import { LineComponent } from "../../../_shared_";
 
-export default function OwnershipComponent() {
+export default function OwnershipComponent(data: OwnershipDataType) {
   return (
     <Fragment>
       <p>Ownership</p>
@@ -28,7 +29,7 @@ export default function OwnershipComponent() {
       {renderShareholdersTable()}
       <p>Number of Employees</p>
       <LineContainer>
-        <LineComponent />
+        <LineComponent data={data.history} />
       </LineContainer>
     </Fragment>
   );

@@ -13,27 +13,17 @@ import {
 } from "./components";
 
 import { Fragment } from "react";
-import { HeaderProps } from "./components/header-component";
-import { OverviewProps } from "./components/overview-component";
-import { HistoryProps } from "./components/history-component";
+import { DashboardDataType } from "../../api/data-types";
 
-export interface DashboardProps {
-  data: {
-    header: HeaderProps;
-    overview: OverviewProps;
-    history: HistoryProps;
-  };
-}
-
-export default function DashboardComponent(props: DashboardProps) {
-  const PaperComponents = getPaperComponents(props);
+export default function DashboardComponent(data: DashboardDataType) {
+  const PaperComponents = getPaperComponents(data);
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
       <Grid item xs={12}>
         <Paper elevation={3}>
           <InnerContainer>
-            <HeaderComponent {...props.data.header} />
+            <HeaderComponent {...data.header} />
           </InnerContainer>
         </Paper>
       </Grid>
@@ -58,14 +48,14 @@ export default function DashboardComponent(props: DashboardProps) {
   );
 }
 
-function getPaperComponents({ data }: DashboardProps) {
+function getPaperComponents(data: DashboardDataType) {
   const PaperComponents: any[][] = [
     [OverviewComponent, data.overview],
     [CompetitorsComponent, {}],
     [HistoryComponent, data.history],
     [CompanyComponent, {}],
     [FundamentalsComponent, {}],
-    [OwnershipComponent, {}],
+    [OwnershipComponent, data.ownership],
   ];
 
   return PaperComponents;

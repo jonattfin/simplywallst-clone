@@ -2,13 +2,15 @@ import { NoSsr } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsiveLine } from "@nivo/line";
 import _ from "lodash";
+import { LineDataType } from "../api/data-types";
 
 const commonProperties = {
   animate: true,
   enableSlices: "x",
+  margin: { top: 20 },
 };
 
-export default function LineComponent() {
+export default function LineComponent({ data }: { data: LineDataType[] }) {
   const lineProps = {
     ...commonProperties,
   };
@@ -17,7 +19,7 @@ export default function LineComponent() {
     <NoSsr>
       <ResponsiveLine
         {...lineProps}
-        data={generateData()}
+        data={data}
         xScale={{
           type: "time",
           format: "%Y-%m-%d",
@@ -25,15 +27,17 @@ export default function LineComponent() {
           precision: "day",
         }}
         xFormat="time:%Y-%m-%d"
-        axisLeft={{
-          legend: "linear scale",
-        }}
+        axisLeft={
+          {
+            // legend: "linear scale",
+          }
+        }
         axisBottom={{
           format: "%b %d",
-          tickValues: "every 2 days",
-          legend: "time scale",
+          tickValues: "every 7 days",
+          // legend: "time scale",
         }}
-        enablePointLabel={true}
+        enablePointLabel={false}
         enableGridX={false}
         enableGridY={false}
         pointSize={2}
@@ -60,25 +64,4 @@ export default function LineComponent() {
       />
     </NoSsr>
   );
-}
-
-function generateData() {
-  const year = 2022;
-  const months = _.range(1, 6);
-  const days = _.range(1, 10);
-
-  const data: any = [];
-  months.forEach((month) => {
-    days.forEach((day) => {
-      const obj = { x: `${year}-${month}-${day}`, y: 10 + _.random(-2, 2) };
-      data.push(obj);
-    });
-  });
-
-  return [
-    {
-      id: "INGB",
-      data,
-    },
-  ];
 }

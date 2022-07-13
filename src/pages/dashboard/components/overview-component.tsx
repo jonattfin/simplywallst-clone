@@ -7,11 +7,7 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { RadarComponent } from "../../../_shared_";
 import { OverviewDataType } from "../../../api/data-types";
 
-export interface OverviewProps {
-  data: OverviewDataType;
-}
-
-export default function OverviewContainer({ data }: OverviewProps) {
+export default function OverviewContainer(data : OverviewDataType) {
   return (
     <Fragment>
       <Grid container>

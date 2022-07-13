@@ -6,11 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { LineComponent } from "../../../_shared_";
 import { HeaderDataType } from "../../../api/data-types";
 
-export interface HeaderProps {
-  data: HeaderDataType;
-}
-
-export default function HeaderComponent({ data }: HeaderProps) {
+export default function HeaderComponent(data: HeaderDataType) {
   return (
     <Fragment>
       <div>
@@ -79,13 +75,11 @@ export default function HeaderComponent({ data }: HeaderProps) {
           <p>{data.priceLastYear}</p>
         </div>
         <div>
-          <p>&nbsp;</p>
           <LineContainer>
-            <LineComponent />
+            <LineComponent data={data.history}/>
           </LineContainer>
         </div>
         <div>
-          <p>&nbsp;</p>
           <p>UPDATED {data.lastUpdated.toDateString()}</p>
         </div>
         <div>
