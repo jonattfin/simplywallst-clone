@@ -4,19 +4,13 @@ import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
 
 import { LineComponent } from "../../../_shared_";
+import { HeaderDataType } from "../../../api/data-types";
 
 export interface HeaderProps {
-  ticker: string;
-  name: string;
-  exchangeName: string;
-  lastPrice: number;
-  marketCap: number;
-  priceLastSevenDays: number;
-  priceLastYear: number;
-  lastUpdated: Date;
+  data: HeaderDataType;
 }
 
-export default function HeaderComponent(props: HeaderProps) {
+export default function HeaderComponent({ data }: HeaderProps) {
   return (
     <Fragment>
       <div>
@@ -38,10 +32,10 @@ export default function HeaderComponent(props: HeaderProps) {
         justifyContent="left"
         alignItems="center"
       >
-        <TickerDiv>{props.ticker}</TickerDiv>
+        <TickerDiv>{data.ticker}</TickerDiv>
         <div>
-          <h2>{props.name}</h2>
-          <h4>{`${props.exchangeName}:${props.ticker} Stock Report`}</h4>
+          <h2>{data.name}</h2>
+          <h4>{`${data.exchangeName}:${data.ticker} Stock Report`}</h4>
         </div>
       </Stack>
 
@@ -70,19 +64,19 @@ export default function HeaderComponent(props: HeaderProps) {
       >
         <div>
           <p>LAST PRICE</p>
-          <p>{props.lastPrice}</p>
+          <p>{data.lastPrice}</p>
         </div>
         <div>
           <p>MARKET CAP</p>
-          <p>{props.marketCap}</p>
+          <p>{data.marketCap}</p>
         </div>
         <div>
           <p>7D</p>
-          <p>{props.priceLastSevenDays}</p>
+          <p>{data.priceLastSevenDays}</p>
         </div>
         <div>
           <p>1Y</p>
-          <p>{props.priceLastYear}</p>
+          <p>{data.priceLastYear}</p>
         </div>
         <div>
           <p>&nbsp;</p>
@@ -92,7 +86,7 @@ export default function HeaderComponent(props: HeaderProps) {
         </div>
         <div>
           <p>&nbsp;</p>
-          <p>UPDATED {props.lastUpdated.toDateString()}</p>
+          <p>UPDATED {data.lastUpdated.toDateString()}</p>
         </div>
         <div>
           <p>&nbsp;</p>

@@ -15,18 +15,13 @@ import {
 import SubjectIcon from "@mui/icons-material/Subject";
 
 import { LineComponent } from "../../../_shared_";
-
-export interface HistoryNews {
-  date: Date;
-  type: string;
-  value: string;
-}
+import { HistoryDataType } from "../../../api/data-types";
 
 export interface HistoryProps {
-  news: HistoryNews[];
+  data: HistoryDataType;
 }
 
-export default function HistoryComponent(props: HistoryProps) {
+export default function HistoryComponent({ data }: HistoryProps) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -75,7 +70,7 @@ export default function HistoryComponent(props: HistoryProps) {
         </Grid>
         Recent News &amp; Updates
         <List>
-          {props.news.map((news, index) => (
+          {data.news.map((news, index) => (
             <ListItem key={`news_${index}`} disablePadding>
               <ListItemButton>
                 <ListItemText primary={news.date.toDateString()} />

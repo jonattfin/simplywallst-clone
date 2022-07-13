@@ -1,5 +1,8 @@
+import { fetchDashboardData } from "../../api";
 import DashboardComponent from "./dashboard-component";
 
 export default function DashboardContainer() {
-  return <DashboardComponent />;
+  const props = fetchDashboardData();
+
+  return <DashboardComponent {...props}/>;
 }
