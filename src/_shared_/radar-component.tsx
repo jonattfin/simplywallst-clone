@@ -1,29 +1,24 @@
 import { NoSsr } from "@mui/material";
-import { generateWinesTastes } from "@nivo/generators";
-import { Radar } from "@nivo/radar";
+import { ResponsiveRadar } from "@nivo/radar";
 
 const commonProperties = {
-  width: 100,
-  height: 100,
-  indexBy: "taste",
+  indexBy: "value",
   animate: true,
 };
 
-export interface RadarProps {
-  width: number;
-  height: number;
-}
-
-export default function RadarContainer(props?: RadarProps) {
+export default function RadarComponent({ data }: { data: any }) {
   const radarProps = {
     ...commonProperties,
-    ...props,
-    ...{ ...generateWinesTastes() },
+    ...{ ...data },
   };
 
   return (
     <NoSsr>
-      <Radar {...radarProps} gridShape="linear" curve="catmullRomClosed" />
+      <ResponsiveRadar
+        {...radarProps}
+        gridShape="linear"
+        curve="catmullRomClosed"
+      />
     </NoSsr>
   );
 }

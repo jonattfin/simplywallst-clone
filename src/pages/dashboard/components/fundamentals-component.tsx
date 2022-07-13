@@ -1,16 +1,21 @@
 import styled from "@emotion/styled";
 import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
+import { FundamentalsDataType } from "../../../api/data-types";
 
 import { RadialBarComponent, BarComponent } from "../../../_shared_";
 
-export default function DashboardContainer() {
+export default function FundamentalsComponent(data: FundamentalsDataType) {
   return (
     <Fragment>
       ING Groep Fundamentals Summary
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
-          <RadialBarComponent />
+          <RadialBarWrapper>
+            <RadialBarContainer>
+              <RadialBarComponent data={data.radialData} />
+            </RadialBarContainer>
+          </RadialBarWrapper>
         </Grid>
         <Grid item xs={6}>
           <div>
@@ -131,4 +136,17 @@ const SpecialDivider = styled(Divider)`
 const SpecialParagraph = styled.p`
   display: inline;
   padding: 10px;
+`;
+
+const RadialBarContainer = styled.div`
+  width: 150px;
+  height: 150px;
+`;
+
+const RadialBarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
 `;

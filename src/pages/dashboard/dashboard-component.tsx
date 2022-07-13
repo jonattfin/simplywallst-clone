@@ -51,10 +51,10 @@ export default function DashboardComponent(data: DashboardDataType) {
 function getPaperComponents(data: DashboardDataType) {
   const PaperComponents: any[][] = [
     [OverviewComponent, data.overview],
-    [CompetitorsComponent, {}],
+    [CompetitorsComponent, data.competitors],
     [HistoryComponent, data.history],
     [CompanyComponent, {}],
-    [FundamentalsComponent, {}],
+    [FundamentalsComponent, data.fundamentals],
     [OwnershipComponent, data.ownership],
   ];
 

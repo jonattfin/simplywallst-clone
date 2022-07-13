@@ -1,6 +1,10 @@
 import _ from "lodash";
 
-import { DashboardDataType, LineDataType } from "./data-types";
+import {
+  CompetitorsDataType,
+  DashboardDataType,
+  LineDataType,
+} from "./data-types";
 
 export function fetchDashboardData(): DashboardDataType {
   const ticker = "INGA";
@@ -31,6 +35,7 @@ export function fetchDashboardData(): DashboardDataType {
         "Earnings grew by 48.9% over the past year",
       ],
       risks: ["Unstable dividend track record"],
+      radarData: generateSnowflakeValues("ING Groep"),
     },
     history: {
       news: [
@@ -63,6 +68,10 @@ export function fetchDashboardData(): DashboardDataType {
     ownership: {
       history: generateData(100000),
     },
+    competitors: getCompetitors(),
+    fundamentals: {
+      radialData: generateRadialBarData()
+    }
   };
 }
 
@@ -88,6 +97,83 @@ function generateData(start: number = 10): LineDataType[] {
     {
       id: "INGB",
       data,
+    },
+  ];
+}
+
+function getCompetitors(): CompetitorsDataType {
+  const competitors = [
+    {
+      name: "ABN AMRO Bank",
+      marketCap: "$9.8b",
+      radarData: generateSnowflakeValues("ABN AMRO Bank"),
+    },
+    {
+      name: "Lloyds Banking",
+      marketCap: "UK28.8b",
+      radarData: generateSnowflakeValues("Lloyds Banking"),
+    },
+    {
+      name: "BCR Bank",
+      marketCap: "$11.8b",
+      radarData: generateSnowflakeValues("BCR Bank"),
+    },
+    {
+      name: "Intesa Sanpaolo Bank",
+      marketCap: "$10.8b",
+      radarData: generateSnowflakeValues("Intesa Sanpaolo Bank"),
+    },
+  ];
+
+  return {
+    competitors,
+  };
+}
+
+function generateSnowflakeValues(ticker: string) {
+  const tickers = [ticker];
+  const values = ["value", "future", "past", "health", "dividend"];
+
+  const data = values.map((value) => {
+    const d: Record<string, unknown> = { value };
+    tickers.forEach((tickerValue) => {
+      d[tickerValue] = _.random(2, 6);
+    });
+
+    return d;
+  });
+
+  return { data, keys: tickers };
+}
+
+function generateRadialBarData() {
+  return [
+    {
+      id: "Earnings",
+      data: [
+        {
+          x: "Value",
+          y: 4.2,
+        },
+      ],
+    },
+    {
+      id: "Revenue",
+      data: [
+        {
+          x: "Value",
+          y: 17.04,
+        },
+      ],
+    },
+    {
+      id: "Market Cap",
+      data: [
+        {
+          x: "Value",
+          y: 34.48,
+        },
+      ],
     },
   ];
 }

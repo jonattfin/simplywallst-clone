@@ -7,7 +7,7 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { RadarComponent } from "../../../_shared_";
 import { OverviewDataType } from "../../../api/data-types";
 
-export default function OverviewContainer(data : OverviewDataType) {
+export default function OverviewContainer(data: OverviewDataType) {
   return (
     <Fragment>
       <Grid container>
@@ -36,9 +36,11 @@ export default function OverviewContainer(data : OverviewDataType) {
         </Grid>
         <Grid item xs>
           <Stack spacing={2}>
-            <RadarContainer>
-              <RadarComponent {...{ width: 200, height: 200 }} />
-            </RadarContainer>
+            <RadarWrapper>
+              <RadarContainer>
+                <RadarComponent data={data.radarData}/>
+              </RadarContainer>
+            </RadarWrapper>
             <p>Snowflake Analysis</p>
             <p>Undervalued with excellent balance sheet and pays a dividend.</p>
             <Stack
@@ -71,10 +73,12 @@ export default function OverviewContainer(data : OverviewDataType) {
 // Styled Components
 
 const RadarContainer = styled.div`
+  width: 150px;
+  height: 150px;
+`;
+
+const RadarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 100%;
-  height: 50%;
 `;

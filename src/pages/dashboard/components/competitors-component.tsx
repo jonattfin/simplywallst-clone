@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
 import { Fragment } from "react";
+import { CompetitorsDataType } from "../../../api/data-types";
 import { RadarComponent } from "../../../_shared_";
 
-export default function Competitors() {
+export default function Competitors({ competitors }: CompetitorsDataType) {
   return (
     <Fragment>
       ING Groep Competitors
@@ -15,13 +16,15 @@ export default function Competitors() {
       >
         {competitors.map((competitor, index) => (
           <Grid item xs={3} key={`competitor_${index}`}>
-            <RadarContainer>
-              <RadarComponent {...{ width: 100, height: 100 }} />
+            <RadarWrapper>
+              <RadarContainer>
+                <RadarComponent data={competitor.radarData} />
+              </RadarContainer>
               <CompetitorWrapperDiv>
                 <p>{competitor.name}</p>
                 <p>{competitor.marketCap}</p>
               </CompetitorWrapperDiv>
-            </RadarContainer>
+            </RadarWrapper>
           </Grid>
         ))}
       </Grid>
@@ -29,23 +32,18 @@ export default function Competitors() {
   );
 }
 
-const competitors = [
-  { name: "ABN AMRO Bank", marketCap: "$9.8b" },
-  { name: "Lloyds Banking", marketCap: "UK28.8b" },
-  { name: "BCR Bank", marketCap: "$11.8b" },
-  { name: "Intesa Sanpaolo Bank", marketCap: "$10.8b" },
-];
-
 // Styled Components
 
-const RadarContainer = styled.div`
+const RadarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
 
-  width: 100%;
-  height: 50%;
+const RadarContainer = styled.div`
+  width: 100px;
+  height: 100px;
 `;
 
 const CompetitorWrapperDiv = styled.div`
