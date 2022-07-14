@@ -55,9 +55,11 @@ function getApplicationComponents(data: DashboardDataType) {
     [OverviewComponent, data.getOverview()],
     [CompetitorsComponent, data.getCompetitors()],
     [HistoryComponent, data.getHistory()],
-    [DividendComponent, data.getDividend()],
+
     [FundamentalsComponent, data.getFundamentals()],
     [FinancialHealthComponent, data.getFinancialHealth()],
+    [DividendComponent, data.getDividend()],
+
     [OwnershipComponent, data.getOwnership()],
     [CompanyComponent, {}],
   ];

@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { Divider, Stack } from "@mui/material";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+
 import { DividendDataType } from "../../../api/data-types";
 import { BarComponent, LineComponent, PieComponent } from "../../../_shared_";
 
@@ -36,7 +38,7 @@ export default function DividendComponent(data: DividendDataType) {
         <div>
           <p>Current Payout to Shareholders</p>
           <Stack
-            spacing={2}
+            spacing={1}
             direction="row"
             justifyContent="space-evenly"
             alignItems="center"
@@ -45,16 +47,20 @@ export default function DividendComponent(data: DividendDataType) {
             <PieContainer>
               <PieComponent />
             </PieContainer>
-            <p>
+            <ContentDiv>
+              <div>
+                <CheckBoxIcon fontSize="small" color="success" />
+                <TitleParagraph>Earnings Coverage: </TitleParagraph>
+              </div>
               At its current payout ratio (81.7%), INGA's payments are covered
               by earnings.
-            </p>
+            </ContentDiv>
           </Stack>
         </div>
         <div>
           <p>Future Payout to Shareholders</p>
           <Stack
-            spacing={2}
+            spacing={1}
             direction="row"
             justifyContent="space-evenly"
             alignItems="center"
@@ -63,10 +69,14 @@ export default function DividendComponent(data: DividendDataType) {
             <PieContainer>
               <PieComponent />
             </PieContainer>
-            <p>
+            <ContentDiv>
+              <div>
+                <CheckBoxIcon fontSize="small" color="success" />
+                <TitleParagraph>Future Dividend Coverage: </TitleParagraph>
+              </div>
               INGA's dividends in 3 years are forecast to be covered by earnings
               (53.1% payout ratio).
-            </p>
+            </ContentDiv>
           </Stack>
         </div>
       </Stack>
@@ -86,4 +96,17 @@ const BarContainer = styled.div`
 const PieContainer = styled.div`
   width: 100px;
   height: 100px;
+`;
+
+const TitleParagraph = styled.p`
+  display: inline;
+  color: green;
+`;
+
+const ContentDiv = styled.div`
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
