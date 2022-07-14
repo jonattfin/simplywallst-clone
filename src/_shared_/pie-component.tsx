@@ -1,3 +1,4 @@
+import { NoSsr } from "@mui/material";
 import { generateProgrammingLanguageStats } from "@nivo/generators";
 import { ResponsivePie } from "@nivo/pie";
 
@@ -12,19 +13,21 @@ const commonProperties = {
 
 export default function PieComponent() {
   return (
-    <ResponsivePie
-      {...commonProperties}
-      innerRadius={0.6}
-      padAngle={0.5}
-      cornerRadius={5}
-      arcLinkLabelsColor={{
-        from: "color",
-      }}
-      arcLinkLabelsThickness={3}
-      arcLinkLabelsTextColor={{
-        from: "color",
-        modifiers: [["darker", 1.2]],
-      }}
-    />
+    <NoSsr>
+      <ResponsivePie
+        {...commonProperties}
+        innerRadius={0.6}
+        padAngle={0.5}
+        cornerRadius={5}
+        arcLinkLabelsColor={{
+          from: "color",
+        }}
+        arcLinkLabelsThickness={3}
+        arcLinkLabelsTextColor={{
+          from: "color",
+          modifiers: [["darker", 1.2]],
+        }}
+      />
+    </NoSsr>
   );
 }
