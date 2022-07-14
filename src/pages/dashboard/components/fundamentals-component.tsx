@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
-import { FundamentalsDataType } from "../../../api/data-types";
+import { IFundamentalsDataType } from "../../../api/data-types";
 
 import { RadialBarComponent, BarComponent } from "../../../_shared_";
 
-export default function FundamentalsComponent(data: FundamentalsDataType) {
+export default function FundamentalsComponent(data: IFundamentalsDataType) {
   return (
     <Fragment>
       ING Groep Fundamentals Summary

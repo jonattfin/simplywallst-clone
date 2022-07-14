@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import { Divider, Stack } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-import { DividendDataType } from "../../../api/data-types";
+import { IDividendDataType } from "../../../api/data-types";
 import { BarComponent, LineComponent, PieComponent } from "../../../_shared_";
 
-export default function DividendComponent(data: DividendDataType) {
+export default function DividendComponent(data: IDividendDataType) {
   return (
     <div>
       <Stack spacing={2} divider={<Divider flexItem />}>

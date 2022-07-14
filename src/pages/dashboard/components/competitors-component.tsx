@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
 import { Fragment } from "react";
-import { CompetitorsDataType } from "../../../api/data-types";
+import { ICompetitorsDataType } from "../../../api/data-types";
 import { RadarComponent } from "../../../_shared_";
 
-export default function Competitors({ competitors }: CompetitorsDataType) {
+export default function Competitors({ competitors }: ICompetitorsDataType) {
   return (
     <Fragment>
       ING Groep Competitors

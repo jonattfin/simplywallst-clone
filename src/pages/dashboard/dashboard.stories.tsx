@@ -1,11 +1,11 @@
-import { fetchDashboardData } from "../../api";
 import DashboardComponent from "./dashboard-component";
+import { factory } from "../../api";
 
 export default function Index() {
   return <div></div>;
 }
 
 export const Dashboard = () => {
-  const data = fetchDashboardData();
-  return <DashboardComponent {...data} />;
+  const dashboardDataType = factory.getDashboardDataType();
+  return <DashboardComponent {...{ data: dashboardDataType }} />;
 };

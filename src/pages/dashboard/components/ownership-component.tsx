@@ -9,11 +9,11 @@ import {
   TableRow,
 } from "@mui/material";
 import { Fragment } from "react";
-import { OwnershipDataType } from "../../../api/data-types";
+import { IOwnershipDataType } from "../../../api/data-types";
 
 import { LineComponent } from "../../../_shared_";
 
-export default function OwnershipComponent(data: OwnershipDataType) {
+export default function OwnershipComponent(data: IOwnershipDataType) {
   return (
     <Fragment>
       <p>Ownership</p>

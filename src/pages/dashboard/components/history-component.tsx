@@ -15,9 +15,9 @@ import {
 import SubjectIcon from "@mui/icons-material/Subject";
 
 import { LineComponent } from "../../../_shared_";
-import { HistoryDataType } from "../../../api/data-types";
+import { IHistoryDataType } from "../../../api/data-types";
 
-export default function HistoryComponent(data: HistoryDataType) {
+export default function HistoryComponent(data: IHistoryDataType) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {

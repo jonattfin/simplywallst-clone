@@ -1,4 +1,4 @@
-export interface HeaderDataType {
+export interface IHeaderDataType {
   ticker: string;
   name: string;
   exchangeName: string;
@@ -7,21 +7,21 @@ export interface HeaderDataType {
   priceLastSevenDays: number;
   priceLastYear: number;
   lastUpdated: Date;
-  history: LineDataType[];
+  history: ILineDataType[];
 }
 
-export interface HistoryNews {
+export interface IHistoryNews {
   date: Date;
   type: string;
   value: string;
 }
 
-export interface HistoryDataType {
-  news: HistoryNews[];
-  getHistory: (numberOfYears: number) => LineDataType[];
+export interface IHistoryDataType {
+  news: IHistoryNews[];
+  getHistory: (numberOfYears: number) => ILineDataType[];
 }
 
-export interface OverviewDataType {
+export interface IOverviewDataType {
   ticker: string;
   description: string;
   rewards: string[];
@@ -29,49 +29,49 @@ export interface OverviewDataType {
   radarData: any;
 }
 
-export interface DashboardDataType {
-  getHeader(): HeaderDataType;
-  getOverview(): OverviewDataType;
-  getHistory(): HistoryDataType;
-  getOwnership(): OwnershipDataType;
-  getCompetitors(): CompetitorsDataType;
-  getFundamentals(): FundamentalsDataType;
-  getFinancialHealth(): FinancialHealthDataType;
-  getDividend(): DividendDataType;
+export interface IDashboardDataType {
+  getHeader(): IHeaderDataType;
+  getOverview(): IOverviewDataType;
+  getHistory(): IHistoryDataType;
+  getOwnership(): IOwnershipDataType;
+  getCompetitors(): ICompetitorsDataType;
+  getFundamentals(): IFundamentalsDataType;
+  getFinancialHealth(): IFinancialHealthDataType;
+  getDividend(): IDividendDataType;
 }
 
-export interface OwnershipDataType {
-  history: LineDataType[];
+export interface IOwnershipDataType {
+  history: ILineDataType[];
 }
 
-export interface PointType {
+export interface IPointType {
   x: string;
   y: number;
 }
 
-export interface LineDataType {
+export interface ILineDataType {
   id: string;
-  data: PointType[];
+  data: IPointType[];
 }
 
-export interface CompetitorType {
+export interface ICompetitorType {
   name: string;
   marketCap: string;
   radarData: any;
 }
 
-export interface CompetitorsDataType {
-  competitors: CompetitorType[];
+export interface ICompetitorsDataType {
+  competitors: ICompetitorType[];
 }
 
-export interface FundamentalsDataType {
+export interface IFundamentalsDataType {
   radialData: any;
 }
 
-export interface FinancialHealthDataType {
-  getHistory(): LineDataType[];
+export interface IFinancialHealthDataType {
+  getHistory(): ILineDataType[];
 }
 
-export interface DividendDataType {
-  getHistory(): LineDataType[];
+export interface IDividendDataType {
+  getHistory(): ILineDataType[];
 }

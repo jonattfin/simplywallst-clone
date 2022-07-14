@@ -4,10 +4,10 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { Button, Divider, Stack } from "@mui/material";
 
 import { LineComponent, TreemapComponent } from "../../../_shared_";
-import { FinancialHealthDataType } from "../../../api/data-types";
+import { IFinancialHealthDataType } from "../../../api/data-types";
 
 export default function FinancialHealthComponent(
-  data: FinancialHealthDataType
+  data: IFinancialHealthDataType
 ) {
   return (
     <Fragment>

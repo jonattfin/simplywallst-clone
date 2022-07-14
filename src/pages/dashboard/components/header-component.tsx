@@ -4,9 +4,9 @@ import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
 
 import { LineComponent } from "../../../_shared_";
-import { HeaderDataType } from "../../../api/data-types";
+import { IHeaderDataType } from "../../../api/data-types";
 
-export default function HeaderComponent(data: HeaderDataType) {
+export default function HeaderComponent(data: IHeaderDataType) {
   return (
     <Fragment>
       <div>

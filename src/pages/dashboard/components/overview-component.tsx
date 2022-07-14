@@ -5,9 +5,9 @@ import InfoIcon from "@mui/icons-material/Info";
 import SubjectIcon from "@mui/icons-material/Subject";
 
 import { RadarComponent } from "../../../_shared_";
-import { OverviewDataType } from "../../../api/data-types";
+import { IOverviewDataType } from "../../../api/data-types";
 
-export default function OverviewContainer(data: OverviewDataType) {
+export default function OverviewContainer(data: IOverviewDataType) {
   return (
     <Fragment>
       <Grid container>

@@ -15,9 +15,13 @@ import {
 } from "./components";
 
 import { Fragment } from "react";
-import { DashboardDataType } from "../../api/data-types";
+import { IDashboardDataType } from "../../api/data-types";
 
-export default function DashboardComponent(data: DashboardDataType) {
+export default function DashboardComponent({
+  data,
+}: {
+  data: IDashboardDataType;
+}) {
   const AppComponents = getApplicationComponents(data);
 
   return (
@@ -50,7 +54,7 @@ export default function DashboardComponent(data: DashboardDataType) {
   );
 }
 
-function getApplicationComponents(data: DashboardDataType) {
+function getApplicationComponents(data: IDashboardDataType) {
   const appComponents: any[][] = [
     [OverviewComponent, data.getOverview()],
     [CompetitorsComponent, data.getCompetitors()],
