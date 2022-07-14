@@ -30,13 +30,14 @@ export interface OverviewDataType {
 }
 
 export interface DashboardDataType {
-  header: HeaderDataType;
-  overview: OverviewDataType;
-  history: HistoryDataType;
-  ownership: OwnershipDataType;
-  competitors: CompetitorsDataType;
-  fundamentals: FundamentalsDataType;
-  financialHealth: FinancialHealthDataType;
+  getHeader(): HeaderDataType;
+  getOverview(): OverviewDataType;
+  getHistory(): HistoryDataType;
+  getOwnership(): OwnershipDataType;
+  getCompetitors(): CompetitorsDataType;
+  getFundamentals(): FundamentalsDataType;
+  getFinancialHealth(): FinancialHealthDataType;
+  getDividend(): DividendDataType;
 }
 
 export interface OwnershipDataType {
@@ -68,5 +69,9 @@ export interface FundamentalsDataType {
 }
 
 export interface FinancialHealthDataType {
-  history: LineDataType[];
+  getHistory(): LineDataType[];
+}
+
+export interface DividendDataType {
+  getHistory(): LineDataType[];
 }

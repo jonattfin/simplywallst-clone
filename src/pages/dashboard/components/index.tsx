@@ -7,3 +7,4 @@ export { default as CompanyComponent } from "./company-component";
 export { default as FundamentalsComponent } from "./fundamentals-component";
 export { default as OwnershipComponent } from "./ownership-component";
 export { default as FinancialHealthComponent } from "./financial-health-component";
+export { default as DividendComponent } from "./dividend-component";

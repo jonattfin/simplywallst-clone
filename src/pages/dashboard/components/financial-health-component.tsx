@@ -20,7 +20,7 @@ export default function FinancialHealthComponent(
       <Divider />
       <p>Debt to Equity History and Analysis</p>
       <LineContainer>
-        <LineComponent data={data.history} />
+        <LineComponent data={data.getHistory()} />
       </LineContainer>
       <div>&nbsp;</div>
       <Stack

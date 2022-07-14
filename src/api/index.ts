@@ -9,16 +9,15 @@ import {
 export function fetchDashboardData(): DashboardDataType {
   const ticker = "INGA";
 
-  const historyData = generateData({ start: 9 });
-
   return {
-    header: getHeaderData(ticker, historyData),
-    overview: getOverviewData(ticker),
-    history: getHistoryData(),
-    ownership: getOwnershipData(),
-    competitors: getCompetitorsData(),
-    fundamentals: getFundamentalsData(),
-    financialHealth: getFinancialHealthData(),
+    getHeader: () => getHeaderData(ticker),
+    getOverview: () => getOverviewData(ticker),
+    getHistory: () => getHistoryData(),
+    getOwnership: () => getOwnershipData(),
+    getCompetitors: () => getCompetitorsData(),
+    getFundamentals: () => getFundamentalsData(),
+    getFinancialHealth: () => getFinancialHealthData(),
+    getDividend: () => getDividendData(),
   };
 }
 
@@ -28,7 +27,7 @@ interface HistoryData {
   numberOfYears?: number;
 }
 
-function getHeaderData(ticker: string, historyData: LineDataType[]) {
+function getHeaderData(ticker: string) {
   return {
     ticker,
     name: "ING Groep",
@@ -38,7 +37,7 @@ function getHeaderData(ticker: string, historyData: LineDataType[]) {
     priceLastSevenDays: -0.1,
     priceLastYear: -13.4,
     lastUpdated: new Date(2022, 6, 10),
-    history: historyData,
+    history: generateData({ start: 9 }),
   };
 }
 
@@ -98,7 +97,13 @@ function getOwnershipData() {
 
 function getFinancialHealthData() {
   return {
-    history: generateData({ start: 100, dimensions: 2 }),
+    getHistory: () => generateData({ start: 100, dimensions: 2 }),
+  };
+}
+
+function getDividendData() {
+  return {
+    getHistory: () => generateData({ start: 100, dimensions: 2 }),
   };
 }
 

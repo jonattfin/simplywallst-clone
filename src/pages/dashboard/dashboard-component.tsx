@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import {
   CompanyComponent,
   CompetitorsComponent,
+  DividendComponent,
   FinancialHealthComponent,
   FundamentalsComponent,
   HeaderComponent,
@@ -24,7 +25,7 @@ export default function DashboardComponent(data: DashboardDataType) {
       <Grid item xs={12}>
         <Paper elevation={3}>
           <InnerContainer>
-            <HeaderComponent {...data.header} />
+            <HeaderComponent {...data.getHeader()} />
           </InnerContainer>
         </Paper>
       </Grid>
@@ -51,13 +52,14 @@ export default function DashboardComponent(data: DashboardDataType) {
 
 function getApplicationComponents(data: DashboardDataType) {
   const appComponents: any[][] = [
-    [OverviewComponent, data.overview],
-    [CompetitorsComponent, data.competitors],
-    [HistoryComponent, data.history],
+    [OverviewComponent, data.getOverview()],
+    [CompetitorsComponent, data.getCompetitors()],
+    [HistoryComponent, data.getHistory()],
+    [DividendComponent, data.getDividend()],
+    [FundamentalsComponent, data.getFundamentals()],
+    [FinancialHealthComponent, data.getFinancialHealth()],
+    [OwnershipComponent, data.getOwnership()],
     [CompanyComponent, {}],
-    [FundamentalsComponent, data.fundamentals],
-    [FinancialHealthComponent, data.financialHealth],
-    [OwnershipComponent, data.ownership],
   ];
 
   return appComponents;
