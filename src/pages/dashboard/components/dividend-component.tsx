@@ -52,7 +52,7 @@ export default function DividendComponent(data: DividendDataType) {
                 <CheckBoxIcon fontSize="small" color="success" />
                 <TitleParagraph>Earnings Coverage: </TitleParagraph>
               </div>
-              At its current payout ratio (81.7%), INGA's payments are covered
+              At its current payout ratio (81.7%), INGA&apos;s payments are covered
               by earnings.
             </ContentDiv>
           </Stack>
@@ -74,7 +74,7 @@ export default function DividendComponent(data: DividendDataType) {
                 <CheckBoxIcon fontSize="small" color="success" />
                 <TitleParagraph>Future Dividend Coverage: </TitleParagraph>
               </div>
-              INGA's dividends in 3 years are forecast to be covered by earnings
+              INGA&apos;s dividends in 3 years are forecast to be covered by earnings
               (53.1% payout ratio).
             </ContentDiv>
           </Stack>
