@@ -19,9 +19,11 @@ export default function MenuComponent() {
           selected={index === selectedItem}
           onClick={(event) => handleMenuItemClick(event, index)}
         >
-          <ListItemText key={`menuItem_${index}`}>{`${
-            index == 0 || index == menuItems.length ? "" : index
-          } ${menuItem}`}</ListItemText>
+          <ListItemText key={`menuItem_${index}`}>
+            <a href={`#${menuItem.replace(" ", "_")}`}>{`${
+              index == 0 || index == menuItems.length ? "" : `${index} `
+            }${menuItem}`}</a>
+          </ListItemText>
         </MenuItem>
       ))}
     </MenuList>
@@ -39,6 +41,3 @@ const menuItems = [
   "Ownership",
   "Other Information",
 ];
-
-
-

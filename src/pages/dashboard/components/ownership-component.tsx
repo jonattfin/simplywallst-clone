@@ -16,7 +16,7 @@ import { LineComponent } from "../../../_shared_";
 export default function OwnershipComponent(data: IOwnershipDataType) {
   return (
     <Fragment>
-      <p>Ownership</p>
+      <p id="Ownership">Ownership</p>
       <p>
         Who are the major shareholders and have insiders been buying or selling?
       </p>

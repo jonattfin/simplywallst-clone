@@ -13,7 +13,7 @@ export default function OverviewContainer(data: IOverviewDataType) {
       <Grid container>
         <Grid item xs={8}>
           <Stack spacing={2}>
-            <p>{data.ticker} Stock Overview</p>
+            <p id="Company_Overview">{data.ticker} Stock Overview</p>
             <p>{data.description}</p>
             <div>
               <Button variant="outlined" startIcon={<InfoIcon />} size="small">

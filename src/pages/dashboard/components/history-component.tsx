@@ -26,7 +26,7 @@ export default function HistoryComponent(data: IHistoryDataType) {
 
   return (
     <Fragment>
-      <p>Price History &amp; Performance</p>
+      <p id="Future_Growth">Price History &amp; Performance</p>
       <Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange} centered>

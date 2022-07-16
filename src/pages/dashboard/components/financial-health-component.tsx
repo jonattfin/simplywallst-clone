@@ -11,7 +11,7 @@ export default function FinancialHealthComponent(
 ) {
   return (
     <Fragment>
-      <p>Financial Health</p>
+      <p id="Financial_Health">Financial Health</p>
       <p>
         How is ING Groep&apos;s financial position? (This company is analysed
         differently as a bank or financial institution)

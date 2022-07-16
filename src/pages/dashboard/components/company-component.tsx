@@ -4,7 +4,7 @@ import { Fragment } from "react";
 export default function CompanyComponent() {
   return (
     <Fragment>
-      <p>About the Company</p>
+      <p id="Other_Information">About the Company</p>
       <Stack direction="row" spacing={5}>
         <div>
           <p>Founded</p>

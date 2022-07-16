@@ -8,7 +8,7 @@ import { RadialBarComponent, BarComponent } from "../../../_shared_";
 export default function FundamentalsComponent(data: IFundamentalsDataType) {
   return (
     <Fragment>
-      ING Groep Fundamentals Summary
+      <p id="Past_Performance">ING Groep Fundamentals Summary</p>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
           <RadialBarWrapper>

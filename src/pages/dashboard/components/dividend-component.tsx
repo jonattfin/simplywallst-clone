@@ -10,7 +10,7 @@ export default function DividendComponent(data: IDividendDataType) {
     <div>
       <Stack spacing={2} divider={<Divider flexItem />}>
         <div>
-          <p>Dividend</p>
+          <p id="Dividend">Dividend</p>
           <p>
             What is ING Groep current dividend yield, its reliability and
             sustainability?
