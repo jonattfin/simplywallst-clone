@@ -10,6 +10,7 @@ import {
   History,
   Overview,
   Ownership,
+  Header,
 } from "./components";
 
 import { Fragment } from "react";
@@ -25,13 +26,15 @@ export function DashboardComponent({
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Paper elevation={3}>
-          {/* <InnerContainer>
-            <HeaderComponent {...data.getHeader()} />
-          </InnerContainer> */}
+          <InnerContainer>
+            <Header.HeaderContainer
+              {...{ fetchData: () => data.getHeaderAsync() }}
+            />
+          </InnerContainer>
         </Paper>
-      </Grid>
+      </Grid> */}
       <Grid item xs={2}>
         <Paper elevation={3}>
           <MenuComponent />
@@ -58,19 +61,25 @@ export function DashboardComponent({
 
 function getApplicationComponents({ data }: { data: IDashboardDataTypeAsync }) {
   const appComponents: any[][] = [
-    [Overview.OverviewContainer, { fetchData: data.getOverviewAsync }],
-    [Competitors.CompetitorsContainer, { fetchData: data.getCompetitorsAsync }],
-    [History.HistoryContainer, { fetchData: data.getHistoryAsync }],
+    [Overview.OverviewContainer, { fetchData: () => data.getOverviewAsync() }],
+    [
+      Competitors.CompetitorsContainer,
+      { fetchData: () => data.getCompetitorsAsync() },
+    ],
+    [History.HistoryContainer, { fetchData: () => data.getHistoryAsync() }],
     [
       Fundamentals.FundamentalsContainer,
-      { fetchData: data.getFundamentalsAsync },
+      { fetchData: () => data.getFundamentalsAsync() },
     ],
     [
       FinancialHealth.FinancialHealthContainer,
-      { fetchData: data.getFinancialHealthAsync },
+      { fetchData: () => data.getFinancialHealthAsync() },
     ],
-    [Dividend.DividendContainer, { fetchData: data.getDividendAsync }],
-    [Ownership.OwnershipContainer, { fetchData: data.getOwnershipAsync }],
+    [Dividend.DividendContainer, { fetchData: () => data.getDividendAsync() }],
+    [
+      Ownership.OwnershipContainer,
+      { fetchData: () => data.getOwnershipAsync() },
+    ],
   ];
 
   return appComponents;

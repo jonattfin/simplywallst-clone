@@ -1,4 +1,4 @@
-export { default as HeaderComponent } from "./header";
+export * as Header  from "./header";
 export { default as MenuComponent } from "./menu";
 export * as Overview from "./overview";
 export * as Competitors from "./competitors";

@@ -3,10 +3,23 @@ import styled from "@emotion/styled";
 import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
 
-import { LineComponent } from "../../../_shared_";
+import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHeaderDataType } from "../../../api/data-types";
 
-export default function HeaderComponent(data: IHeaderDataType) {
+export function HeaderContainer({
+  fetchData,
+}: {
+  fetchData: Promise<IHeaderDataType>;
+}) {
+  return withLoadingSpinner<IHeaderDataType>(
+    HeaderComponent,
+    fetchData,
+    "header",
+    {}
+  );
+}
+
+export function HeaderComponent({ data }: { data: IHeaderDataType }) {
   return (
     <Fragment>
       <div>
@@ -76,7 +89,7 @@ export default function HeaderComponent(data: IHeaderDataType) {
         </div>
         <div>
           <LineContainer>
-            <LineComponent data={data.history}/>
+            <LineComponent data={data.history} />
           </LineContainer>
         </div>
         <div>

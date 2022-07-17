@@ -2,6 +2,7 @@ import _ from "lodash";
 import { DashboardDataType } from "./dashboardDataType";
 import {
   ICompetitorsDataType,
+  IDashboardDataType,
   IDashboardDataTypeAsync,
   IDividendDataType,
   IFinancialHealthDataType,
@@ -12,32 +13,32 @@ import {
   IOwnershipDataType,
 } from "./data-types";
 
-const dashboardDataType = new DashboardDataType();
-
 export class DashboardDataTypeAsync implements IDashboardDataTypeAsync {
+  constructor(private dashboardDataType: IDashboardDataType) {}
+
   getHeaderAsync(): Promise<IHeaderDataType> {
-    return makePromise(dashboardDataType.getHeader());
+    return makePromise(this.dashboardDataType.getHeader());
   }
   getOverviewAsync(): Promise<IOverviewDataType> {
-    return makePromise(dashboardDataType.getOverview());
+    return makePromise(this.dashboardDataType.getOverview());
   }
   getHistoryAsync(): Promise<IHistoryDataType> {
-    return makePromise(dashboardDataType.getHistory());
+    return makePromise(this.dashboardDataType.getHistory());
   }
   getOwnershipAsync(): Promise<IOwnershipDataType> {
-    return makePromise(dashboardDataType.getOwnership());
+    return makePromise(this.dashboardDataType.getOwnership());
   }
   getCompetitorsAsync(): Promise<ICompetitorsDataType> {
-    return makePromise(dashboardDataType.getCompetitors());
+    return makePromise(this.dashboardDataType.getCompetitors());
   }
   getFundamentalsAsync(): Promise<IFundamentalsDataType> {
-    return makePromise(dashboardDataType.getFundamentals());
+    return makePromise(this.dashboardDataType.getFundamentals());
   }
   getFinancialHealthAsync(): Promise<IFinancialHealthDataType> {
-    return makePromise(dashboardDataType.getFinancialHealth());
+    return makePromise(this.dashboardDataType.getFinancialHealth());
   }
   getDividendAsync(): Promise<IDividendDataType> {
-    return makePromise(dashboardDataType.getDividend());
+    return makePromise(this.dashboardDataType.getDividend());
   }
 }
 

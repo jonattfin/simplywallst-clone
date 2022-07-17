@@ -8,7 +8,9 @@ export default class DataTypeFactory {
 
   constructor() {
     this._dashboardDataType = new DashboardDataType();
-    this._dashboardDataTypeAsync = new DashboardDataTypeAsync();
+    this._dashboardDataTypeAsync = new DashboardDataTypeAsync(
+      this._dashboardDataType
+    );
   }
 
   getDashboardDataType(): IDashboardDataType {

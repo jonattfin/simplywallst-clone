@@ -86,8 +86,6 @@ export class DashboardDataType implements IDashboardDataType {
     };
   }
   getCompetitors(): ICompetitorsDataType {
-    console.log('get the competitors...');
-
     const competitors = [
       {
         name: "ABN AMRO Bank",
