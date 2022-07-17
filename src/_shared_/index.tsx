@@ -4,5 +4,6 @@ export { default as RadarComponent } from "./radar-component";
 export { default as RadialBarComponent } from "./radialBar-component";
 export { default as TreemapComponent } from "./treemap-component";
 export { default as PieComponent } from "./pie-component";
+export { default as withLoadingSpinner } from './data-loader';
 
 export { default as HeaderComponent } from "./header-component";

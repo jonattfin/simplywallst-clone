@@ -2,26 +2,24 @@ import { Grid, Paper } from "@mui/material";
 import styled from "@emotion/styled";
 
 import {
-  CompanyComponent,
-  CompetitorsComponent,
-  DividendComponent,
-  FinancialHealthComponent,
-  FundamentalsComponent,
-  HeaderComponent,
-  HistoryComponent,
+  Competitors,
+  Dividend,
+  FinancialHealth,
+  Fundamentals,
   MenuComponent,
-  OverviewComponent,
-  OwnershipComponent,
+  History,
+  Overview,
+  Ownership,
 } from "./components";
 
 import { Fragment } from "react";
-import { IDashboardDataType } from "../../api/data-types";
-import { MenuItems } from "./components/menu-component";
+import { IDashboardDataTypeAsync } from "../../api/data-types";
+import { MenuItems } from "./components/menu";
 
-export default function DashboardComponent({
+export function DashboardComponent({
   data,
 }: {
-  data: IDashboardDataType;
+  data: IDashboardDataTypeAsync;
 }) {
   const AppComponents = getApplicationComponents({ data });
 
@@ -29,9 +27,9 @@ export default function DashboardComponent({
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
       <Grid item xs={12}>
         <Paper elevation={3}>
-          <InnerContainer>
+          {/* <InnerContainer>
             <HeaderComponent {...data.getHeader()} />
-          </InnerContainer>
+          </InnerContainer> */}
         </Paper>
       </Grid>
       <Grid item xs={2}>
@@ -58,17 +56,21 @@ export default function DashboardComponent({
   );
 }
 
-function getApplicationComponents({ data }: { data: IDashboardDataType }) {
+function getApplicationComponents({ data }: { data: IDashboardDataTypeAsync }) {
   const appComponents: any[][] = [
-    [OverviewComponent, { data: data.getOverview() }],
-    [CompetitorsComponent, { data: data.getCompetitors() }],
-    [HistoryComponent, { data: data.getHistory() }],
-    [FundamentalsComponent, { data: data.getFundamentals() }],
-
-    [FinancialHealthComponent, { data: data.getFinancialHealth() }],
-    [DividendComponent, { data: data.getDividend() }],
-    [OwnershipComponent, { data: data.getOwnership() }],
-    [CompanyComponent, {}],
+    [Overview.OverviewContainer, { fetchData: data.getOverviewAsync }],
+    [Competitors.CompetitorsContainer, { fetchData: data.getCompetitorsAsync }],
+    [History.HistoryContainer, { fetchData: data.getHistoryAsync }],
+    [
+      Fundamentals.FundamentalsContainer,
+      { fetchData: data.getFundamentalsAsync },
+    ],
+    [
+      FinancialHealth.FinancialHealthContainer,
+      { fetchData: data.getFinancialHealthAsync },
+    ],
+    [Dividend.DividendContainer, { fetchData: data.getDividendAsync }],
+    [Ownership.OwnershipContainer, { fetchData: data.getOwnershipAsync }],
   ];
 
   return appComponents;

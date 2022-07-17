@@ -40,6 +40,17 @@ export interface IDashboardDataType {
   getDividend(): IDividendDataType;
 }
 
+export interface IDashboardDataTypeAsync {
+  getHeaderAsync(): Promise<IHeaderDataType>;
+  getOverviewAsync(): Promise<IOverviewDataType>;
+  getHistoryAsync(): Promise<IHistoryDataType>;
+  getOwnershipAsync(): Promise<IOwnershipDataType>;
+  getCompetitorsAsync(): Promise<ICompetitorsDataType>;
+  getFundamentalsAsync(): Promise<IFundamentalsDataType>;
+  getFinancialHealthAsync(): Promise<IFinancialHealthDataType>;
+  getDividendAsync(): Promise<IDividendDataType>;
+}
+
 export interface IOwnershipDataType {
   history: ILineDataType[];
 }

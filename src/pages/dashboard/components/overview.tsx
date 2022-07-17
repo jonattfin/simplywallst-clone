@@ -4,10 +4,25 @@ import { Fragment } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import SubjectIcon from "@mui/icons-material/Subject";
 
-import { RadarComponent } from "../../../_shared_";
+import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 import { IOverviewDataType } from "../../../api/data-types";
 
-export default function OverviewComponent({
+export function OverviewContainer({
+  fetchData,
+  sectionName,
+}: {
+  fetchData: Promise<IOverviewDataType>;
+  sectionName: string;
+}) {
+  return withLoadingSpinner<IOverviewDataType>(
+    OverviewComponent,
+    fetchData,
+    "overview",
+    { sectionName }
+  );
+}
+
+export function OverviewComponent({
   data,
   sectionName,
 }: {

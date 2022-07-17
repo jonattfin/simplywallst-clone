@@ -2,9 +2,22 @@ import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
 import { Fragment } from "react";
 import { ICompetitorsDataType } from "../../../api/data-types";
-import { RadarComponent } from "../../../_shared_";
+import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 
-export default function Competitors({ data }: { data: ICompetitorsDataType }) {
+export function CompetitorsContainer({
+  fetchData,
+}: {
+  fetchData: Promise<ICompetitorsDataType>;
+}) {
+  return withLoadingSpinner<ICompetitorsDataType>(
+    CompetitorsComponent,
+    fetchData,
+    "competitors",
+    {}
+  );
+}
+
+export function CompetitorsComponent({ data }: { data: ICompetitorsDataType }) {
   return (
     <Fragment>
       <h4>ING Groep Competitors</h4>

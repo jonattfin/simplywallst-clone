@@ -3,9 +3,29 @@ import { Divider, Stack } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 import { IDividendDataType } from "../../../api/data-types";
-import { BarComponent, LineComponent, PieComponent } from "../../../_shared_";
+import {
+  BarComponent,
+  LineComponent,
+  PieComponent,
+  withLoadingSpinner,
+} from "../../../_shared_";
 
-export default function Dividend({
+export function DividendContainer({
+  fetchData,
+  sectionName,
+}: {
+  fetchData: Promise<IDividendDataType>;
+  sectionName: string;
+}) {
+  return withLoadingSpinner<IDividendDataType>(
+    DividendComponent,
+    fetchData,
+    "dividend",
+    { sectionName }
+  );
+}
+
+export function DividendComponent({
   data,
   sectionName,
 }: {

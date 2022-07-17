@@ -45,12 +45,12 @@ const queryClient = new QueryClient();
 
 export const decorators = [
   (Story) => (
-    <Story />
-    // <ThemeProvider theme={darkTheme}>
-    //   <QueryClientProvider client={queryClient}>
-    //     <Story />
-    //   </QueryClientProvider>
-    // </ThemeProvider>
+    // <Story />
+    <ThemeProvider theme={darkTheme}>
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    </ThemeProvider>
   ),
 ];
 

@@ -14,10 +14,25 @@ import {
 } from "@mui/material";
 import SubjectIcon from "@mui/icons-material/Subject";
 
-import { LineComponent } from "../../../_shared_";
+import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHistoryDataType } from "../../../api/data-types";
 
-export default function History({
+export function HistoryContainer({
+  fetchData,
+  sectionName,
+}: {
+  fetchData: Promise<IHistoryDataType>;
+  sectionName: string;
+}) {
+  return withLoadingSpinner<IHistoryDataType>(
+    HistoryComponent,
+    fetchData,
+    "history",
+    { sectionName }
+  );
+}
+
+export function HistoryComponent({
   data,
   sectionName,
 }: {

@@ -3,9 +3,28 @@ import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 import { IFundamentalsDataType } from "../../../api/data-types";
 
-import { RadialBarComponent, BarComponent } from "../../../_shared_";
+import {
+  RadialBarComponent,
+  BarComponent,
+  withLoadingSpinner,
+} from "../../../_shared_";
 
-export default function Fundamentals({
+export function FundamentalsContainer({
+  fetchData,
+  sectionName,
+}: {
+  fetchData: Promise<IFundamentalsDataType>;
+  sectionName: string;
+}) {
+  return withLoadingSpinner<IFundamentalsDataType>(
+    FundamentalsComponent,
+    fetchData,
+    "fundamentals",
+    { sectionName }
+  );
+}
+
+export function FundamentalsComponent({
   data,
   sectionName,
 }: {

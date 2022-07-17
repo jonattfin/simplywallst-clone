@@ -3,10 +3,29 @@ import { Fragment } from "react";
 import SubjectIcon from "@mui/icons-material/Subject";
 import { Button, Divider, Stack } from "@mui/material";
 
-import { LineComponent, TreemapComponent } from "../../../_shared_";
+import {
+  LineComponent,
+  TreemapComponent,
+  withLoadingSpinner,
+} from "../../../_shared_";
 import { IFinancialHealthDataType } from "../../../api/data-types";
 
-export default function FinancialHealth({
+export function FinancialHealthContainer({
+  fetchData,
+  sectionName,
+}: {
+  fetchData: Promise<IFinancialHealthDataType>;
+  sectionName: string;
+}) {
+  return withLoadingSpinner<IFinancialHealthDataType>(
+    FinancialHealthComponent,
+    fetchData,
+    "financialHealth",
+    { sectionName }
+  );
+}
+
+export function FinancialHealthComponent({
   data,
   sectionName,
 }: {

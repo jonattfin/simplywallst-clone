@@ -11,9 +11,24 @@ import {
 import { Fragment } from "react";
 import { IOwnershipDataType } from "../../../api/data-types";
 
-import { LineComponent } from "../../../_shared_";
+import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 
-export default function Ownership({
+export function OwnershipContainer({
+  fetchData,
+  sectionName,
+}: {
+  fetchData: Promise<IOwnershipDataType>;
+  sectionName: string;
+}) {
+  return withLoadingSpinner<IOwnershipDataType>(
+    OwnershipComponent,
+    fetchData,
+    "ownership",
+    { sectionName }
+  );
+}
+
+export function OwnershipComponent({
   data,
   sectionName,
 }: {
