@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Divider } from "@mui/material";
+import { ButtonGroup, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 
 const pages = [
@@ -32,7 +32,13 @@ const settings: string[] = [
   "Logout",
 ];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({
+  theme,
+  setTheme,
+}: {
+  theme: string;
+  setTheme: any;
+}) => {
   const [anchorElNav, setAnchorElNav] =
     React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] =
@@ -59,7 +65,6 @@ const ResponsiveAppBar = () => {
         <Container>
           <Toolbar>
             <AdbIcon />
-
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -108,7 +113,22 @@ const ResponsiveAppBar = () => {
                 </Button>
               ))}
             </Box>
-
+            <ExtraPaddingDiv>
+              <ButtonGroup variant="text" size="small">
+                <Button
+                  color={theme == "light" ? "success" : "primary"}
+                  onClick={() => setTheme("light")}
+                >
+                  Light
+                </Button>
+                <Button
+                  color={theme == "dark" ? "success" : "primary"}
+                  onClick={() => setTheme("dark")}
+                >
+                  Dark
+                </Button>
+              </ButtonGroup>
+            </ExtraPaddingDiv>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -151,4 +171,8 @@ export default ResponsiveAppBar;
 
 const TopDiv = styled.div`
   padding: 1vh 0px;
+`;
+
+const ExtraPaddingDiv = styled.div`
+  padding: 0px 10px;
 `;
