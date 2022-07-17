@@ -1,9 +1,9 @@
-export { default as BarComponent } from "./bar-component";
-export { default as LineComponent } from "./line-component";
-export { default as RadarComponent } from "./radar-component";
-export { default as RadialBarComponent } from "./radialBar-component";
-export { default as TreemapComponent } from "./treemap-component";
-export { default as PieComponent } from "./pie-component";
+export { default as BarComponent } from "./bar";
+export { default as LineComponent } from "./line";
+export { default as RadarComponent } from "./radar";
+export { default as RadialBarComponent } from "./radialBar";
+export { default as TreemapComponent } from "./treemap";
+export { default as PieComponent } from "./pie";
 export { default as withLoadingSpinner } from './data-loader';
 
-export { default as HeaderComponent } from "./header-component";
+export { default as HeaderComponent } from "./header";
