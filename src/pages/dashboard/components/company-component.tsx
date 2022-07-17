@@ -1,10 +1,10 @@
 import { Button, Stack } from "@mui/material";
 import { Fragment } from "react";
 
-export default function CompanyComponent() {
+export default function Company({ sectionName }: { sectionName: string }) {
   return (
     <Fragment>
-      <p id="Other_Information">About the Company</p>
+      <h4 id={sectionName}>About the Company</h4>
       <Stack direction="row" spacing={5}>
         <div>
           <p>Founded</p>
@@ -20,7 +20,9 @@ export default function CompanyComponent() {
         </div>
         <div>
           <p>Website</p>
-          <a href="https://www.ing.com" target="_blank" rel="noreferrer">https://www.ing.com</a>
+          <a href="https://www.ing.com" target="_blank" rel="noreferrer">
+            https://www.ing.com
+          </a>
         </div>
         <p></p>
       </Stack>

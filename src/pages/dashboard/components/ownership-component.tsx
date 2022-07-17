@@ -13,10 +13,16 @@ import { IOwnershipDataType } from "../../../api/data-types";
 
 import { LineComponent } from "../../../_shared_";
 
-export default function OwnershipComponent(data: IOwnershipDataType) {
+export default function Ownership({
+  data,
+  sectionName,
+}: {
+  data: IOwnershipDataType;
+  sectionName: string;
+}) {
   return (
     <Fragment>
-      <p id="Ownership">Ownership</p>
+      <h4 id={sectionName}>Ownership</h4>
       <p>
         Who are the major shareholders and have insiders been buying or selling?
       </p>

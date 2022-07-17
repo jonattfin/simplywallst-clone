@@ -13,7 +13,7 @@ export default function MenuComponent() {
 
   return (
     <MenuList>
-      {menuItems.map((menuItem, index) => (
+      {MenuItems.map((menuItem, index) => (
         <MenuItem
           key={`menuItem_${index}`}
           selected={index === selectedItem}
@@ -21,7 +21,7 @@ export default function MenuComponent() {
         >
           <ListItemText key={`menuItem_${index}`}>
             <a href={`#${menuItem.replace(" ", "_")}`}>{`${
-              index == 0 || index == menuItems.length ? "" : `${index} `
+              index == 0 || index == MenuItems.length ? "" : `${index} `
             }${menuItem}`}</a>
           </ListItemText>
         </MenuItem>
@@ -30,14 +30,13 @@ export default function MenuComponent() {
   );
 }
 
-const menuItems = [
+export const MenuItems = [
   "Company Overview",
   "Valuation",
   "Future Growth",
   "Past Performance",
   "Financial Health",
   "Dividend",
-  "Management",
   "Ownership",
   "Other Information",
 ];

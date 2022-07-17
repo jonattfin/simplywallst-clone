@@ -16,13 +16,14 @@ import {
 
 import { Fragment } from "react";
 import { IDashboardDataType } from "../../api/data-types";
+import { MenuItems } from "./components/menu-component";
 
 export default function DashboardComponent({
   data,
 }: {
   data: IDashboardDataType;
 }) {
-  const AppComponents = getApplicationComponents(data);
+  const AppComponents = getApplicationComponents({ data });
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
@@ -43,7 +44,10 @@ export default function DashboardComponent({
           <Fragment key={`paper_${index}`}>
             <Paper elevation={3}>
               <InnerContainer>
-                <CustomComponent {...customProps} />
+                <CustomComponent
+                  {...customProps}
+                  sectionName={MenuItems[index].replace(" ", "_")}
+                />
               </InnerContainer>
             </Paper>
             <br />
@@ -54,17 +58,16 @@ export default function DashboardComponent({
   );
 }
 
-function getApplicationComponents(data: IDashboardDataType) {
+function getApplicationComponents({ data }: { data: IDashboardDataType }) {
   const appComponents: any[][] = [
-    [OverviewComponent, data.getOverview()],
-    [CompetitorsComponent, data.getCompetitors()],
-    [HistoryComponent, data.getHistory()],
+    [OverviewComponent, { data: data.getOverview() }],
+    [CompetitorsComponent, { data: data.getCompetitors() }],
+    [HistoryComponent, { data: data.getHistory() }],
+    [FundamentalsComponent, { data: data.getFundamentals() }],
 
-    [FundamentalsComponent, data.getFundamentals()],
-    [FinancialHealthComponent, data.getFinancialHealth()],
-    [DividendComponent, data.getDividend()],
-
-    [OwnershipComponent, data.getOwnership()],
+    [FinancialHealthComponent, { data: data.getFinancialHealth() }],
+    [DividendComponent, { data: data.getDividend() }],
+    [OwnershipComponent, { data: data.getOwnership() }],
     [CompanyComponent, {}],
   ];
 

@@ -17,7 +17,13 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { LineComponent } from "../../../_shared_";
 import { IHistoryDataType } from "../../../api/data-types";
 
-export default function HistoryComponent(data: IHistoryDataType) {
+export default function History({
+  data,
+  sectionName,
+}: {
+  data: IHistoryDataType;
+  sectionName: string;
+}) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -26,7 +32,7 @@ export default function HistoryComponent(data: IHistoryDataType) {
 
   return (
     <Fragment>
-      <p id="Future_Growth">Price History &amp; Performance</p>
+      <h4 id={sectionName}>Price History &amp; Performance</h4>
       <Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange} centered>

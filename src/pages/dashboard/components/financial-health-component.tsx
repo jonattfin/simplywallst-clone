@@ -6,12 +6,16 @@ import { Button, Divider, Stack } from "@mui/material";
 import { LineComponent, TreemapComponent } from "../../../_shared_";
 import { IFinancialHealthDataType } from "../../../api/data-types";
 
-export default function FinancialHealthComponent(
-  data: IFinancialHealthDataType
-) {
+export default function FinancialHealth({
+  data,
+  sectionName,
+}: {
+  data: IFinancialHealthDataType;
+  sectionName: string;
+}) {
   return (
     <Fragment>
-      <p id="Financial_Health">Financial Health</p>
+      <h4 id={sectionName}>Financial Health</h4>
       <p>
         How is ING Groep&apos;s financial position? (This company is analysed
         differently as a bank or financial institution)

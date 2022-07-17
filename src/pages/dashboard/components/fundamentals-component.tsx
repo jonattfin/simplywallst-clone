@@ -5,10 +5,16 @@ import { IFundamentalsDataType } from "../../../api/data-types";
 
 import { RadialBarComponent, BarComponent } from "../../../_shared_";
 
-export default function FundamentalsComponent(data: IFundamentalsDataType) {
+export default function Fundamentals({
+  data,
+  sectionName,
+}: {
+  data: IFundamentalsDataType;
+  sectionName: string;
+}) {
   return (
     <Fragment>
-      <p id="Past_Performance">ING Groep Fundamentals Summary</p>
+      <h4 id={sectionName}>ING Groep Fundamentals Summary</h4>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
           <RadialBarWrapper>

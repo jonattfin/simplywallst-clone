@@ -4,17 +4,17 @@ import { Fragment } from "react";
 import { ICompetitorsDataType } from "../../../api/data-types";
 import { RadarComponent } from "../../../_shared_";
 
-export default function Competitors({ competitors }: ICompetitorsDataType) {
+export default function Competitors({ data }: { data: ICompetitorsDataType }) {
   return (
     <Fragment>
-      ING Groep Competitors
+      <h4>ING Groep Competitors</h4>
       <Grid
         container
         spacing={2}
         justifyContent="space-between"
         alignItems="center"
       >
-        {competitors.map((competitor, index) => (
+        {data.competitors.map((competitor, index) => (
           <Grid item xs={3} key={`competitor_${index}`}>
             <RadarWrapper>
               <RadarContainer>

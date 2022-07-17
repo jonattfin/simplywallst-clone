@@ -7,13 +7,19 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { RadarComponent } from "../../../_shared_";
 import { IOverviewDataType } from "../../../api/data-types";
 
-export default function OverviewContainer(data: IOverviewDataType) {
+export default function OverviewComponent({
+  data,
+  sectionName,
+}: {
+  data: IOverviewDataType;
+  sectionName: string;
+}) {
   return (
     <Fragment>
       <Grid container>
         <Grid item xs={8}>
           <Stack spacing={2}>
-            <p id="Company_Overview">{data.ticker} Stock Overview</p>
+            <h4 id={sectionName}>{data.ticker} Stock Overview</h4>
             <p>{data.description}</p>
             <div>
               <Button variant="outlined" startIcon={<InfoIcon />} size="small">
@@ -38,7 +44,7 @@ export default function OverviewContainer(data: IOverviewDataType) {
           <Stack spacing={2}>
             <RadarWrapper>
               <RadarContainer>
-                <RadarComponent data={data.radarData}/>
+                <RadarComponent data={data.radarData} />
               </RadarContainer>
             </RadarWrapper>
             <p>Snowflake Analysis</p>

@@ -5,12 +5,18 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { IDividendDataType } from "../../../api/data-types";
 import { BarComponent, LineComponent, PieComponent } from "../../../_shared_";
 
-export default function DividendComponent(data: IDividendDataType) {
+export default function Dividend({
+  data,
+  sectionName,
+}: {
+  data: IDividendDataType;
+  sectionName: string;
+}) {
   return (
     <div>
       <Stack spacing={2} divider={<Divider flexItem />}>
         <div>
-          <p id="Dividend">Dividend</p>
+          <h4 id={sectionName}>Dividend</h4>
           <p>
             What is ING Groep current dividend yield, its reliability and
             sustainability?
@@ -52,8 +58,8 @@ export default function DividendComponent(data: IDividendDataType) {
                 <CheckBoxIcon fontSize="small" color="success" />
                 <TitleParagraph>Earnings Coverage: </TitleParagraph>
               </div>
-              At its current payout ratio (81.7%), INGA&apos;s payments are covered
-              by earnings.
+              At its current payout ratio (81.7%), INGA&apos;s payments are
+              covered by earnings.
             </ContentDiv>
           </Stack>
         </div>
@@ -74,8 +80,8 @@ export default function DividendComponent(data: IDividendDataType) {
                 <CheckBoxIcon fontSize="small" color="success" />
                 <TitleParagraph>Future Dividend Coverage: </TitleParagraph>
               </div>
-              INGA&apos;s dividends in 3 years are forecast to be covered by earnings
-              (53.1% payout ratio).
+              INGA&apos;s dividends in 3 years are forecast to be covered by
+              earnings (53.1% payout ratio).
             </ContentDiv>
           </Stack>
         </div>
