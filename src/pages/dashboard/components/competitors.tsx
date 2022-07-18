@@ -7,14 +7,14 @@ import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 export function CompetitorsContainer({
   fetchData,
 }: {
-  fetchData: Promise<ICompetitorsDataType>;
+  fetchData: () => Promise<ICompetitorsDataType>;
 }) {
-  return withLoadingSpinner<ICompetitorsDataType>(
-    CompetitorsComponent,
+  return withLoadingSpinner<ICompetitorsDataType>({
+    WrappedComponent: CompetitorsComponent,
     fetchData,
-    "competitors",
-    {}
-  );
+    cacheName: "competitors",
+    otherProps: {},
+  });
 }
 
 export function CompetitorsComponent({ data }: { data: ICompetitorsDataType }) {

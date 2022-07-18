@@ -14,15 +14,15 @@ export function FinancialHealthContainer({
   fetchData,
   sectionName,
 }: {
-  fetchData: Promise<IFinancialHealthDataType>;
+  fetchData: () => Promise<IFinancialHealthDataType>;
   sectionName: string;
 }) {
-  return withLoadingSpinner<IFinancialHealthDataType>(
-    FinancialHealthComponent,
+  return withLoadingSpinner<IFinancialHealthDataType>({
+    WrappedComponent: FinancialHealthComponent,
     fetchData,
-    "financialHealth",
-    { sectionName }
-  );
+    cacheName: "financialHealth",
+    otherProps: { sectionName },
+  });
 }
 
 export function FinancialHealthComponent({

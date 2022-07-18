@@ -3,12 +3,19 @@ import { CircularProgress } from "@mui/material";
 import { Fragment } from "react";
 import { useQuery } from "react-query";
 
-export default function withLoadingSpinner<T>(
-  WrappedComponent: any,
-  fetchData: any,
-  cacheName: string,
-  otherProps: any
-) {
+interface IWithLoadingSpinner<T> {
+  WrappedComponent: any;
+  fetchData: () => Promise<T>;
+  cacheName: string;
+  otherProps: any;
+}
+
+export default function withLoadingSpinner<T>({
+  WrappedComponent,
+  fetchData,
+  cacheName,
+  otherProps,
+}: IWithLoadingSpinner<T>) {
   const { isLoading, error, data } = useQuery(cacheName, fetchData);
 
   return (
@@ -39,8 +46,7 @@ function ComponentDataLoader({
         <CircularProgress />
       </DivWrapper>
     );
-  if (error || !data)
-    return <DivWrapper>An error has occurred...</DivWrapper>;
+  if (error || !data) return <DivWrapper>An error has occurred...</DivWrapper>;
 
   return <Fragment>{children}</Fragment>;
 }

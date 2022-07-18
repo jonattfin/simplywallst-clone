@@ -13,15 +13,15 @@ export function FundamentalsContainer({
   fetchData,
   sectionName,
 }: {
-  fetchData: Promise<IFundamentalsDataType>;
+  fetchData: () => Promise<IFundamentalsDataType>;
   sectionName: string;
 }) {
-  return withLoadingSpinner<IFundamentalsDataType>(
-    FundamentalsComponent,
+  return withLoadingSpinner<IFundamentalsDataType>({
+    WrappedComponent: FundamentalsComponent,
     fetchData,
-    "fundamentals",
-    { sectionName }
-  );
+    cacheName: "fundamentals",
+    otherProps: { sectionName },
+  });
 }
 
 export function FundamentalsComponent({

@@ -11,15 +11,15 @@ export function OverviewContainer({
   fetchData,
   sectionName,
 }: {
-  fetchData: Promise<IOverviewDataType>;
+  fetchData: () => Promise<IOverviewDataType>;
   sectionName: string;
 }) {
-  return withLoadingSpinner<IOverviewDataType>(
-    OverviewComponent,
+  return withLoadingSpinner<IOverviewDataType>({
+    WrappedComponent: OverviewComponent,
     fetchData,
-    "overview",
-    { sectionName }
-  );
+    cacheName: "overview",
+    otherProps: { sectionName },
+  });
 }
 
 export function OverviewComponent({

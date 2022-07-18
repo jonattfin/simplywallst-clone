@@ -11,12 +11,12 @@ export function HeaderContainer({
 }: {
   fetchData: () => Promise<IHeaderDataType>;
 }) {
-  return withLoadingSpinner<IHeaderDataType>(
-    HeaderComponent,
+  return withLoadingSpinner<IHeaderDataType>({
+    WrappedComponent: HeaderComponent,
     fetchData,
-    "header",
-    {}
-  );
+    cacheName: "header",
+    otherProps: {},
+  });
 }
 
 export function HeaderComponent({ data }: { data: IHeaderDataType }) {
@@ -96,7 +96,6 @@ export function HeaderComponent({ data }: { data: IHeaderDataType }) {
           <p>UPDATED {data.lastUpdated.toDateString()}</p>
         </div>
         <div>
-          <p>&nbsp;</p>
           <p>
             DATA Company Financials <Button>+ 18 Analysts</Button>
           </p>

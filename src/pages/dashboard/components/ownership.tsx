@@ -17,15 +17,15 @@ export function OwnershipContainer({
   fetchData,
   sectionName,
 }: {
-  fetchData: Promise<IOwnershipDataType>;
+  fetchData: () => Promise<IOwnershipDataType>;
   sectionName: string;
 }) {
-  return withLoadingSpinner<IOwnershipDataType>(
-    OwnershipComponent,
+  return withLoadingSpinner<IOwnershipDataType>({
+    WrappedComponent: OwnershipComponent,
     fetchData,
-    "ownership",
-    { sectionName }
-  );
+    cacheName: "ownership",
+    otherProps: { sectionName },
+  });
 }
 
 export function OwnershipComponent({

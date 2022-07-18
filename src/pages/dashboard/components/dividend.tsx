@@ -14,15 +14,15 @@ export function DividendContainer({
   fetchData,
   sectionName,
 }: {
-  fetchData: Promise<IDividendDataType>;
+  fetchData: () => Promise<IDividendDataType>;
   sectionName: string;
 }) {
-  return withLoadingSpinner<IDividendDataType>(
-    DividendComponent,
+  return withLoadingSpinner<IDividendDataType>({
+    WrappedComponent: DividendComponent,
     fetchData,
-    "dividend",
-    { sectionName }
-  );
+    cacheName: "dividend",
+    otherProps: { sectionName },
+  });
 }
 
 export function DividendComponent({

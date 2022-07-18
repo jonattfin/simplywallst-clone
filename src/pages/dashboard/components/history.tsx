@@ -21,15 +21,15 @@ export function HistoryContainer({
   fetchData,
   sectionName,
 }: {
-  fetchData: Promise<IHistoryDataType>;
+  fetchData: () => Promise<IHistoryDataType>;
   sectionName: string;
 }) {
-  return withLoadingSpinner<IHistoryDataType>(
-    HistoryComponent,
+  return withLoadingSpinner<IHistoryDataType>({
+    WrappedComponent: HistoryComponent,
     fetchData,
-    "history",
-    { sectionName }
-  );
+    cacheName: "history",
+    otherProps: { sectionName },
+  });
 }
 
 export function HistoryComponent({
