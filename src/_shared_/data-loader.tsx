@@ -20,9 +20,7 @@ export default function withLoadingSpinner<T>({
 
   return (
     <ComponentDataLoader {...{ isLoading, error, data }}>
-      <WrappedComponent
-        {...{ data: data as T, ...otherProps }}
-      ></WrappedComponent>
+      <WrappedComponent {...{ data: data as T, ...otherProps }} />
     </ComponentDataLoader>
   );
 }

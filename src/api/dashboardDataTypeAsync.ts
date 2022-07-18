@@ -14,7 +14,11 @@ import {
 } from "./data-types";
 
 export class DashboardDataTypeAsync implements IDashboardDataTypeAsync {
-  constructor(private dashboardDataType: IDashboardDataType) {}
+  dashboardDataType!: IDashboardDataType;
+  
+  constructor(dashboardDataType: IDashboardDataType) {
+    this.dashboardDataType = dashboardDataType;
+  }
 
   getHeaderAsync(): Promise<IHeaderDataType> {
     return makePromise(this.dashboardDataType.getHeader());
