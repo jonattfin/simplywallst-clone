@@ -9,7 +9,7 @@ import { IHeaderDataType } from "../../../api/data-types";
 export function HeaderContainer({
   fetchData,
 }: {
-  fetchData: Promise<IHeaderDataType>;
+  fetchData: () => Promise<IHeaderDataType>;
 }) {
   return withLoadingSpinner<IHeaderDataType>(
     HeaderComponent,

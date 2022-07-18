@@ -10,6 +10,7 @@ import {
   History,
   Overview,
   Ownership,
+  Header,
 } from "./components";
 
 import { Fragment } from "react";
@@ -25,15 +26,13 @@ export function DashboardComponent({
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <Paper elevation={3}>
           <InnerContainer>
-            <Header.HeaderContainer
-              {...{ fetchData: () => data.getHeaderAsync() }}
-            />
+            <Header.HeaderContainer fetchData={() => data.getHeaderAsync()} />
           </InnerContainer>
         </Paper>
-      </Grid> */}
+      </Grid>
       <Grid item xs={2}>
         <Paper elevation={3}>
           <MenuComponent />
