@@ -7,3 +7,4 @@ export { default as PieComponent } from "./pie";
 export { default as withLoadingSpinner } from './data-loader';
 
 export { default as HeaderComponent } from "./header";
+export { default as FooterComponent } from "./footer";

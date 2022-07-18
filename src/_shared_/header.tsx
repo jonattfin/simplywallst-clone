@@ -7,13 +7,12 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { ButtonGroup, Divider } from "@mui/material";
+import { ButtonGroup } from "@mui/material";
 import styled from "@emotion/styled";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 const pages = [
   "Home",
@@ -129,7 +128,10 @@ const ResponsiveAppBar = ({
                 </Button>
               </ButtonGroup>
             </ExtraPaddingDiv>
-            <Box sx={{ flexGrow: 0 }}>
+            <a href="https://github.com/jonattfin/simplywallst-clone" target="_blank" rel="noreferrer">
+              <GitHubIcon fontSize="small"></GitHubIcon>
+            </a>
+            {/* <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -160,7 +162,7 @@ const ResponsiveAppBar = ({
                   </div>
                 ))}
               </Menu>
-            </Box>
+            </Box> */}
           </Toolbar>
         </Container>
       </AppBar>

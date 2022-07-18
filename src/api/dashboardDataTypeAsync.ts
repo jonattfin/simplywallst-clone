@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { DashboardDataType } from "./dashboardDataType";
+
 import {
   ICompetitorsDataType,
   IDashboardDataType,

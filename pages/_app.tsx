@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Grid } from "@mui/material";
 import { ThemeProvider, createTheme, ThemeOptions } from "@mui/material/styles";
 
-import { HeaderComponent } from "../src/_shared_";
+import { FooterComponent, HeaderComponent } from "../src/_shared_";
 import styled from "@emotion/styled";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -48,7 +48,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               <main>
                 <Component {...pageProps} />
               </main>
-              <footer></footer>
+              <footer>
+                {/* <FooterContainer>
+                  <FooterComponent />
+                </FooterContainer> */}
+              </footer>
             </Grid>
             <Grid item xl={3}></Grid>
           </Grid>
@@ -64,6 +68,12 @@ function getMainContainer(theme: string) {
     background-color: ${color};
   `;
 }
+
+const FooterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 {
   /* <Head>

@@ -10,7 +10,6 @@ import {
   History,
   Overview,
   Ownership,
-  Header,
 } from "./components";
 
 import { Fragment } from "react";
