@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -112,24 +112,35 @@ const ResponsiveAppBar = ({
                 </Button>
               ))}
             </Box>
-            <ExtraPaddingDiv>
-              <ButtonGroup variant="text" size="small">
-                <Button
-                  color={theme == "light" ? "success" : "primary"}
-                  onClick={() => setTheme("light")}
-                >
-                  Light
-                </Button>
-                <Button
-                  color={theme == "dark" ? "success" : "primary"}
-                  onClick={() => setTheme("dark")}
-                >
-                  Dark
-                </Button>
-              </ButtonGroup>
-            </ExtraPaddingDiv>
-            <a href="https://github.com/jonattfin/simplywallst-clone" target="_blank" rel="noreferrer">
+            <ButtonGroup variant="text" size="small">
+              <Button
+                color={theme == "light" ? "success" : "primary"}
+                onClick={() => setTheme("light")}
+              >
+                Light
+              </Button>
+              <Button
+                color={theme == "dark" ? "success" : "primary"}
+                onClick={() => setTheme("dark")}
+              >
+                Dark
+              </Button>
+            </ButtonGroup>
+            <ExtraParagraph />
+            <a
+              href="https://github.com/jonattfin/simplywallst-clone"
+              target="_blank"
+              rel="noreferrer"
+            >
               <GitHubIcon fontSize="small"></GitHubIcon>
+            </a>
+            <ExtraParagraph />
+            <a
+              href="https://sonarcloud.io/summary/new_code?id=jonattfin_simplywallst-clone"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExtraImage src="https://sonarcloud.io/api/project_badges/measure?project=jonattfin_simplywallst-clone&metric=alert_status" />
             </a>
             {/* <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
@@ -175,6 +186,10 @@ const TopDiv = styled.div`
   padding: 1vh 0px;
 `;
 
-const ExtraPaddingDiv = styled.div`
+const ExtraImage = styled.img`
+  height: 50%;
+`;
+
+const ExtraParagraph = styled.p`
   padding: 0px 10px;
 `;
