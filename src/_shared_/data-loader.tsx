@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { CircularProgress } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
-import { useQuery } from "react-query";
 
 interface IWithLoadingSpinner<T> {
   WrappedComponent: any;
@@ -16,7 +16,7 @@ export default function withLoadingSpinner<T>({
   cacheName,
   otherProps,
 }: IWithLoadingSpinner<T>) {
-  const { isLoading, error, data } = useQuery(cacheName, fetchData);
+  const { isLoading, error, data } = useQuery([cacheName], fetchData);
 
   return (
     <ComponentDataLoader {...{ isLoading, error, data }}>
