@@ -14,16 +14,11 @@ import {
 } from "./components";
 
 import { Fragment } from "react";
-import { IDashboardDataTypeAsync } from "../../api/data-types";
 import { MenuItems } from "./components/menu";
 import Head from "next/head";
 
-export function DashboardComponent({
-  data,
-}: {
-  data: IDashboardDataTypeAsync;
-}) {
-  const AppComponents = getApplicationComponents({ data });
+export function DashboardComponent({}) {
+  const AppComponents = getApplicationComponents();
 
   return (
     <Fragment>
@@ -41,7 +36,7 @@ export function DashboardComponent({
         <Grid item xs={12}>
           <Paper elevation={3}>
             <InnerContainer>
-              <Header.HeaderContainer fetchData={() => data.getHeaderAsync()} />
+              <Header.HeaderContainer />
             </InnerContainer>
           </Paper>
         </Grid>
@@ -51,12 +46,11 @@ export function DashboardComponent({
           </Paper>
         </Grid>
         <Grid item xs>
-          {AppComponents.map(([CustomComponent, customProps], index) => (
+          {AppComponents.map((CustomComponent, index) => (
             <Fragment key={`paper_${index}`}>
               <Paper elevation={3}>
                 <InnerContainer>
                   <CustomComponent
-                    {...customProps}
                     sectionName={MenuItems[index].replace(" ", "_")}
                   />
                 </InnerContainer>
@@ -70,30 +64,16 @@ export function DashboardComponent({
   );
 }
 
-function getApplicationComponents({ data }: { data: IDashboardDataTypeAsync }) {
-  const appComponents: any[][] = [
-    [Overview.OverviewContainer, { fetchData: () => data.getOverviewAsync() }],
-    [
-      Competitors.CompetitorsContainer,
-      { fetchData: () => data.getCompetitorsAsync() },
-    ],
-    [History.HistoryContainer, { fetchData: () => data.getHistoryAsync() }],
-    [
-      Fundamentals.FundamentalsContainer,
-      { fetchData: () => data.getFundamentalsAsync() },
-    ],
-    [
-      FinancialHealth.FinancialHealthContainer,
-      { fetchData: () => data.getFinancialHealthAsync() },
-    ],
-    [Dividend.DividendContainer, { fetchData: () => data.getDividendAsync() }],
-    [
-      Ownership.OwnershipContainer,
-      { fetchData: () => data.getOwnershipAsync() },
-    ],
+function getApplicationComponents() {
+  return [
+    Overview.OverviewContainer,
+    Competitors.CompetitorsContainer,
+    History.HistoryContainer,
+    Fundamentals.FundamentalsContainer,
+    FinancialHealth.FinancialHealthContainer,
+    Dividend.DividendContainer,
+    Ownership.OwnershipContainer,
   ];
-
-  return appComponents;
 }
 
 // Styled Components

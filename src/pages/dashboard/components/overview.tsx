@@ -6,18 +6,22 @@ import SubjectIcon from "@mui/icons-material/Subject";
 
 import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 import { IOverviewDataType } from "../../../api/data-types";
+import { gql } from "@apollo/client";
 
-export function OverviewContainer({
-  fetchData,
-  sectionName,
-}: {
-  fetchData: () => Promise<IOverviewDataType>;
-  sectionName: string;
-}) {
+const GET_OVERVIEW_QUERY = gql`
+  query getCompetitorsData($companyId: ID!) {
+    company(id: $companyId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export function OverviewContainer({ sectionName }: { sectionName: string }) {
   return withLoadingSpinner<IOverviewDataType>({
     WrappedComponent: OverviewComponent,
-    fetchData,
-    cacheName: "overview",
+    query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },
   });
 }

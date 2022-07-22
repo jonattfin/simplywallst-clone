@@ -13,21 +13,25 @@ import {
   Stack,
 } from "@mui/material";
 import SubjectIcon from "@mui/icons-material/Subject";
+import { gql } from "@apollo/client";
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHistoryDataType } from "../../../api/data-types";
 
-export function HistoryContainer({
-  fetchData,
-  sectionName,
-}: {
-  fetchData: () => Promise<IHistoryDataType>;
-  sectionName: string;
-}) {
+const GET_HISTORY_QUERY = gql`
+  query getCompetitorsData($companyId: ID!) {
+    company(id: $companyId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export function HistoryContainer({ sectionName }: { sectionName: string }) {
   return withLoadingSpinner<IHistoryDataType>({
     WrappedComponent: HistoryComponent,
-    fetchData,
-    cacheName: "history",
+    query: GET_HISTORY_QUERY,
     otherProps: { sectionName },
   });
 }

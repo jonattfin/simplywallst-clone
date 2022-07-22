@@ -1,19 +1,25 @@
+import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
 import { Fragment } from "react";
+
 import { ICompetitorsDataType } from "../../../api/data-types";
 import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 
-export function CompetitorsContainer({
-  fetchData,
-}: {
-  fetchData: () => Promise<ICompetitorsDataType>;
-}) {
+const GET_COMPETITORS_QUERY = gql`
+  query getCompetitorsData($companyId: ID!) {
+    company(id: $companyId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export function CompetitorsContainer({}) {
   return withLoadingSpinner<ICompetitorsDataType>({
     WrappedComponent: CompetitorsComponent,
-    fetchData,
-    cacheName: "competitors",
-    otherProps: {},
+    query: GET_COMPETITORS_QUERY,
   });
 }
 

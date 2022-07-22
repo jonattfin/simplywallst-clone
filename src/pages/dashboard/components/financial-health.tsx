@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Fragment } from "react";
 import SubjectIcon from "@mui/icons-material/Subject";
 import { Button, Divider, Stack } from "@mui/material";
+import { gql } from "@apollo/client";
 
 import {
   LineComponent,
@@ -10,17 +11,24 @@ import {
 } from "../../../_shared_";
 import { IFinancialHealthDataType } from "../../../api/data-types";
 
+const GET_FINANCIAL_HEALTH_QUERY = gql`
+  query getFinancialHealthData($companyId: ID!) {
+    company(id: $companyId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
 export function FinancialHealthContainer({
-  fetchData,
   sectionName,
 }: {
-  fetchData: () => Promise<IFinancialHealthDataType>;
   sectionName: string;
 }) {
   return withLoadingSpinner<IFinancialHealthDataType>({
     WrappedComponent: FinancialHealthComponent,
-    fetchData,
-    cacheName: "financialHealth",
+    query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },
   });
 }

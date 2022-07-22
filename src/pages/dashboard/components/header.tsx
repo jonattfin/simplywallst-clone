@@ -2,20 +2,25 @@ import { Button, Breadcrumbs, Stack, Link } from "@mui/material";
 import styled from "@emotion/styled";
 import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
+import { gql } from "@apollo/client";
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHeaderDataType } from "../../../api/data-types";
 
-export function HeaderContainer({
-  fetchData,
-}: {
-  fetchData: () => Promise<IHeaderDataType>;
-}) {
+const GET_HEADER_QUERY = gql`
+  query getHeaderData($companyId: ID!) {
+    company(id: $companyId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export function HeaderContainer() {
   return withLoadingSpinner<IHeaderDataType>({
     WrappedComponent: HeaderComponent,
-    fetchData,
-    cacheName: "header",
-    otherProps: {},
+    query: GET_HEADER_QUERY,
   });
 }
 

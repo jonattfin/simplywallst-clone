@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme, ThemeOptions } from "@mui/material/styles";
 import { HeaderComponent } from "../src/_shared_";
 import styled from "@emotion/styled";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const blackColor = "#151B24";
 const whiteColor = "grey";
@@ -28,6 +29,11 @@ const getTheme = () => {
   return createTheme(themeObject);
 };
 
+const client = new ApolloClient({
+  uri: "http://localhost:8080/graphql",
+  cache: new InMemoryCache(),
+});
+
 // Create a client
 const queryClient = new QueryClient();
 
@@ -37,23 +43,25 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const MainContainer = getMainContainer(theme);
   return (
     <MainContainer>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={getTheme()}>
-          <Grid container>
-            <Grid item md={3}></Grid>
-            <Grid item md={6}>
-              <nav>
-                <HeaderComponent {...{ theme, setTheme }} />
-              </nav>
-              <main>
-                <Component {...pageProps} />
-              </main>
-              <footer />
+      <ApolloProvider client={client}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={getTheme()}>
+            <Grid container>
+              <Grid item md={3}></Grid>
+              <Grid item md={6}>
+                <nav>
+                  <HeaderComponent {...{ theme, setTheme }} />
+                </nav>
+                <main>
+                  <Component {...pageProps} />
+                </main>
+                <footer />
+              </Grid>
+              <Grid item md={3}></Grid>
             </Grid>
-            <Grid item md={3}></Grid>
-          </Grid>
-        </ThemeProvider>
-      </QueryClientProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </ApolloProvider>
     </MainContainer>
   );
 }
@@ -64,4 +72,3 @@ function getMainContainer(theme: string) {
     background-color: ${color};
   `;
 }
-

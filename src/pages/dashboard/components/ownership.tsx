@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import {
   Paper,
@@ -9,21 +10,24 @@ import {
   TableRow,
 } from "@mui/material";
 import { Fragment } from "react";
-import { IOwnershipDataType } from "../../../api/data-types";
 
+import { IOwnershipDataType } from "../../../api/data-types";
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 
-export function OwnershipContainer({
-  fetchData,
-  sectionName,
-}: {
-  fetchData: () => Promise<IOwnershipDataType>;
-  sectionName: string;
-}) {
+const GET_OWNERSHIP_QUERY = gql`
+  query getCompetitorsData($companyId: ID!) {
+    company(id: $companyId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export function OwnershipContainer({ sectionName }: { sectionName: string }) {
   return withLoadingSpinner<IOwnershipDataType>({
     WrappedComponent: OwnershipComponent,
-    fetchData,
-    cacheName: "ownership",
+    query: GET_OWNERSHIP_QUERY,
     otherProps: { sectionName },
   });
 }
