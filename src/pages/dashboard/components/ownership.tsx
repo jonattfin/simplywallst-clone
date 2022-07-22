@@ -10,16 +10,15 @@ import {
   TableRow,
 } from "@mui/material";
 import { Fragment } from "react";
+import { generateHistory } from "../../../api/dashboardDataType";
 
 import { IOwnershipDataType } from "../../../api/data-types";
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 
 const GET_OWNERSHIP_QUERY = gql`
-  query getCompetitorsData($companyId: ID!) {
-    company(id: $companyId) {
-      id
+  query getOwnershipData {
+    company(id: 1) {
       name
-      description
     }
   }
 `;
@@ -54,7 +53,7 @@ export function OwnershipComponent({
       {renderShareholdersTable()}
       <p>Number of Employees</p>
       <LineContainer>
-        <LineComponent data={data.history} />
+        <LineComponent data={generateHistory({ start: 100000 })} />
       </LineContainer>
     </Fragment>
   );

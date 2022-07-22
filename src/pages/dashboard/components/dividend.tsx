@@ -10,13 +10,12 @@ import {
   PieComponent,
   withLoadingSpinner,
 } from "../../../_shared_";
+import { generateHistory } from "../../../api/dashboardDataType";
 
 const GET_DIVIDENDS_QUERY = gql`
-  query getDividendsData($companyId: ID!) {
-    company(id: $companyId) {
-      id
+  query getDividendsData {
+    company(id: 1) {
       name
-      description
     }
   }
 `;
@@ -62,7 +61,7 @@ export function DividendComponent({
         <div>
           <p>Stability and Growth of Payments</p>
           <LineContainer>
-            <LineComponent data={data.getHistory()} />
+            <LineComponent data={generateHistory({ start: 100, dimensions: 3 })} />
           </LineContainer>
         </div>
         <div>

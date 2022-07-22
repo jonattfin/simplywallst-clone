@@ -17,13 +17,14 @@ import { gql } from "@apollo/client";
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHistoryDataType } from "../../../api/data-types";
+import { generateHistory } from "../../../api/dashboardDataType";
 
 const GET_HISTORY_QUERY = gql`
-  query getCompetitorsData($companyId: ID!) {
-    company(id: $companyId) {
+  query getNewsData {
+    news(id: 1) {
       id
-      name
-      description
+      date
+      text
     }
   }
 `;
@@ -49,6 +50,8 @@ export function HistoryComponent({
     setValue(newValue);
   };
 
+  const { news } = data;
+
   return (
     <Fragment>
       <h4 id={sectionName}>Price History &amp; Performance</h4>
@@ -66,7 +69,7 @@ export function HistoryComponent({
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineContainer>
-                    <LineComponent data={data.getHistory(index + 1)} />
+                    <LineComponent data={generateHistory({ start: 10 })} />
                   </LineContainer>
                 </TabPanel>
               ))}
@@ -91,12 +94,12 @@ export function HistoryComponent({
         </Grid>
         Recent News &amp; Updates
         <List>
-          {data.news.map((news, index) => (
+          {[news].map((news, index) => (
             <ListItem key={`news_${index}`} disablePadding>
               <ListItemButton>
-                <ListItemText primary={news.date.toDateString()} />
-                <ListItemText primary={news.type} />
-                <CustomListItemText primary={news.value} />
+                <ListItemText primary={news.date} />
+                {/* <ListItemText primary={news.type} /> */}
+                <CustomListItemText primary={news.text} />
               </ListItemButton>
             </ListItem>
           ))}

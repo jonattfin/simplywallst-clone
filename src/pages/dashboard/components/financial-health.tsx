@@ -10,13 +10,12 @@ import {
   withLoadingSpinner,
 } from "../../../_shared_";
 import { IFinancialHealthDataType } from "../../../api/data-types";
+import { generateHistory } from "../../../api/dashboardDataType";
 
 const GET_FINANCIAL_HEALTH_QUERY = gql`
-  query getFinancialHealthData($companyId: ID!) {
-    company(id: $companyId) {
-      id
+  query getFinancialHealthData {
+    company(id: 1) {
       name
-      description
     }
   }
 `;
@@ -51,7 +50,7 @@ export function FinancialHealthComponent({
       <Divider />
       <p>Debt to Equity History and Analysis</p>
       <LineContainer>
-        <LineComponent data={data.getHistory()} />
+        <LineComponent data={generateHistory({ start: 100, dimensions: 2 })} />
       </LineContainer>
       <div>&nbsp;</div>
       <Stack
