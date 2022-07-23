@@ -24,7 +24,7 @@ const GET_COMPETITORS_QUERY = gql`
   }
 `;
 
-export function CompetitorsContainer({}) {
+export function CompetitorsContainer() {
   return withLoadingSpinner<ICompetitorsDataType>({
     WrappedComponent: CompetitorsComponent,
     query: GET_COMPETITORS_QUERY,

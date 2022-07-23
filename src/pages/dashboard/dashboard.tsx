@@ -17,7 +17,7 @@ import { Fragment } from "react";
 import { MenuItems } from "./components/menu";
 import Head from "next/head";
 
-export function DashboardComponent({}) {
+export function DashboardComponent() {
   const AppComponents = getApplicationComponents();
 
   return (
