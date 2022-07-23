@@ -1,25 +1,30 @@
+import {
+  DocumentNode,
+  OperationVariables,
+  TypedDocumentNode,
+  useQuery,
+} from "@apollo/client";
 import styled from "@emotion/styled";
 import { CircularProgress } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
 
 interface IWithLoadingSpinner<T> {
   WrappedComponent: any;
-  fetchData: () => Promise<T>;
-  cacheName: string;
-  otherProps: any;
+  query: DocumentNode | TypedDocumentNode<any, OperationVariables>;
+  variables?: any;
+  otherProps?: any;
 }
 
 export default function withLoadingSpinner<T>({
   WrappedComponent,
-  fetchData,
-  cacheName,
+  query,
+  variables,
   otherProps,
 }: IWithLoadingSpinner<T>) {
-  const { isLoading, error, data } = useQuery([cacheName], fetchData);
+  const { loading, error, data } = useQuery(query, { variables });
 
   return (
-    <ComponentDataLoader {...{ isLoading, error, data }}>
+    <ComponentDataLoader {...{ isLoading: loading, error, data }}>
       <WrappedComponent {...{ data: data as T, ...otherProps }} />
     </ComponentDataLoader>
   );

@@ -1,32 +1,45 @@
 export interface IHeaderDataType {
-  ticker: string;
-  name: string;
-  exchangeName: string;
-  lastPrice: number;
-  marketCap: number;
-  priceLastSevenDays: number;
-  priceLastYear: number;
-  lastUpdated: Date;
-  history: ILineDataType[];
+  company: {
+    name: string;
+    description: string;
+  }
+  stock: {
+    ticker: string;
+    exchangeName: string;
+    lastPrice: number;
+    marketCap: number;
+    priceSevenDays: number;
+    priceOneYear: number;
+    lastUpdated: string;
+    history: ILineDataType[];
+  };
 }
 
 export interface IHistoryNews {
-  date: Date;
-  type: string;
-  value: string;
+  date: string;
+  text: string;
 }
 
 export interface IHistoryDataType {
-  news: IHistoryNews[];
+  news: IHistoryNews;
   getHistory: (numberOfYears: number) => ILineDataType[];
 }
 
 export interface IOverviewDataType {
-  ticker: string;
-  description: string;
-  rewards: string[];
-  risks: string[];
-  radarData: any;
+  company: {
+    name:string;
+    description: string;
+    rewards: {
+      description: string;
+    }[];
+    risks: {
+      description: string;
+    }[];
+    // radarData: any;
+  };
+  stock: {
+    ticker: string;
+  };
 }
 
 export interface IDashboardDataType {
@@ -65,14 +78,13 @@ export interface ILineDataType {
   data: IPointType[];
 }
 
-export interface ICompetitorType {
-  name: string;
-  marketCap: string;
-  radarData: any;
-}
-
 export interface ICompetitorsDataType {
-  competitors: ICompetitorType[];
+  company: {
+    name: string;
+  };
+  stock: {
+    marketCap: string;
+  };
 }
 
 export interface IFundamentalsDataType {

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Fragment } from "react";
 import SubjectIcon from "@mui/icons-material/Subject";
 import { Button, Divider, Stack } from "@mui/material";
+import { gql } from "@apollo/client";
 
 import {
   LineComponent,
@@ -9,18 +10,24 @@ import {
   withLoadingSpinner,
 } from "../../../_shared_";
 import { IFinancialHealthDataType } from "../../../api/data-types";
+import { generateHistory } from "../../../api/dashboardDataType";
+
+const GET_FINANCIAL_HEALTH_QUERY = gql`
+  query getFinancialHealthData {
+    company(id: 1) {
+      name
+    }
+  }
+`;
 
 export function FinancialHealthContainer({
-  fetchData,
   sectionName,
 }: {
-  fetchData: () => Promise<IFinancialHealthDataType>;
   sectionName: string;
 }) {
   return withLoadingSpinner<IFinancialHealthDataType>({
     WrappedComponent: FinancialHealthComponent,
-    fetchData,
-    cacheName: "financialHealth",
+    query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },
   });
 }
@@ -43,7 +50,7 @@ export function FinancialHealthComponent({
       <Divider />
       <p>Debt to Equity History and Analysis</p>
       <LineContainer>
-        <LineComponent data={data.getHistory()} />
+        <LineComponent data={generateHistory({ start: 100, dimensions: 2 })} />
       </LineContainer>
       <div>&nbsp;</div>
       <Stack

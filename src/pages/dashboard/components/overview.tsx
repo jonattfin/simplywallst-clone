@@ -6,18 +6,31 @@ import SubjectIcon from "@mui/icons-material/Subject";
 
 import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 import { IOverviewDataType } from "../../../api/data-types";
+import { gql } from "@apollo/client";
+import { generateSnowflakeValues } from "../../../api/dashboardDataType";
 
-export function OverviewContainer({
-  fetchData,
-  sectionName,
-}: {
-  fetchData: () => Promise<IOverviewDataType>;
-  sectionName: string;
-}) {
+const GET_OVERVIEW_QUERY = gql`
+  query getOverviewData {
+    company(id: 1) {
+      name
+      description
+      rewards {
+        description
+      }
+      risks {
+        description
+      }
+    }
+    stock(id: 1) {
+      ticker
+    }
+  }
+`;
+
+export function OverviewContainer({ sectionName }: { sectionName: string }) {
   return withLoadingSpinner<IOverviewDataType>({
     WrappedComponent: OverviewComponent,
-    fetchData,
-    cacheName: "overview",
+    query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },
   });
 }
@@ -29,13 +42,15 @@ export function OverviewComponent({
   data: IOverviewDataType;
   sectionName: string;
 }) {
+  const { company, stock } = data;
+
   return (
     <Fragment>
       <Grid container>
         <Grid item xs={8}>
           <Stack spacing={2}>
-            <h4 id={sectionName}>{data.ticker} Stock Overview</h4>
-            <p>{data.description}</p>
+            <h4 id={sectionName}>{stock.ticker} Stock Overview</h4>
+            <p>{company.description}</p>
             <div>
               <Button variant="outlined" startIcon={<InfoIcon />} size="small">
                 About the company
@@ -43,14 +58,14 @@ export function OverviewComponent({
             </div>
             <p>REWARDS</p>
             <ul>
-              {data.rewards.map((reward, index) => (
-                <li key={`reward_${index}`}>{reward}</li>
+              {company.rewards.map(({ description }, index) => (
+                <li key={`reward_${index}`}>{description}</li>
               ))}
             </ul>
             <p>RISK ANALYSIS</p>
             <ul>
-              {data.risks.map((risk, index) => (
-                <li key={`risk_${index}`}>{risk}</li>
+              {company.risks.map(({ description }, index) => (
+                <li key={`risk_${index}`}>{description}</li>
               ))}
             </ul>
           </Stack>
@@ -59,7 +74,7 @@ export function OverviewComponent({
           <Stack spacing={2}>
             <RadarWrapper>
               <RadarContainer>
-                <RadarComponent data={data.radarData} />
+                <RadarComponent data={generateSnowflakeValues(company.name)} />
               </RadarContainer>
             </RadarWrapper>
             <p>Snowflake Analysis</p>

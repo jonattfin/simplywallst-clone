@@ -1,6 +1,9 @@
+import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
+import { generateRadialBarData } from "../../../api/dashboardDataType";
+
 import { IFundamentalsDataType } from "../../../api/data-types";
 
 import {
@@ -9,17 +12,22 @@ import {
   withLoadingSpinner,
 } from "../../../_shared_";
 
+const GET_FUNDAMENTALS_QUERY = gql`
+  query getFundamentalsData {
+    company(id: 1) {
+      name
+    }
+  }
+`;
+
 export function FundamentalsContainer({
-  fetchData,
   sectionName,
 }: {
-  fetchData: () => Promise<IFundamentalsDataType>;
   sectionName: string;
 }) {
   return withLoadingSpinner<IFundamentalsDataType>({
     WrappedComponent: FundamentalsComponent,
-    fetchData,
-    cacheName: "fundamentals",
+    query: GET_FUNDAMENTALS_QUERY,
     otherProps: { sectionName },
   });
 }
@@ -38,7 +46,7 @@ export function FundamentalsComponent({
         <Grid item xs={6}>
           <RadialBarWrapper>
             <RadialBarContainer>
-              <RadialBarComponent data={data.radialData} />
+              <RadialBarComponent data={generateRadialBarData()} />
             </RadialBarContainer>
           </RadialBarWrapper>
         </Grid>

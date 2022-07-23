@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Divider, Stack } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { gql } from "@apollo/client";
 
 import { IDividendDataType } from "../../../api/data-types";
 import {
@@ -9,18 +10,20 @@ import {
   PieComponent,
   withLoadingSpinner,
 } from "../../../_shared_";
+import { generateHistory } from "../../../api/dashboardDataType";
 
-export function DividendContainer({
-  fetchData,
-  sectionName,
-}: {
-  fetchData: () => Promise<IDividendDataType>;
-  sectionName: string;
-}) {
+const GET_DIVIDENDS_QUERY = gql`
+  query getDividendsData {
+    company(id: 1) {
+      name
+    }
+  }
+`;
+
+export function DividendContainer({ sectionName }: { sectionName: string }) {
   return withLoadingSpinner<IDividendDataType>({
     WrappedComponent: DividendComponent,
-    fetchData,
-    cacheName: "dividend",
+    query: GET_DIVIDENDS_QUERY,
     otherProps: { sectionName },
   });
 }
@@ -58,7 +61,7 @@ export function DividendComponent({
         <div>
           <p>Stability and Growth of Payments</p>
           <LineContainer>
-            <LineComponent data={data.getHistory()} />
+            <LineComponent data={generateHistory({ start: 100, dimensions: 3 })} />
           </LineContainer>
         </div>
         <div>

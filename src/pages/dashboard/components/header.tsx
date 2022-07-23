@@ -2,24 +2,39 @@ import { Button, Breadcrumbs, Stack, Link } from "@mui/material";
 import styled from "@emotion/styled";
 import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
+import { gql } from "@apollo/client";
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHeaderDataType } from "../../../api/data-types";
+import { generateHistory } from "../../../api/dashboardDataType";
 
-export function HeaderContainer({
-  fetchData,
-}: {
-  fetchData: () => Promise<IHeaderDataType>;
-}) {
+const GET_HEADER_QUERY = gql`
+  query getHeaderData {
+    company(id: 1) {
+      name
+    }
+    stock(id: 1) {
+      ticker
+      exchangeName
+      lastPrice
+      marketCap
+      priceSevenDays
+      priceOneYear
+      lastUpdated
+    }
+  }
+`;
+
+export function HeaderContainer() {
   return withLoadingSpinner<IHeaderDataType>({
     WrappedComponent: HeaderComponent,
-    fetchData,
-    cacheName: "header",
-    otherProps: {},
+    query: GET_HEADER_QUERY,
   });
 }
 
 export function HeaderComponent({ data }: { data: IHeaderDataType }) {
+  const { company, stock } = data;
+
   return (
     <Fragment>
       <div>
@@ -41,10 +56,10 @@ export function HeaderComponent({ data }: { data: IHeaderDataType }) {
         justifyContent="left"
         alignItems="center"
       >
-        <TickerDiv>{data.ticker}</TickerDiv>
+        <TickerDiv>{stock.ticker}</TickerDiv>
         <div>
-          <h2>{data.name}</h2>
-          <h4>{`${data.exchangeName}:${data.ticker} Stock Report`}</h4>
+          <h2>{company.name}</h2>
+          <h4>{`${stock.exchangeName}:${stock.ticker} Stock Report`}</h4>
         </div>
       </Stack>
 
@@ -73,27 +88,27 @@ export function HeaderComponent({ data }: { data: IHeaderDataType }) {
       >
         <div>
           <p>LAST PRICE</p>
-          <p>{data.lastPrice}</p>
+          <p>{stock.lastPrice}</p>
         </div>
         <div>
           <p>MARKET CAP</p>
-          <p>{data.marketCap}</p>
+          <p>{stock.marketCap}</p>
         </div>
         <div>
           <p>7D</p>
-          <p>{data.priceLastSevenDays}</p>
+          <p>{stock.priceSevenDays}</p>
         </div>
         <div>
           <p>1Y</p>
-          <p>{data.priceLastYear}</p>
+          <p>{stock.priceOneYear}</p>
         </div>
         <div>
           <LineContainer>
-            <LineComponent data={data.history} />
+            <LineComponent data={generateHistory({ start: 9 })} /> TODO
           </LineContainer>
         </div>
         <div>
-          <p>UPDATED {data.lastUpdated.toDateString()}</p>
+          <p>UPDATED {stock.lastUpdated}</p>
         </div>
         <div>
           <p>

@@ -13,21 +13,26 @@ import {
   Stack,
 } from "@mui/material";
 import SubjectIcon from "@mui/icons-material/Subject";
+import { gql } from "@apollo/client";
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHistoryDataType } from "../../../api/data-types";
+import { generateHistory } from "../../../api/dashboardDataType";
 
-export function HistoryContainer({
-  fetchData,
-  sectionName,
-}: {
-  fetchData: () => Promise<IHistoryDataType>;
-  sectionName: string;
-}) {
+const GET_HISTORY_QUERY = gql`
+  query getNewsData {
+    news(id: 1) {
+      id
+      date
+      text
+    }
+  }
+`;
+
+export function HistoryContainer({ sectionName }: { sectionName: string }) {
   return withLoadingSpinner<IHistoryDataType>({
     WrappedComponent: HistoryComponent,
-    fetchData,
-    cacheName: "history",
+    query: GET_HISTORY_QUERY,
     otherProps: { sectionName },
   });
 }
@@ -44,6 +49,8 @@ export function HistoryComponent({
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const { news } = data;
 
   return (
     <Fragment>
@@ -62,7 +69,7 @@ export function HistoryComponent({
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineContainer>
-                    <LineComponent data={data.getHistory(index + 1)} />
+                    <LineComponent data={generateHistory({ start: 10 })} />
                   </LineContainer>
                 </TabPanel>
               ))}
@@ -87,12 +94,12 @@ export function HistoryComponent({
         </Grid>
         Recent News &amp; Updates
         <List>
-          {data.news.map((news, index) => (
+          {[news].map((news, index) => (
             <ListItem key={`news_${index}`} disablePadding>
               <ListItemButton>
-                <ListItemText primary={news.date.toDateString()} />
-                <ListItemText primary={news.type} />
-                <CustomListItemText primary={news.value} />
+                <ListItemText primary={news.date} />
+                {/* <ListItemText primary={news.type} /> */}
+                <CustomListItemText primary={news.text} />
               </ListItemButton>
             </ListItem>
           ))}
