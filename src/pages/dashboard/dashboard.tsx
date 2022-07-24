@@ -40,12 +40,12 @@ export function DashboardComponent() {
             </InnerContainer>
           </Paper>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xl={2} md={2}>
           <Paper elevation={3}>
             <MenuComponent />
           </Paper>
         </Grid>
-        <Grid item xs>
+        <Grid item xl={10} md={10}>
           {AppComponents.map((CustomComponent, index) => (
             <Fragment key={`paper_${index}`}>
               <Paper elevation={3}>

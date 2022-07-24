@@ -48,8 +48,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={getTheme()}>
             <Grid container>
-              <Grid item md={3}></Grid>
-              <Grid item md={6}>
+              <Grid item xl={3}></Grid>
+              <Grid item xl={6}>
                 <nav>
                   <HeaderComponent {...{ theme, setTheme }} />
                 </nav>
@@ -58,7 +58,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 </main>
                 <footer />
               </Grid>
-              <Grid item md={3}></Grid>
+              <Grid item xl={3}></Grid>
             </Grid>
           </ThemeProvider>
         </QueryClientProvider>

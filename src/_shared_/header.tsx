@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { ButtonGroup } from "@mui/material";
+import { Stack, Switch } from "@mui/material";
 import styled from "@emotion/styled";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -22,14 +22,15 @@ const pages = [
   "Portfolios",
   "Screener",
 ];
-const settings: string[] = [
-  "Profile",
-  "Subscription & Billing",
-  "Plans & Pricing",
-  "Notifications",
-  "Help Center",
-  "Logout",
-];
+
+// const settings: string[] = [
+//   "Profile",
+//   "Subscription & Billing",
+//   "Plans & Pricing",
+//   "Notifications",
+//   "Help Center",
+//   "Logout",
+// ];
 
 const ResponsiveAppBar = ({
   theme,
@@ -64,7 +65,7 @@ const ResponsiveAppBar = ({
         <Container>
           <Toolbar>
             <AdbIcon />
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -112,68 +113,29 @@ const ResponsiveAppBar = ({
                 </Button>
               ))}
             </Box>
-            <ButtonGroup variant="text" size="small">
-              <Button
-                color={theme == "light" ? "success" : "primary"}
-                onClick={() => setTheme("light")}
-              >
-                Light
-              </Button>
-              <Button
-                color={theme == "dark" ? "success" : "primary"}
-                onClick={() => setTheme("dark")}
-              >
-                Dark
-              </Button>
-            </ButtonGroup>
-            <ExtraParagraph />
-            <a
-              href="https://github.com/jonattfin/simplywallst-clone"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <GitHubIcon fontSize="small"></GitHubIcon>
-            </a>
-            <ExtraParagraph />
-            <a
-              href="https://sonarcloud.io/summary/new_code?id=jonattfin_simplywallst-clone"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ExtraImage src="https://sonarcloud.io/api/project_badges/measure?project=jonattfin_simplywallst-clone&metric=alert_status" />
-            </a>
-            {/* <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Switch
+                checked={theme == "dark"}
+                onChange={() => {
+                  theme == "dark" ? setTheme("light") : setTheme("dark");
                 }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+              <a
+                href="https://github.com/jonattfin/simplywallst-clone"
+                target="_blank"
+                rel="noreferrer"
               >
-                {settings.map((setting) => (
-                  <div key={setting}>
-                    {setting == "Logout" && <Divider />}
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  </div>
-                ))}
-              </Menu>
-            </Box> */}
+                <GitHubIcon fontSize="small"></GitHubIcon>
+              </a>
+              <a
+                href="https://sonarcloud.io/summary/new_code?id=jonattfin_simplywallst-clone"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <ExtraImage src="https://sonarcloud.io/api/project_badges/measure?project=jonattfin_simplywallst-clone&metric=alert_status" />
+              </a>
+            </Stack>
           </Toolbar>
         </Container>
       </AppBar>
@@ -188,8 +150,4 @@ const TopDiv = styled.div`
 
 const ExtraImage = styled.img`
   height: 50%;
-`;
-
-const ExtraParagraph = styled.p`
-  padding: 0px 10px;
 `;
