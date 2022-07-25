@@ -6,7 +6,6 @@ import { ThemeProvider, createTheme, ThemeOptions } from "@mui/material/styles";
 
 import { HeaderComponent } from "../src/_shared_";
 import styled from "@emotion/styled";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const blackColor = "#151B24";
@@ -35,9 +34,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// Create a client
-const queryClient = new QueryClient();
-
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState("dark");
 
@@ -45,23 +41,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <MainContainer>
       <ApolloProvider client={client}>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={getTheme()}>
-            <Grid container>
-              <Grid item xl={3}></Grid>
-              <Grid item xl={6}>
-                <nav>
-                  <HeaderComponent {...{ theme, setTheme }} />
-                </nav>
-                <main>
-                  <Component {...pageProps} />
-                </main>
-                <footer />
-              </Grid>
-              <Grid item xl={3}></Grid>
+        <ThemeProvider theme={getTheme()}>
+          <Grid container>
+            <Grid item xl={3}></Grid>
+            <Grid item xl={6}>
+              <nav>
+                <HeaderComponent {...{ theme, setTheme }} />
+              </nav>
+              <main>
+                <Component {...pageProps} />
+              </main>
+              <footer />
             </Grid>
-          </ThemeProvider>
-        </QueryClientProvider>
+            <Grid item xl={3}></Grid>
+          </Grid>
+        </ThemeProvider>
       </ApolloProvider>
     </MainContainer>
   );

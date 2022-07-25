@@ -7,7 +7,6 @@ import { FundamentalsComponent } from "./components/fundamentals";
 import { HistoryComponent } from "./components/history";
 import { OverviewComponent } from "./components/overview";
 import { OwnershipComponent } from "./components/ownership";
-import { DashboardContainer } from ".";
 
 export default function Index() {
   return <div></div>;
@@ -71,8 +70,4 @@ export const Ownership = () => {
       {...{ data: dashboarDataType.getOwnership(), sectionName: "" }}
     />
   );
-};
-
-export const Dashboard = () => {
-  return <DashboardContainer />;
 };

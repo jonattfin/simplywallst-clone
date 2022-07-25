@@ -10,9 +10,10 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Stack, Switch } from "@mui/material";
+import { Divider, Stack, Switch } from "@mui/material";
 import styled from "@emotion/styled";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 const pages = [
   "Home",
@@ -113,7 +114,7 @@ const ResponsiveAppBar = ({
                 </Button>
               ))}
             </Box>
-            <Stack direction="row" spacing={1} alignItems="center">
+            <Stack direction="row" spacing={2} alignItems="center">
               <Switch
                 checked={theme == "dark"}
                 onChange={() => {
@@ -121,6 +122,7 @@ const ResponsiveAppBar = ({
                 }}
                 inputProps={{ "aria-label": "controlled" }}
               />
+
               <a
                 href="https://github.com/jonattfin/simplywallst-clone"
                 target="_blank"
@@ -128,6 +130,15 @@ const ResponsiveAppBar = ({
               >
                 <GitHubIcon fontSize="small"></GitHubIcon>
               </a>
+
+              <a
+                href="https://www.chromatic.com/builds?appId=62de61e1ffeef704546c2cb6"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <AutoStoriesIcon fontSize="small" color="secondary"></AutoStoriesIcon>
+              </a>
+
               <a
                 href="https://sonarcloud.io/summary/new_code?id=jonattfin_simplywallst-clone"
                 target="_blank"
@@ -151,3 +162,4 @@ const TopDiv = styled.div`
 const ExtraImage = styled.img`
   height: 50%;
 `;
+
