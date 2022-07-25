@@ -46,7 +46,7 @@ export function CompetitorsComponent({ data }: { data: ICompetitorsDataType }) {
           <Grid item xs={3} key={`competitor_${index}`}>
             <RadarWrapper>
               <RadarContainer>
-                <RadarComponent data={generateSnowflakeValues(name)} />
+                <RadarComponent data={generateSnowflakeValues(name || "")} />
               </RadarContainer>
               <CompetitorWrapperDiv>
                 <p>{name}</p>

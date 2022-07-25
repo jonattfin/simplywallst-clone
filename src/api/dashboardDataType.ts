@@ -160,7 +160,11 @@ function getData(historyData: IHistoryData) {
   return data;
 }
 
-export function generateSnowflakeValues(ticker: string) {
+export function generateSnowflakeValues(ticker: string | undefined) {
+  if (!ticker) {
+    ticker = "RandomTicker";
+  }
+
   const tickers = [ticker];
   const values = ["value", "future", "past", "health", "dividend"];
 

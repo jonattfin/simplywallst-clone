@@ -96,11 +96,11 @@ export function HistoryComponent({
         </Grid>
         Recent News &amp; Updates
         <List>
-          {company.news.map((news, index) => (
+          {company.news.map((newsItem, index) => (
             <ListItem key={`news_${index}`} disablePadding>
               <ListItemButton>
-                <ListItemText primary={news.date} />
-                <CustomListItemText primary={news.description} />
+                <ListItemText primary={newsItem.date} />
+                <CustomListItemText primary={newsItem.description} />
               </ListItemButton>
             </ListItem>
           ))}

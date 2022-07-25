@@ -28,10 +28,10 @@ export interface IStock {
 export interface ICompany {
   name?: string;
   description?: string;
-  stocks?: IStock[];
-  rewards?: IRewards[];
-  risks?: IRisks[];
-  news?: INews[];
+  stocks: IStock[];
+  rewards: IRewards[];
+  risks: IRisks[];
+  news: INews[];
   competitors? : ICompany[]
 }
 
