@@ -20,11 +20,13 @@ import { IHistoryDataType } from "../../../api/data-types";
 import { generateHistory } from "../../../api/dashboardDataType";
 
 const GET_HISTORY_QUERY = gql`
-  query getNewsData {
-    news(id: 1) {
-      id
-      date
-      text
+  query getNewsForCompanyData {
+    company(id: 1) {
+      news {
+        id
+        date
+        description
+      }
     }
   }
 `;
@@ -50,7 +52,7 @@ export function HistoryComponent({
     setValue(newValue);
   };
 
-  const { news } = data;
+  const { company } = data;
 
   return (
     <Fragment>
@@ -69,7 +71,7 @@ export function HistoryComponent({
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineContainer>
-                    <LineComponent data={generateHistory({ start: 10 })} />
+                    <LineComponent data={generateHistory({ start: 10, numberOfYears: index + 1 })} />
                   </LineContainer>
                 </TabPanel>
               ))}
@@ -94,12 +96,11 @@ export function HistoryComponent({
         </Grid>
         Recent News &amp; Updates
         <List>
-          {[news].map((news, index) => (
+          {company.news.map((news, index) => (
             <ListItem key={`news_${index}`} disablePadding>
               <ListItemButton>
                 <ListItemText primary={news.date} />
-                {/* <ListItemText primary={news.type} /> */}
-                <CustomListItemText primary={news.text} />
+                <CustomListItemText primary={news.description} />
               </ListItemButton>
             </ListItem>
           ))}

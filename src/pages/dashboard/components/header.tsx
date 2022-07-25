@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import { gql } from "@apollo/client";
+import { head } from 'lodash';
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
 import { IHeaderDataType } from "../../../api/data-types";
@@ -12,15 +13,15 @@ const GET_HEADER_QUERY = gql`
   query getHeaderData {
     company(id: 1) {
       name
-    }
-    stock(id: 1) {
-      ticker
-      exchangeName
-      lastPrice
-      marketCap
-      priceSevenDays
-      priceOneYear
-      lastUpdated
+      stocks {
+        ticker
+        exchangeName
+        lastPrice
+        marketCap
+        priceSevenDays
+        priceOneYear
+        lastUpdated
+      }
     }
   }
 `;
@@ -33,7 +34,12 @@ export function HeaderContainer() {
 }
 
 export function HeaderComponent({ data }: { data: IHeaderDataType }) {
-  const { company, stock } = data;
+  const { company } = data;
+  const stock = head(company.stocks);
+
+  if (!stock) {
+    return <div>&nbsp;</div>
+  }
 
   return (
     <Fragment>
@@ -104,7 +110,7 @@ export function HeaderComponent({ data }: { data: IHeaderDataType }) {
         </div>
         <div>
           <LineContainer>
-            <LineComponent data={generateHistory({ start: 9 })} /> TODO
+            <LineComponent data={generateHistory({ start: 9 })} />
           </LineContainer>
         </div>
         <div>

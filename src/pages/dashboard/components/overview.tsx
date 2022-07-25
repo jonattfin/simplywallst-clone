@@ -3,10 +3,11 @@ import { Button, Grid, Stack } from "@mui/material";
 import { Fragment } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import SubjectIcon from "@mui/icons-material/Subject";
+import { gql } from "@apollo/client";
+import { head } from "lodash";
 
 import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 import { IOverviewDataType } from "../../../api/data-types";
-import { gql } from "@apollo/client";
 import { generateSnowflakeValues } from "../../../api/dashboardDataType";
 
 const GET_OVERVIEW_QUERY = gql`
@@ -20,9 +21,9 @@ const GET_OVERVIEW_QUERY = gql`
       risks {
         description
       }
-    }
-    stock(id: 1) {
-      ticker
+      stocks {
+        marketCap
+      }
     }
   }
 `;
@@ -42,7 +43,11 @@ export function OverviewComponent({
   data: IOverviewDataType;
   sectionName: string;
 }) {
-  const { company, stock } = data;
+  const { company } = data;
+  const { rewards = [], risks = [] } = company;
+  const stock = head(company.stocks);
+
+  if (!stock) return <div>&nbsp;</div>;
 
   return (
     <Fragment>
@@ -58,13 +63,13 @@ export function OverviewComponent({
             </div>
             <p>REWARDS</p>
             <ul>
-              {company.rewards.map(({ description }, index) => (
+              {rewards.map(({ description }, index) => (
                 <li key={`reward_${index}`}>{description}</li>
               ))}
             </ul>
             <p>RISK ANALYSIS</p>
             <ul>
-              {company.risks.map(({ description }, index) => (
+              {risks.map(({ description }, index) => (
                 <li key={`risk_${index}`}>{description}</li>
               ))}
             </ul>

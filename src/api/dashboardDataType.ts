@@ -11,64 +11,32 @@ import {
   ILineDataType,
   IOverviewDataType,
   IOwnershipDataType,
+  ICompany,
 } from "./data-types";
 
 export class DashboardDataType implements IDashboardDataType {
-  private _ticker!: string;
+  private readonly _company!: ICompany;
 
   constructor() {
-    this._ticker = "INGA";
+    const competitors = getCompetitors();
+    this._company = getCompany("INGB", competitors);
   }
 
   getHeader(): IHeaderDataType {
     return {
-      company: {
-        name: "ING Groep",
-        description: ""
-      },
-      stock: {
-        ticker: this._ticker,
-        exchangeName: "ENXTAM",
-        lastPrice: 9.42,
-        marketCap: 35.3e9,
-        priceSevenDays: -0.1,
-        priceOneYear: -13.4,
-        lastUpdated: new Date(2022, 6, 10).toString(),
-        history: generateHistory({ start: 9 }),
-      },
+      company: this._company,
     };
   }
   getOverview(): IOverviewDataType {
     return {
-      company: {
-        name: "",
-        description: `ING Groep N.V., a financial institution, provides various banking
-        products and services in the Netherlands, Belgium, Germany,
-        Poland, Rest of Europe, North America, Latin America, Asia, and
-        Australia.`,
-        rewards: [
-          {
-            description: "Trading at 67% below our estimate of its fair value",
-          },
-          { description: "Earnings are forecast to grow 12.35% per year" },
-          { description: "Earnings grew by 48.9% over the past year" },
-        ],
-        risks: [{ description: "Unstable dividend track record" }],
-      },
-      stock: {
-        ticker: this._ticker,
-      },
+      company: this._company,
     };
   }
   getHistory(): IHistoryDataType {
     return {
-      news: {
-        date: new Date(2022, 5, 18).toDateString(),
-        text:
-          "ING Groep N.V. commences an Equity Buyback Plan, under the authorization approved on April 25, 2022.",
-      },
+      company: this._company,
       getHistory: (numberOfYears: number) =>
-      generateHistory({ start: 10, numberOfYears }),
+        generateHistory({ start: 10, numberOfYears }),
     };
   }
   getOwnership(): IOwnershipDataType {
@@ -77,14 +45,7 @@ export class DashboardDataType implements IDashboardDataType {
     };
   }
   getCompetitors(): ICompetitorsDataType {
-    return {
-      company: {
-        name: "ABN AMRO Bank",
-      },
-      stock: {
-        marketCap: "$9.8b",
-      }
-    };
+    return { company: this._company };
   }
   getFundamentals(): IFundamentalsDataType {
     return {
@@ -124,6 +85,50 @@ export function generateHistory(historyData: IHistoryData): ILineDataType[] {
       data: getData(historyData),
     };
   });
+}
+
+function getCompetitors() {
+  return [
+    getCompany("ABN AMRO Bank"),
+    getCompany("Lloyds Banking Group"),
+    getCompany("Oversea-Chinese Banking"),
+    getCompany("Shanghai Development Bank"),
+  ];
+}
+
+function getCompany(ticker: string, competitors: ICompany[] = []) {
+  return {
+    name: ticker,
+    description: "",
+    stocks: [
+      {
+        ticker: ticker,
+        exchangeName: "ENXTAM",
+        lastPrice: 9.42,
+        marketCap: 35.3e9,
+        priceSevenDays: -0.1,
+        priceOneYear: -13.4,
+        lastUpdated: new Date(2022, 6, 10).toString(),
+        history: generateHistory({ start: 9 }),
+      },
+    ],
+    news: [
+      {
+        date: new Date(2022, 5, 18).toDateString(),
+        description:
+          "ING Groep N.V. commences an Equity Buyback Plan, under the authorization approved on April 25, 2022.",
+      },
+    ],
+    rewards: [
+      {
+        description: "Trading at 67% below our estimate of its fair value",
+      },
+      { description: "Earnings are forecast to grow 12.35% per year" },
+      { description: "Earnings grew by 48.9% over the past year" },
+    ],
+    risks: [{ description: "Unstable dividend track record" }],
+    competitors,
+  };
 }
 
 function getData(historyData: IHistoryData) {
