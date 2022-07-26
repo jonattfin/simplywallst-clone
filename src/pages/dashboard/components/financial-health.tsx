@@ -9,7 +9,7 @@ import {
   TreemapComponent,
   withLoadingSpinner,
 } from "../../../_shared_";
-import { IFinancialHealthDataType } from "../../../api/data-types";
+import { FinancialHealthDataType } from "../../../api/data-types";
 import { generateHistory } from "../../../api/dashboardDataType";
 
 const GET_FINANCIAL_HEALTH_QUERY = gql`
@@ -25,7 +25,7 @@ export function FinancialHealthContainer({
 }: {
   sectionName: string;
 }) {
-  return withLoadingSpinner<IFinancialHealthDataType>({
+  return withLoadingSpinner<FinancialHealthDataType>({
     WrappedComponent: FinancialHealthComponent,
     query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },
@@ -36,7 +36,7 @@ export function FinancialHealthComponent({
   data,
   sectionName,
 }: {
-  data: IFinancialHealthDataType;
+  data: FinancialHealthDataType;
   sectionName: string;
 }) {
   return (

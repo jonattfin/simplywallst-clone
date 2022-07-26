@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { head } from "lodash";
 
 import { generateSnowflakeValues } from "../../../api/dashboardDataType";
-import { ICompetitorsDataType } from "../../../api/data-types";
+import { CompetitorsDataType } from "../../../api/data-types";
 import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
 
 const GET_COMPETITORS_QUERY = gql`
@@ -23,13 +23,13 @@ const GET_COMPETITORS_QUERY = gql`
 `;
 
 export function CompetitorsContainer() {
-  return withLoadingSpinner<ICompetitorsDataType>({
+  return withLoadingSpinner<CompetitorsDataType>({
     WrappedComponent: CompetitorsComponent,
     query: GET_COMPETITORS_QUERY,
   });
 }
 
-export function CompetitorsComponent({ data }: { data: ICompetitorsDataType }) {
+export function CompetitorsComponent({ data }: { data: CompetitorsDataType }) {
   const { company } = data;
   const { competitors = [] } = company;
 

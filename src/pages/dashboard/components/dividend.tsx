@@ -3,7 +3,7 @@ import { Divider, Stack } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { gql } from "@apollo/client";
 
-import { IDividendDataType } from "../../../api/data-types";
+import { DividendDataType } from "../../../api/data-types";
 import {
   BarComponent,
   LineComponent,
@@ -21,7 +21,7 @@ const GET_DIVIDENDS_QUERY = gql`
 `;
 
 export function DividendContainer({ sectionName }: { sectionName: string }) {
-  return withLoadingSpinner<IDividendDataType>({
+  return withLoadingSpinner<DividendDataType>({
     WrappedComponent: DividendComponent,
     query: GET_DIVIDENDS_QUERY,
     otherProps: { sectionName },
@@ -32,7 +32,7 @@ export function DividendComponent({
   data,
   sectionName,
 }: {
-  data: IDividendDataType;
+  data: DividendDataType;
   sectionName: string;
 }) {
   return (

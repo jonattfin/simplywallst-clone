@@ -1,14 +1,14 @@
-import { DashboardDataType } from "./dashboardDataType";
-import { IDashboardDataType, IDashboardDataTypeAsync } from "./data-types";
+import { LocalDashboardDataType } from "./dashboardDataType";
+import { DashboardDataType } from "./data-types";
 
 export default class DataTypeFactory {
-  private _dashboardDataType!: IDashboardDataType;
+  private _dashboardDataType!: DashboardDataType;
 
   constructor() {
-    this._dashboardDataType = new DashboardDataType();
+    this._dashboardDataType = new LocalDashboardDataType();
   }
 
-  getDashboardDataType(): IDashboardDataType {
+  getDashboardDataType(): DashboardDataType {
     return this._dashboardDataType;
   }
 }

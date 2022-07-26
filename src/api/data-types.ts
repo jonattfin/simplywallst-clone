@@ -1,20 +1,20 @@
-export interface INews {
+export interface News {
   id?: number;
-  date: string
+  date: string;
   description: string;
 }
 
-export interface IRewards {
-  id?: number;
-  description: string;
-}
-
-export interface IRisks {
+export interface Rewards {
   id?: number;
   description: string;
 }
 
-export interface IStock {
+export interface Risks {
+  id?: number;
+  description: string;
+}
+
+export interface Stock {
   ticker: string;
   exchangeName?: string;
   lastPrice?: number;
@@ -22,85 +22,74 @@ export interface IStock {
   priceSevenDays?: number;
   priceOneYear?: number;
   lastUpdated?: string;
-  history: ILineDataType[];
+  history: LineDataType[];
 }
 
-export interface ICompany {
+export interface Company {
   name?: string;
   description?: string;
-  stocks: IStock[];
-  rewards: IRewards[];
-  risks: IRisks[];
-  news: INews[];
-  competitors? : ICompany[]
+  stocks: Stock[];
+  rewards: Rewards[];
+  risks: Risks[];
+  news: News[];
+  competitors?: Company[];
 }
 
-export interface IHeaderDataType {
-  company: ICompany;
+export interface HeaderDataType {
+  company: Company;
 }
 
-export interface IHistoryNews {
+export interface HistoryNews {
   date: string;
   text: string;
 }
 
-export interface IHistoryDataType {
-  company: ICompany;
-  getHistory: (numberOfYears: number) => ILineDataType[];
+export interface HistoryDataType {
+  company: Company;
+  getHistory: (numberOfYears: number) => LineDataType[];
 }
 
-export interface IOverviewDataType {
-  company: ICompany;
+export interface OverviewDataType {
+  company: Company;
 }
 
-export interface IDashboardDataType {
-  getHeader(): IHeaderDataType;
-  getOverview(): IOverviewDataType;
-  getHistory(): IHistoryDataType;
-  getOwnership(): IOwnershipDataType;
-  getCompetitors(): ICompetitorsDataType;
-  getFundamentals(): IFundamentalsDataType;
-  getFinancialHealth(): IFinancialHealthDataType;
-  getDividend(): IDividendDataType;
+export interface DashboardDataType {
+  getHeader(): HeaderDataType;
+  getOverview(): OverviewDataType;
+  getHistory(): HistoryDataType;
+  getOwnership(): OwnershipDataType;
+  getCompetitors(): CompetitorsDataType;
+  getFundamentals(): FundamentalsDataType;
+  getFinancialHealth(): FinancialHealthDataType;
+  getDividend(): DividendDataType;
 }
 
-export interface IDashboardDataTypeAsync {
-  getHeaderAsync(): Promise<IHeaderDataType>;
-  getOverviewAsync(): Promise<IOverviewDataType>;
-  getHistoryAsync(): Promise<IHistoryDataType>;
-  getOwnershipAsync(): Promise<IOwnershipDataType>;
-  getCompetitorsAsync(): Promise<ICompetitorsDataType>;
-  getFundamentalsAsync(): Promise<IFundamentalsDataType>;
-  getFinancialHealthAsync(): Promise<IFinancialHealthDataType>;
-  getDividendAsync(): Promise<IDividendDataType>;
+export interface OwnershipDataType {
+  history: LineDataType[];
 }
 
-export interface IOwnershipDataType {
-  history: ILineDataType[];
-}
-
-export interface IPointType {
+export interface PointType {
   x: string;
   y: number;
 }
 
-export interface ILineDataType {
+export interface LineDataType {
   id: string;
-  data: IPointType[];
+  data: PointType[];
 }
 
-export interface ICompetitorsDataType {
-  company: ICompany;
+export interface CompetitorsDataType {
+  company: Company;
 }
 
-export interface IFundamentalsDataType {
+export interface FundamentalsDataType {
   radialData: any;
 }
 
-export interface IFinancialHealthDataType {
-  getHistory(): ILineDataType[];
+export interface FinancialHealthDataType {
+  getHistory(): LineDataType[];
 }
 
-export interface IDividendDataType {
-  getHistory(): ILineDataType[];
+export interface DividendDataType {
+  getHistory(): LineDataType[];
 }

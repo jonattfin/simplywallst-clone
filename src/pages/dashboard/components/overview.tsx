@@ -7,7 +7,7 @@ import { gql } from "@apollo/client";
 import { head } from "lodash";
 
 import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
-import { IOverviewDataType } from "../../../api/data-types";
+import { OverviewDataType } from "../../../api/data-types";
 import { generateSnowflakeValues } from "../../../api/dashboardDataType";
 
 const GET_OVERVIEW_QUERY = gql`
@@ -29,7 +29,7 @@ const GET_OVERVIEW_QUERY = gql`
 `;
 
 export function OverviewContainer({ sectionName }: { sectionName: string }) {
-  return withLoadingSpinner<IOverviewDataType>({
+  return withLoadingSpinner<OverviewDataType>({
     WrappedComponent: OverviewComponent,
     query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },
@@ -40,7 +40,7 @@ export function OverviewComponent({
   data,
   sectionName,
 }: {
-  data: IOverviewDataType;
+  data: OverviewDataType;
   sectionName: string;
 }) {
   const { company } = data;

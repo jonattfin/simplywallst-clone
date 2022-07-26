@@ -4,7 +4,7 @@ import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 import { generateRadialBarData } from "../../../api/dashboardDataType";
 
-import { IFundamentalsDataType } from "../../../api/data-types";
+import { FundamentalsDataType } from "../../../api/data-types";
 
 import {
   RadialBarComponent,
@@ -25,7 +25,7 @@ export function FundamentalsContainer({
 }: {
   sectionName: string;
 }) {
-  return withLoadingSpinner<IFundamentalsDataType>({
+  return withLoadingSpinner<FundamentalsDataType>({
     WrappedComponent: FundamentalsComponent,
     query: GET_FUNDAMENTALS_QUERY,
     otherProps: { sectionName },
@@ -36,7 +36,7 @@ export function FundamentalsComponent({
   data,
   sectionName,
 }: {
-  data: IFundamentalsDataType;
+  data: FundamentalsDataType;
   sectionName: string;
 }) {
   return (

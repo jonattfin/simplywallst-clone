@@ -1,7 +1,7 @@
 import { NoSsr } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsiveLine } from "@nivo/line";
-import { ILineDataType } from "../api/data-types";
+import { LineDataType } from "../api/data-types";
 
 const commonProperties = {
   animate: true,
@@ -9,7 +9,7 @@ const commonProperties = {
   margin: { top: 20 },
 };
 
-export default function LineComponent({ data }: { data: ILineDataType[] }) {
+export default function LineComponent({ data }: { data: LineDataType[] }) {
   const lineProps = {
     ...commonProperties,
   };

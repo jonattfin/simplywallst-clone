@@ -6,7 +6,7 @@ import { gql } from "@apollo/client";
 import { head } from 'lodash';
 
 import { LineComponent, withLoadingSpinner } from "../../../_shared_";
-import { IHeaderDataType } from "../../../api/data-types";
+import { HeaderDataType } from "../../../api/data-types";
 import { generateHistory } from "../../../api/dashboardDataType";
 
 const GET_HEADER_QUERY = gql`
@@ -27,13 +27,13 @@ const GET_HEADER_QUERY = gql`
 `;
 
 export function HeaderContainer() {
-  return withLoadingSpinner<IHeaderDataType>({
+  return withLoadingSpinner<HeaderDataType>({
     WrappedComponent: HeaderComponent,
     query: GET_HEADER_QUERY,
   });
 }
 
-export function HeaderComponent({ data }: { data: IHeaderDataType }) {
+export function HeaderComponent({ data }: { data: HeaderDataType }) {
   const { company } = data;
   const stock = head(company.stocks);
 

@@ -1,63 +1,63 @@
 import _ from "lodash";
 
 import {
-  ICompetitorsDataType,
-  IDividendDataType,
-  IFinancialHealthDataType,
-  IFundamentalsDataType,
-  IHeaderDataType,
-  IHistoryDataType,
-  IDashboardDataType,
-  ILineDataType,
-  IOverviewDataType,
-  IOwnershipDataType,
-  ICompany,
+  CompetitorsDataType,
+  DividendDataType,
+  FinancialHealthDataType,
+  FundamentalsDataType,
+  HeaderDataType,
+  HistoryDataType,
+  DashboardDataType,
+  LineDataType,
+  OverviewDataType,
+  OwnershipDataType,
+  Company,
 } from "./data-types";
 
-export class DashboardDataType implements IDashboardDataType {
-  private readonly _company!: ICompany;
+export class LocalDashboardDataType implements DashboardDataType {
+  private readonly _company!: Company;
 
   constructor() {
     const competitors = getCompetitors();
     this._company = getCompany("INGB", competitors);
   }
 
-  getHeader(): IHeaderDataType {
+  getHeader(): HeaderDataType {
     return {
       company: this._company,
     };
   }
-  getOverview(): IOverviewDataType {
+  getOverview(): OverviewDataType {
     return {
       company: this._company,
     };
   }
-  getHistory(): IHistoryDataType {
+  getHistory(): HistoryDataType {
     return {
       company: this._company,
       getHistory: (numberOfYears: number) =>
         generateHistory({ start: 10, numberOfYears }),
     };
   }
-  getOwnership(): IOwnershipDataType {
+  getOwnership(): OwnershipDataType {
     return {
       history: generateHistory({ start: 100000 }),
     };
   }
-  getCompetitors(): ICompetitorsDataType {
+  getCompetitors(): CompetitorsDataType {
     return { company: this._company };
   }
-  getFundamentals(): IFundamentalsDataType {
+  getFundamentals(): FundamentalsDataType {
     return {
       radialData: generateRadialBarData(),
     };
   }
-  getFinancialHealth(): IFinancialHealthDataType {
+  getFinancialHealth(): FinancialHealthDataType {
     return {
       getHistory: () => generateHistory({ start: 100, dimensions: 2 }),
     };
   }
-  getDividend(): IDividendDataType {
+  getDividend(): DividendDataType {
     return {
       getHistory: () => generateHistory({ start: 100, dimensions: 3 }),
     };
@@ -70,7 +70,7 @@ export interface IHistoryData {
   numberOfYears?: number;
 }
 
-export function generateHistory(historyData: IHistoryData): ILineDataType[] {
+export function generateHistory(historyData: IHistoryData): LineDataType[] {
   if (!historyData.dimensions) {
     historyData.dimensions = 1;
   }
@@ -96,7 +96,7 @@ function getCompetitors() {
   ];
 }
 
-function getCompany(ticker: string, competitors: ICompany[] = []) {
+function getCompany(ticker: string, competitors: Company[] = []) {
   return {
     name: ticker,
     description: "",
