@@ -21,11 +21,11 @@ export default function withLoadingSpinner<T>({
   variables,
   otherProps,
 }: IWithLoadingSpinner<T>) {
-  const { loading, error, data } = useQuery<T>(query, { variables });
+  const { loading, error, data } = useQuery(query, { variables });
 
   return (
     <ComponentDataLoader {...{ isLoading: loading, error, data }}>
-      <WrappedComponent {...{ data, ...otherProps }} />
+      <WrappedComponent {...{ data: data as T, ...otherProps }} />
     </ComponentDataLoader>
   );
 }
