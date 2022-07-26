@@ -13,7 +13,7 @@ import { Fragment } from "react";
 import { generateHistory } from "../../../api/dashboardDataType";
 
 import { OwnershipDataType } from "../../../api/data-types";
-import { LineComponent, withLoadingSpinner } from "../../../_shared_";
+import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 
 const GET_OWNERSHIP_QUERY = gql`
   query getOwnershipData {
@@ -24,7 +24,7 @@ const GET_OWNERSHIP_QUERY = gql`
 `;
 
 export function OwnershipContainer({ sectionName }: { sectionName: string }) {
-  return withLoadingSpinner<OwnershipDataType>({
+  return WithLoadingSpinner<OwnershipDataType>({
     WrappedComponent: OwnershipComponent,
     query: GET_OWNERSHIP_QUERY,
     otherProps: { sectionName },

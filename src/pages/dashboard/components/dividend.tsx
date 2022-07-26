@@ -8,7 +8,7 @@ import {
   BarComponent,
   LineComponent,
   PieComponent,
-  withLoadingSpinner,
+  WithLoadingSpinner,
 } from "../../../_shared_";
 import { generateHistory } from "../../../api/dashboardDataType";
 
@@ -21,7 +21,7 @@ const GET_DIVIDENDS_QUERY = gql`
 `;
 
 export function DividendContainer({ sectionName }: { sectionName: string }) {
-  return withLoadingSpinner<DividendDataType>({
+  return WithLoadingSpinner<DividendDataType>({
     WrappedComponent: DividendComponent,
     query: GET_DIVIDENDS_QUERY,
     otherProps: { sectionName },

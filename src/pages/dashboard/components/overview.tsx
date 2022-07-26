@@ -6,7 +6,7 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { gql } from "@apollo/client";
 import { head } from "lodash";
 
-import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
+import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
 import { OverviewDataType } from "../../../api/data-types";
 import { generateSnowflakeValues } from "../../../api/dashboardDataType";
 
@@ -29,7 +29,7 @@ const GET_OVERVIEW_QUERY = gql`
 `;
 
 export function OverviewContainer({ sectionName }: { sectionName: string }) {
-  return withLoadingSpinner<OverviewDataType>({
+  return WithLoadingSpinner<OverviewDataType>({
     WrappedComponent: OverviewComponent,
     query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },

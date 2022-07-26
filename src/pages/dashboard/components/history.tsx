@@ -15,7 +15,7 @@ import {
 import SubjectIcon from "@mui/icons-material/Subject";
 import { gql } from "@apollo/client";
 
-import { LineComponent, withLoadingSpinner } from "../../../_shared_";
+import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 import { HistoryDataType } from "../../../api/data-types";
 import { generateHistory } from "../../../api/dashboardDataType";
 
@@ -32,7 +32,7 @@ const GET_HISTORY_QUERY = gql`
 `;
 
 export function HistoryContainer({ sectionName }: { sectionName: string }) {
-  return withLoadingSpinner<HistoryDataType>({
+  return WithLoadingSpinner<HistoryDataType>({
     WrappedComponent: HistoryComponent,
     query: GET_HISTORY_QUERY,
     otherProps: { sectionName },

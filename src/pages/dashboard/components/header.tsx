@@ -5,7 +5,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { gql } from "@apollo/client";
 import { head } from 'lodash';
 
-import { LineComponent, withLoadingSpinner } from "../../../_shared_";
+import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 import { HeaderDataType } from "../../../api/data-types";
 import { generateHistory } from "../../../api/dashboardDataType";
 
@@ -27,7 +27,7 @@ const GET_HEADER_QUERY = gql`
 `;
 
 export function HeaderContainer() {
-  return withLoadingSpinner<HeaderDataType>({
+  return WithLoadingSpinner<HeaderDataType>({
     WrappedComponent: HeaderComponent,
     query: GET_HEADER_QUERY,
   });

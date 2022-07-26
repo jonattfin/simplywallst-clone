@@ -6,7 +6,7 @@ import { head } from "lodash";
 
 import { generateSnowflakeValues } from "../../../api/dashboardDataType";
 import { CompetitorsDataType } from "../../../api/data-types";
-import { RadarComponent, withLoadingSpinner } from "../../../_shared_";
+import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
 
 const GET_COMPETITORS_QUERY = gql`
   query getCompetitorsData {
@@ -23,7 +23,7 @@ const GET_COMPETITORS_QUERY = gql`
 `;
 
 export function CompetitorsContainer() {
-  return withLoadingSpinner<CompetitorsDataType>({
+  return WithLoadingSpinner<CompetitorsDataType>({
     WrappedComponent: CompetitorsComponent,
     query: GET_COMPETITORS_QUERY,
   });

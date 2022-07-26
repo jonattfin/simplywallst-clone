@@ -7,7 +7,7 @@ import { gql } from "@apollo/client";
 import {
   LineComponent,
   TreemapComponent,
-  withLoadingSpinner,
+  WithLoadingSpinner,
 } from "../../../_shared_";
 import { FinancialHealthDataType } from "../../../api/data-types";
 import { generateHistory } from "../../../api/dashboardDataType";
@@ -25,7 +25,7 @@ export function FinancialHealthContainer({
 }: {
   sectionName: string;
 }) {
-  return withLoadingSpinner<FinancialHealthDataType>({
+  return WithLoadingSpinner<FinancialHealthDataType>({
     WrappedComponent: FinancialHealthComponent,
     query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },

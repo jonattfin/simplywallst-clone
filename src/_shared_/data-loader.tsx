@@ -15,7 +15,7 @@ interface IWithLoadingSpinner<T> {
   otherProps?: any;
 }
 
-export default function withLoadingSpinner<T>({
+export default function WithLoadingSpinner<T>({
   WrappedComponent,
   query,
   variables,

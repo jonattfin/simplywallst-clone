@@ -9,7 +9,7 @@ import { FundamentalsDataType } from "../../../api/data-types";
 import {
   RadialBarComponent,
   BarComponent,
-  withLoadingSpinner,
+  WithLoadingSpinner,
 } from "../../../_shared_";
 
 const GET_FUNDAMENTALS_QUERY = gql`
@@ -25,7 +25,7 @@ export function FundamentalsContainer({
 }: {
   sectionName: string;
 }) {
-  return withLoadingSpinner<FundamentalsDataType>({
+  return WithLoadingSpinner<FundamentalsDataType>({
     WrappedComponent: FundamentalsComponent,
     query: GET_FUNDAMENTALS_QUERY,
     otherProps: { sectionName },
