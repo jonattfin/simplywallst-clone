@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mui/material";
 import { Fragment } from "react";
 
-export default function Company({ sectionName }: { sectionName: string }) {
+export function CompanyComponent({ sectionName }: { sectionName: string }) {
   return (
     <Fragment>
       <h4 id={sectionName}>About the Company</h4>

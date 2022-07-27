@@ -11,23 +11,23 @@ import {
   WithLoadingSpinner,
 } from "../../../_shared_";
 
+export const GET_FUNDAMENTALS_QUERY = gql`
+  query getFundamentalsData {
+    company(id: 1) {
+      name
+      radialBarValueJson
+    }
+  }
+`;
+
 export function FundamentalsContainer({
   sectionName,
 }: {
   sectionName: string;
 }) {
-  const query = gql`
-    query getFundamentalsData {
-      company(id: 1) {
-        name
-        radialBarValueJson
-      }
-    }
-  `;
-
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: FundamentalsComponent,
-    query,
+    query: GET_FUNDAMENTALS_QUERY,
     otherProps: { sectionName },
   });
 }

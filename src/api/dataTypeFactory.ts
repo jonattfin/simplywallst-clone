@@ -1,7 +1,7 @@
 import { LocalDashboardDataType } from "./dashboardDataType";
 import { DashboardDataType } from "./data-types";
 
-export default class DataTypeFactory {
+export class DataTypeFactory {
   private _dashboardDataType!: DashboardDataType;
 
   constructor() {
@@ -12,3 +12,6 @@ export default class DataTypeFactory {
     return this._dashboardDataType;
   }
 }
+
+
+export const dataTypeFactory = new DataTypeFactory();

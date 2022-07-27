@@ -12,7 +12,7 @@ import {
 import { CompanyFacade } from "../../../api/data-types";
 import { head } from "lodash";
 
-const GET_DIVIDENDS_QUERY = gql`
+export const GET_DIVIDENDS_QUERY = gql`
   query getDividendsData {
     company(id: 1) {
       name
@@ -67,7 +67,9 @@ export function DividendComponent({
         <div>
           <p>Stability and Growth of Payments</p>
           <LineContainer>
-            {stock && <LineComponent data={JSON.parse(stock.priceHistoryJson)} />}
+            {stock && (
+              <LineComponent data={JSON.parse(stock.priceHistoryJson)} />
+            )}
           </LineContainer>
         </div>
         <div>

@@ -1,31 +1,31 @@
-import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
 import { Fragment } from "react";
 import { head } from "lodash";
+import { gql } from "@apollo/client";
 
 import { CompanyFacade } from "../../../api/data-types";
 import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
 
-export function CompetitorsContainer() {
-  const query = gql`
-    query getCompetitorsData {
-      company(id: 1) {
+export const GET_COMPETITORS_QUERY = gql`
+  query getCompetitorsData {
+    company(id: 1) {
+      name
+      competitors {
         name
-        competitors {
-          name
-          snowflakeValueJson
-          stocks {
-            marketCap
-          }
+        snowflakeValueJson
+        stocks {
+          marketCap
         }
       }
     }
-  `;
+  }
+`;
 
+export function CompetitorsContainer() {
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: CompetitorsComponent,
-    query,
+    query: GET_COMPETITORS_QUERY,
   });
 }
 

@@ -1,73 +1,77 @@
-import { factory } from "../../api";
-import { CompanyComponent } from "./components";
-import { CompetitorsComponent } from "./components/competitors";
-import { DividendComponent } from "./components/dividend";
-import { FinancialHealthComponent } from "./components/financial-health";
-import { FundamentalsComponent } from "./components/fundamentals";
-import { HistoryComponent } from "./components/history";
-import { OverviewComponent } from "./components/overview";
-import { OwnershipComponent } from "./components/ownership";
+import { dataTypeFactory } from "../../api/dataTypeFactory";
+import {
+  Company,
+  Competitors,
+  Dividend,
+  FinancialHealth,
+  Fundamentals,
+  History,
+  Overview,
+  Ownership,
+} from "./components";
 
 export default function Index() {
   return <div></div>;
 }
 
-const dashboarDataType = factory.getDashboardDataType();
+const dashboardDataType = dataTypeFactory.getDashboardDataType();
 
-export const Company = () => {
-  return <CompanyComponent {...{ sectionName: "Company" }} />;
+export const CompanyInstance = () => {
+  return <Company.CompanyComponent {...{ sectionName: "Company" }} />;
 };
 
-export const Competitors = () => {
+export const CompetitorsInstance = () => {
   return (
-    <CompetitorsComponent {...{ data: dashboarDataType.getCompanyFacade() }} />
-  );
-};
-
-export const Dividend = () => {
-  return (
-    <DividendComponent
-      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
+    <Competitors.CompetitorsComponent
+      {...{ data: dashboardDataType.getCompanyFacade() }}
     />
   );
 };
 
-export const FinancialHealth = () => {
+export const DividendInstance = () => {
   return (
-    <FinancialHealthComponent
-      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
+    <Dividend.DividendComponent
+      {...{ data: dashboardDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
 
-export const Fundamentals = () => {
+export const FinancialHealthInstance = () => {
   return (
-    <FundamentalsComponent
-      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
+    <FinancialHealth.FinancialHealthComponent
+      {...{ data: dashboardDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
 
-export const History = () => {
+export const FundamentalsInstance = () => {
   return (
-    <HistoryComponent
-      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
+    <Fundamentals.FundamentalsComponent
+      {...{ data: dashboardDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
 
-export const Overview = () => {
+export const HistoryInstance = () => {
   return (
-    <OverviewComponent
-      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
+    <History.HistoryComponent
+      {...{ data: dashboardDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
 
-export const Ownership = () => {
+export const OverviewInstance = () => {
   return (
-    <OwnershipComponent
-      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
+    <Overview.OverviewComponent
+      {...{ data: dashboardDataType.getCompanyFacade(), sectionName: "" }}
+    />
+  );
+};
+
+export const OwnershipInstance = () => {
+  return (
+    <Ownership.OwnershipComponent
+      {...{ data: dashboardDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };

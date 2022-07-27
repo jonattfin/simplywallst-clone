@@ -1,7 +1,7 @@
 import { MenuList, MenuItem, ListItemText } from "@mui/material";
 import { useState } from "react";
 
-export default function MenuComponent() {
+export function MenuComponent() {
   const [selectedItem, setSelectedItem] = useState(0);
 
   const handleMenuItemClick = (

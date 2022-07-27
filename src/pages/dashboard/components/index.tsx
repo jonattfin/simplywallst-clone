@@ -1,9 +1,9 @@
-export * as Header  from "./header";
-export { default as MenuComponent } from "./menu";
+export * as Header from "./header";
+export * as Menu from "./menu";
 export * as Overview from "./overview";
 export * as Competitors from "./competitors";
-export * as  History from "./history";
-export { default as CompanyComponent } from "./company";
+export * as History from "./history";
+export * as Company from "./company";
 export * as Fundamentals from "./fundamentals";
 export * as Ownership from "./ownership";
 export * as FinancialHealth from "./financial-health";

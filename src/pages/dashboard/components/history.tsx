@@ -19,25 +19,24 @@ import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 import { CompanyFacade } from "../../../api/data-types";
 import { head } from "lodash";
 
-export function HistoryContainer({ sectionName }: { sectionName: string }) {
-  const query = gql`
-    query getNewsForCompanyData {
-      company(id: 1) {
-        news {
-          id
-          date
-          description
-        }
-        stocks {
-          priceHistoryJson
-        }
+export const GET_NEWS_QUERY = gql`
+  query getNewsForCompanyData {
+    company(id: 1) {
+      news {
+        date
+        description
+      }
+      stocks {
+        priceHistoryJson
       }
     }
-  `;
+  }
+`;
 
+export function HistoryContainer({ sectionName }: { sectionName: string }) {
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: HistoryComponent,
-    query,
+    query: GET_NEWS_QUERY,
     otherProps: { sectionName },
   });
 }

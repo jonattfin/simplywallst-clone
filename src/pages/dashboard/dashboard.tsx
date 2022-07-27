@@ -6,7 +6,7 @@ import {
   Dividend,
   FinancialHealth,
   Fundamentals,
-  MenuComponent,
+  Menu,
   History,
   Overview,
   Ownership,
@@ -42,7 +42,7 @@ export function DashboardComponent() {
         </Grid>
         <Grid item xl={2} md={2}>
           <Paper elevation={3}>
-            <MenuComponent />
+            <Menu.MenuComponent />
           </Paper>
         </Grid>
         <Grid item xl={10} md={10}>

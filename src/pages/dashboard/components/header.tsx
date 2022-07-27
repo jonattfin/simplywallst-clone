@@ -8,28 +8,28 @@ import { head } from "lodash";
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 import { CompanyFacade } from "../../../api/data-types";
 
-export function HeaderContainer() {
-  const query = gql`
-    query getHeaderData {
-      company(id: 1) {
-        name
-        stocks {
-          ticker
-          exchangeName
-          lastPrice
-          marketCap
-          priceSevenDays
-          priceOneYear
-          lastUpdated
-          priceHistoryJson
-        }
+export const GET_HEADER_QUERY = gql`
+  query getHeaderData {
+    company(id: 1) {
+      name
+      stocks {
+        ticker
+        exchangeName
+        lastPrice
+        marketCap
+        priceSevenDays
+        priceOneYear
+        lastUpdated
+        priceHistoryJson
       }
     }
-  `;
+  }
+`;
 
+export function HeaderContainer() {
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: HeaderComponent,
-    query,
+    query: GET_HEADER_QUERY,
   });
 }
 

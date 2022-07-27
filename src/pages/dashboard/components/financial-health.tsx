@@ -12,25 +12,25 @@ import {
 import { head } from "lodash";
 import { CompanyFacade } from "../../../api/data-types";
 
+export const GET_FINANCIAL_HEALTH_QUERY = gql`
+  query getFinancialHealthData {
+    company(id: 1) {
+      name
+      stocks {
+        priceHistoryJson
+      }
+    }
+  }
+`;
+
 export function FinancialHealthContainer({
   sectionName,
 }: {
   sectionName: string;
 }) {
-  const query = gql`
-    query getFinancialHealthData {
-      company(id: 1) {
-        name
-        stocks {
-          priceHistoryJson
-        }
-      }
-    }
-  `;
-
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: FinancialHealthComponent,
-    query,
+    query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },
   });
 }

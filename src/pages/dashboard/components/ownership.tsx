@@ -15,21 +15,21 @@ import { Fragment } from "react";
 import { CompanyFacade } from "../../../api/data-types";
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 
-export function OwnershipContainer({ sectionName }: { sectionName: string }) {
-  const query = gql`
-    query getOwnershipData {
-      company(id: 1) {
-        name
-        stocks {
-          priceHistoryJson
-        }
+export const GET_OWNERSHIP_QUERY = gql`
+  query getOwnershipData {
+    company(id: 1) {
+      name
+      stocks {
+        priceHistoryJson
       }
     }
-  `;
+  }
+`;
 
+export function OwnershipContainer({ sectionName }: { sectionName: string }) {
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: OwnershipComponent,
-    query,
+    query: GET_OWNERSHIP_QUERY,
     otherProps: { sectionName },
   });
 }
@@ -59,7 +59,7 @@ export function OwnershipComponent({
       {renderShareholdersTable()}
       <p>Number of Employees</p>
       <LineContainer>
-        {stock && <LineComponent data={JSON.parse(stock.priceHistoryJson)} /> }
+        {stock && <LineComponent data={JSON.parse(stock.priceHistoryJson)} />}
       </LineContainer>
     </Fragment>
   );

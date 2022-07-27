@@ -9,29 +9,29 @@ import { head } from "lodash";
 import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
 import { CompanyFacade } from "../../../api/data-types";
 
-export function OverviewContainer({ sectionName }: { sectionName: string }) {
-  const query = gql`
-    query getOverviewData {
-      company(id: 1) {
-        name
+export const GET_OVERVIEW_QUERY = gql`
+  query getOverviewData {
+    company(id: 1) {
+      name
+      description
+      rewards {
         description
-        rewards {
-          description
-        }
-        risks {
-          description
-        }
-        stocks {
-          marketCap
-        }
-        snowflakeValueJson
       }
+      risks {
+        description
+      }
+      stocks {
+        marketCap
+      }
+      snowflakeValueJson
     }
-  `;
+  }
+`;
 
+export function OverviewContainer({ sectionName }: { sectionName: string }) {
   return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: OverviewComponent,
-    query,
+    query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },
   });
 }
