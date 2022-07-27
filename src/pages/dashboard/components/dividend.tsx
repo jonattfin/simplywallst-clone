@@ -3,25 +3,28 @@ import { Divider, Stack } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { gql } from "@apollo/client";
 
-import { DividendDataType } from "../../../api/data-types";
 import {
   BarComponent,
   LineComponent,
   PieComponent,
   WithLoadingSpinner,
 } from "../../../_shared_";
-import { generateHistory } from "../../../api/dashboardDataType";
+import { CompanyFacade } from "../../../api/data-types";
+import { head } from "lodash";
 
 const GET_DIVIDENDS_QUERY = gql`
   query getDividendsData {
     company(id: 1) {
       name
+      stocks {
+        priceHistoryJson
+      }
     }
   }
 `;
 
 export function DividendContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<DividendDataType>({
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: DividendComponent,
     query: GET_DIVIDENDS_QUERY,
     otherProps: { sectionName },
@@ -32,9 +35,12 @@ export function DividendComponent({
   data,
   sectionName,
 }: {
-  data: DividendDataType;
+  data: CompanyFacade;
   sectionName: string;
 }) {
+  const { company } = data;
+  const stock = head(company.stocks);
+
   return (
     <div>
       <Stack spacing={2} divider={<Divider flexItem />}>
@@ -61,7 +67,7 @@ export function DividendComponent({
         <div>
           <p>Stability and Growth of Payments</p>
           <LineContainer>
-            <LineComponent data={generateHistory({ start: 100, dimensions: 3 })} />
+            {stock && <LineComponent data={JSON.parse(stock.priceHistoryJson)} />}
           </LineContainer>
         </div>
         <div>

@@ -3,42 +3,42 @@ import styled from "@emotion/styled";
 import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import { gql } from "@apollo/client";
-import { head } from 'lodash';
+import { head } from "lodash";
 
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
-import { HeaderDataType } from "../../../api/data-types";
-import { generateHistory } from "../../../api/dashboardDataType";
-
-const GET_HEADER_QUERY = gql`
-  query getHeaderData {
-    company(id: 1) {
-      name
-      stocks {
-        ticker
-        exchangeName
-        lastPrice
-        marketCap
-        priceSevenDays
-        priceOneYear
-        lastUpdated
-      }
-    }
-  }
-`;
+import { CompanyFacade } from "../../../api/data-types";
 
 export function HeaderContainer() {
-  return WithLoadingSpinner<HeaderDataType>({
+  const query = gql`
+    query getHeaderData {
+      company(id: 1) {
+        name
+        stocks {
+          ticker
+          exchangeName
+          lastPrice
+          marketCap
+          priceSevenDays
+          priceOneYear
+          lastUpdated
+          priceHistoryJson
+        }
+      }
+    }
+  `;
+
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: HeaderComponent,
-    query: GET_HEADER_QUERY,
+    query,
   });
 }
 
-export function HeaderComponent({ data }: { data: HeaderDataType }) {
+export function HeaderComponent({ data }: { data: CompanyFacade }) {
   const { company } = data;
   const stock = head(company.stocks);
 
   if (!stock) {
-    return <div>&nbsp;</div>
+    return <div>&nbsp;</div>;
   }
 
   return (
@@ -110,7 +110,7 @@ export function HeaderComponent({ data }: { data: HeaderDataType }) {
         </div>
         <div>
           <LineContainer>
-            <LineComponent data={generateHistory({ start: 9 })} />
+            <LineComponent data={JSON.parse(stock.priceHistoryJson)} />
           </LineContainer>
         </div>
         <div>

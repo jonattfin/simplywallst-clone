@@ -9,25 +9,28 @@ import {
   TreemapComponent,
   WithLoadingSpinner,
 } from "../../../_shared_";
-import { FinancialHealthDataType } from "../../../api/data-types";
-import { generateHistory } from "../../../api/dashboardDataType";
-
-const GET_FINANCIAL_HEALTH_QUERY = gql`
-  query getFinancialHealthData {
-    company(id: 1) {
-      name
-    }
-  }
-`;
+import { head } from "lodash";
+import { CompanyFacade } from "../../../api/data-types";
 
 export function FinancialHealthContainer({
   sectionName,
 }: {
   sectionName: string;
 }) {
-  return WithLoadingSpinner<FinancialHealthDataType>({
+  const query = gql`
+    query getFinancialHealthData {
+      company(id: 1) {
+        name
+        stocks {
+          priceHistoryJson
+        }
+      }
+    }
+  `;
+
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: FinancialHealthComponent,
-    query: GET_FINANCIAL_HEALTH_QUERY,
+    query,
     otherProps: { sectionName },
   });
 }
@@ -36,9 +39,12 @@ export function FinancialHealthComponent({
   data,
   sectionName,
 }: {
-  data: FinancialHealthDataType;
+  data: CompanyFacade;
   sectionName: string;
 }) {
+  const { company } = data;
+  const stock = head(company.stocks);
+
   return (
     <Fragment>
       <h4 id={sectionName}>Financial Health</h4>
@@ -50,7 +56,7 @@ export function FinancialHealthComponent({
       <Divider />
       <p>Debt to Equity History and Analysis</p>
       <LineContainer>
-        <LineComponent data={generateHistory({ start: 100, dimensions: 2 })} />
+        {stock && <LineComponent data={JSON.parse(stock.priceHistoryJson)} />}
       </LineContainer>
       <div>&nbsp;</div>
       <Stack

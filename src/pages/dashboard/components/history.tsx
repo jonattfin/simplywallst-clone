@@ -16,25 +16,28 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { gql } from "@apollo/client";
 
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
-import { HistoryDataType } from "../../../api/data-types";
-import { generateHistory } from "../../../api/dashboardDataType";
-
-const GET_HISTORY_QUERY = gql`
-  query getNewsForCompanyData {
-    company(id: 1) {
-      news {
-        id
-        date
-        description
-      }
-    }
-  }
-`;
+import { CompanyFacade } from "../../../api/data-types";
+import { head } from "lodash";
 
 export function HistoryContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<HistoryDataType>({
+  const query = gql`
+    query getNewsForCompanyData {
+      company(id: 1) {
+        news {
+          id
+          date
+          description
+        }
+        stocks {
+          priceHistoryJson
+        }
+      }
+    }
+  `;
+
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: HistoryComponent,
-    query: GET_HISTORY_QUERY,
+    query,
     otherProps: { sectionName },
   });
 }
@@ -43,7 +46,7 @@ export function HistoryComponent({
   data,
   sectionName,
 }: {
-  data: HistoryDataType;
+  data: CompanyFacade;
   sectionName: string;
 }) {
   const [value, setValue] = useState(0);
@@ -53,6 +56,7 @@ export function HistoryComponent({
   };
 
   const { company } = data;
+  let stock = head(company.stocks);
 
   return (
     <Fragment>
@@ -71,7 +75,11 @@ export function HistoryComponent({
               {tabValues.map((_tabValue, index) => (
                 <TabPanel key={`tabPanel_${index}`} value={value} index={index}>
                   <LineContainer>
-                    <LineComponent data={generateHistory({ start: 10, numberOfYears: index + 1 })} />
+                    {stock && (
+                      <LineComponent
+                        data={JSON.parse(stock.priceHistoryJson)}
+                      />
+                    )}
                   </LineContainer>
                 </TabPanel>
               ))}

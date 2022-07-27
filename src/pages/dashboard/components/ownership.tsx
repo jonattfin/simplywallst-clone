@@ -9,24 +9,27 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { head } from "lodash";
 import { Fragment } from "react";
-import { generateHistory } from "../../../api/dashboardDataType";
 
-import { OwnershipDataType } from "../../../api/data-types";
+import { CompanyFacade } from "../../../api/data-types";
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 
-const GET_OWNERSHIP_QUERY = gql`
-  query getOwnershipData {
-    company(id: 1) {
-      name
-    }
-  }
-`;
-
 export function OwnershipContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<OwnershipDataType>({
+  const query = gql`
+    query getOwnershipData {
+      company(id: 1) {
+        name
+        stocks {
+          priceHistoryJson
+        }
+      }
+    }
+  `;
+
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: OwnershipComponent,
-    query: GET_OWNERSHIP_QUERY,
+    query,
     otherProps: { sectionName },
   });
 }
@@ -35,9 +38,12 @@ export function OwnershipComponent({
   data,
   sectionName,
 }: {
-  data: OwnershipDataType;
+  data: CompanyFacade;
   sectionName: string;
 }) {
+  const { company } = data;
+  const stock = head(company.stocks);
+
   return (
     <Fragment>
       <h4 id={sectionName}>Ownership</h4>
@@ -53,7 +59,7 @@ export function OwnershipComponent({
       {renderShareholdersTable()}
       <p>Number of Employees</p>
       <LineContainer>
-        <LineComponent data={generateHistory({ start: 100000 })} />
+        {stock && <LineComponent data={JSON.parse(stock.priceHistoryJson)} /> }
       </LineContainer>
     </Fragment>
   );

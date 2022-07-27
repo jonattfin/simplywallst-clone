@@ -20,14 +20,14 @@ export const Company = () => {
 
 export const Competitors = () => {
   return (
-    <CompetitorsComponent {...{ data: dashboarDataType.getCompetitors() }} />
+    <CompetitorsComponent {...{ data: dashboarDataType.getCompanyFacade() }} />
   );
 };
 
 export const Dividend = () => {
   return (
     <DividendComponent
-      {...{ data: dashboarDataType.getDividend(), sectionName: "" }}
+      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
@@ -35,7 +35,7 @@ export const Dividend = () => {
 export const FinancialHealth = () => {
   return (
     <FinancialHealthComponent
-      {...{ data: dashboarDataType.getFinancialHealth(), sectionName: "" }}
+      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
@@ -43,7 +43,7 @@ export const FinancialHealth = () => {
 export const Fundamentals = () => {
   return (
     <FundamentalsComponent
-      {...{ data: dashboarDataType.getFundamentals(), sectionName: "" }}
+      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
@@ -51,7 +51,7 @@ export const Fundamentals = () => {
 export const History = () => {
   return (
     <HistoryComponent
-      {...{ data: dashboarDataType.getHistory(), sectionName: "" }}
+      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
@@ -59,7 +59,7 @@ export const History = () => {
 export const Overview = () => {
   return (
     <OverviewComponent
-      {...{ data: dashboarDataType.getOverview(), sectionName: "" }}
+      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };
@@ -67,7 +67,7 @@ export const Overview = () => {
 export const Ownership = () => {
   return (
     <OwnershipComponent
-      {...{ data: dashboarDataType.getOwnership(), sectionName: "" }}
+      {...{ data: dashboarDataType.getCompanyFacade(), sectionName: "" }}
     />
   );
 };

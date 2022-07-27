@@ -1,17 +1,10 @@
 import _ from "lodash";
 
 import {
-  CompetitorsDataType,
-  DividendDataType,
-  FinancialHealthDataType,
-  FundamentalsDataType,
-  HeaderDataType,
-  HistoryDataType,
   DashboardDataType,
   LineDataType,
-  OverviewDataType,
-  OwnershipDataType,
   Company,
+  CompanyFacade,
 } from "./data-types";
 
 export class LocalDashboardDataType implements DashboardDataType {
@@ -22,84 +15,17 @@ export class LocalDashboardDataType implements DashboardDataType {
     this._company = getCompany("INGB", competitors);
   }
 
-  getHeader(): HeaderDataType {
-    return {
-      company: this._company,
-    };
-  }
-  getOverview(): OverviewDataType {
-    return {
-      company: this._company,
-    };
-  }
-  getHistory(): HistoryDataType {
-    return {
-      company: this._company,
-      getHistory: (numberOfYears: number) =>
-        generateHistory({ start: 10, numberOfYears }),
-    };
-  }
-  getOwnership(): OwnershipDataType {
-    return {
-      history: generateHistory({ start: 100000 }),
-    };
-  }
-  getCompetitors(): CompetitorsDataType {
+  getCompanyFacade(): CompanyFacade {
     return { company: this._company };
   }
-  getFundamentals(): FundamentalsDataType {
-    return {
-      radialData: generateRadialBarData(),
-    };
-  }
-  getFinancialHealth(): FinancialHealthDataType {
-    return {
-      getHistory: () => generateHistory({ start: 100, dimensions: 2 }),
-    };
-  }
-  getDividend(): DividendDataType {
-    return {
-      getHistory: () => generateHistory({ start: 100, dimensions: 3 }),
-    };
-  }
 }
 
-export interface IHistoryData {
-  start: number;
-  dimensions?: number;
-  numberOfYears?: number;
-}
-
-export function generateHistory(historyData: IHistoryData): LineDataType[] {
-  if (!historyData.dimensions) {
-    historyData.dimensions = 1;
-  }
-
-  if (!historyData.numberOfYears) {
-    historyData.numberOfYears = 1;
-  }
-
-  return _.range(0, historyData.dimensions).map((item) => {
-    return {
-      id: `INGB ${item}`,
-      data: getData(historyData),
-    };
-  });
-}
-
-function getCompetitors() {
-  return [
-    getCompany("ABN AMRO Bank"),
-    getCompany("Lloyds Banking Group"),
-    getCompany("Oversea-Chinese Banking"),
-    getCompany("Shanghai Development Bank"),
-  ];
-}
-
-function getCompany(ticker: string, competitors: Company[] = []) {
+function getCompany(ticker: string, competitors: Company[] = []): Company {
   return {
     name: ticker,
     description: "",
+    snowflakeValueJson: JSON.stringify(generateSnowflakeValue(ticker)),
+    radialBarValueJson: JSON.stringify(generateRadialBarData()),
     stocks: [
       {
         ticker: ticker,
@@ -109,7 +35,7 @@ function getCompany(ticker: string, competitors: Company[] = []) {
         priceSevenDays: -0.1,
         priceOneYear: -13.4,
         lastUpdated: new Date(2022, 6, 10).toString(),
-        history: generateHistory({ start: 9 }),
+        priceHistoryJson: JSON.stringify(generateHistory({ start: 9 })),
       },
     ],
     news: [
@@ -129,6 +55,38 @@ function getCompany(ticker: string, competitors: Company[] = []) {
     risks: [{ description: "Unstable dividend track record" }],
     competitors,
   };
+}
+
+export interface IHistoryData {
+  start: number;
+  dimensions?: number;
+  numberOfYears?: number;
+}
+
+function getCompetitors() {
+  return [
+    getCompany("ABN AMRO Bank"),
+    getCompany("Lloyds Banking Group"),
+    getCompany("Oversea-Chinese Banking"),
+    getCompany("Shanghai Development Bank"),
+  ];
+}
+
+function generateHistory(historyData: IHistoryData): LineDataType[] {
+  if (!historyData.dimensions) {
+    historyData.dimensions = 1;
+  }
+
+  if (!historyData.numberOfYears) {
+    historyData.numberOfYears = 1;
+  }
+
+  return _.range(0, historyData.dimensions).map((item) => {
+    return {
+      id: `INGB ${item}`,
+      data: getData(historyData),
+    };
+  });
 }
 
 function getData(historyData: IHistoryData) {
@@ -160,7 +118,7 @@ function getData(historyData: IHistoryData) {
   return data;
 }
 
-export function generateSnowflakeValues(ticker: string | undefined) {
+function generateSnowflakeValue(ticker: string | undefined) {
   if (!ticker) {
     ticker = "RandomTicker";
   }
@@ -180,7 +138,7 @@ export function generateSnowflakeValues(ticker: string | undefined) {
   return { data, keys: tickers };
 }
 
-export function generateRadialBarData() {
+function generateRadialBarData() {
   return [
     {
       id: "Earnings",

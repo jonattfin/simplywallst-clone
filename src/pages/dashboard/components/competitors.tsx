@@ -4,32 +4,32 @@ import { Grid } from "@mui/material";
 import { Fragment } from "react";
 import { head } from "lodash";
 
-import { generateSnowflakeValues } from "../../../api/dashboardDataType";
-import { CompetitorsDataType } from "../../../api/data-types";
+import { CompanyFacade } from "../../../api/data-types";
 import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
 
-const GET_COMPETITORS_QUERY = gql`
-  query getCompetitorsData {
-    company(id: 1) {
-      name
-      competitors {
+export function CompetitorsContainer() {
+  const query = gql`
+    query getCompetitorsData {
+      company(id: 1) {
         name
-        stocks {
-          marketCap
+        competitors {
+          name
+          snowflakeValueJson
+          stocks {
+            marketCap
+          }
         }
       }
     }
-  }
-`;
+  `;
 
-export function CompetitorsContainer() {
-  return WithLoadingSpinner<CompetitorsDataType>({
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: CompetitorsComponent,
-    query: GET_COMPETITORS_QUERY,
+    query,
   });
 }
 
-export function CompetitorsComponent({ data }: { data: CompetitorsDataType }) {
+export function CompetitorsComponent({ data }: { data: CompanyFacade }) {
   const { company } = data;
   const { competitors = [] } = company;
 
@@ -42,11 +42,11 @@ export function CompetitorsComponent({ data }: { data: CompetitorsDataType }) {
         justifyContent="space-between"
         alignItems="center"
       >
-        {competitors.map(({ name, stocks }, index) => (
+        {competitors.map(({ name, stocks, snowflakeValueJson }, index) => (
           <Grid item xs={3} key={`competitor_${index}`}>
             <RadarWrapper>
               <RadarContainer>
-                <RadarComponent data={generateSnowflakeValues(name || "")} />
+                <RadarComponent data={JSON.parse(snowflakeValueJson)} />
               </RadarContainer>
               <CompetitorWrapperDiv>
                 <p>{name}</p>

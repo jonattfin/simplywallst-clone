@@ -2,9 +2,8 @@ import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
-import { generateRadialBarData } from "../../../api/dashboardDataType";
 
-import { FundamentalsDataType } from "../../../api/data-types";
+import { CompanyFacade } from "../../../api/data-types";
 
 import {
   RadialBarComponent,
@@ -12,22 +11,23 @@ import {
   WithLoadingSpinner,
 } from "../../../_shared_";
 
-const GET_FUNDAMENTALS_QUERY = gql`
-  query getFundamentalsData {
-    company(id: 1) {
-      name
-    }
-  }
-`;
-
 export function FundamentalsContainer({
   sectionName,
 }: {
   sectionName: string;
 }) {
-  return WithLoadingSpinner<FundamentalsDataType>({
+  const query = gql`
+    query getFundamentalsData {
+      company(id: 1) {
+        name
+        radialBarValueJson
+      }
+    }
+  `;
+
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: FundamentalsComponent,
-    query: GET_FUNDAMENTALS_QUERY,
+    query,
     otherProps: { sectionName },
   });
 }
@@ -36,9 +36,11 @@ export function FundamentalsComponent({
   data,
   sectionName,
 }: {
-  data: FundamentalsDataType;
+  data: CompanyFacade;
   sectionName: string;
 }) {
+  const { company } = data;
+
   return (
     <Fragment>
       <h4 id={sectionName}>ING Groep Fundamentals Summary</h4>
@@ -46,7 +48,9 @@ export function FundamentalsComponent({
         <Grid item xs={6}>
           <RadialBarWrapper>
             <RadialBarContainer>
-              <RadialBarComponent data={generateRadialBarData()} />
+              <RadialBarComponent
+                data={JSON.parse(company.radialBarValueJson)}
+              />
             </RadialBarContainer>
           </RadialBarWrapper>
         </Grid>

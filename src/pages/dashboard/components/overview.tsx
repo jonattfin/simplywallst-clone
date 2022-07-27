@@ -7,31 +7,31 @@ import { gql } from "@apollo/client";
 import { head } from "lodash";
 
 import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
-import { OverviewDataType } from "../../../api/data-types";
-import { generateSnowflakeValues } from "../../../api/dashboardDataType";
-
-const GET_OVERVIEW_QUERY = gql`
-  query getOverviewData {
-    company(id: 1) {
-      name
-      description
-      rewards {
-        description
-      }
-      risks {
-        description
-      }
-      stocks {
-        marketCap
-      }
-    }
-  }
-`;
+import { CompanyFacade } from "../../../api/data-types";
 
 export function OverviewContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<OverviewDataType>({
+  const query = gql`
+    query getOverviewData {
+      company(id: 1) {
+        name
+        description
+        rewards {
+          description
+        }
+        risks {
+          description
+        }
+        stocks {
+          marketCap
+        }
+        snowflakeValueJson
+      }
+    }
+  `;
+
+  return WithLoadingSpinner<CompanyFacade>({
     WrappedComponent: OverviewComponent,
-    query: GET_OVERVIEW_QUERY,
+    query,
     otherProps: { sectionName },
   });
 }
@@ -40,7 +40,7 @@ export function OverviewComponent({
   data,
   sectionName,
 }: {
-  data: OverviewDataType;
+  data: CompanyFacade;
   sectionName: string;
 }) {
   const { company } = data;
@@ -79,7 +79,7 @@ export function OverviewComponent({
           <Stack spacing={2}>
             <RadarWrapper>
               <RadarContainer>
-                <RadarComponent data={generateSnowflakeValues(company.name)} />
+                <RadarComponent data={JSON.parse(company.snowflakeValueJson)} />
               </RadarContainer>
             </RadarWrapper>
             <p>Snowflake Analysis</p>

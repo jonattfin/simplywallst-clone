@@ -9,7 +9,7 @@ const commonProperties = {
   margin: { top: 20 },
 };
 
-export default function LineComponent({ data }: { data: LineDataType[] }) {
+export default function LineComponent({ data }: { data: any }) {
   const lineProps = {
     ...commonProperties,
   };
