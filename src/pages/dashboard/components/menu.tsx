@@ -1,32 +1,26 @@
-import { MenuList, MenuItem, ListItemText } from "@mui/material";
+import { Stack, Button, Divider } from "@mui/material";
 import { useState } from "react";
 
 export function MenuComponent() {
   const [selectedItem, setSelectedItem] = useState(0);
 
-  const handleMenuItemClick = (
-    _event: React.MouseEvent<HTMLElement>,
-    index: number
-  ) => {
-    setSelectedItem(index);
-  };
-
   return (
-    <MenuList>
+    <Stack>
       {MenuItems.map((menuItem, index) => (
-        <MenuItem
-          key={`menuItem_${index}`}
-          selected={index === selectedItem}
-          onClick={(event) => handleMenuItemClick(event, index)}
+        <Button
+          key={`${menuItem}_${index}`}
+          href={`#${menuItem.replace(" ", "_")}`}
+          onClick={() => {
+            setSelectedItem(index);
+          }}
+          disabled={index == selectedItem}
         >
-          <ListItemText key={`menuItem_${index}`}>
-            <a href={`#${menuItem.replace(" ", "_")}`}>{`${
-              index == 0 || index == MenuItems.length ? "" : `${index} `
-            }${menuItem}`}</a>
-          </ListItemText>
-        </MenuItem>
+          {`${
+            index == 0 || index == MenuItems.length ? "" : `${index} `
+          }${menuItem}`}
+        </Button>
       ))}
-    </MenuList>
+    </Stack>
   );
 }
 
