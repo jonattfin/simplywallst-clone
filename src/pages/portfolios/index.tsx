@@ -1,4 +1,2 @@
-export default function DiscoverContainer() {
-    return <div>DiscoverContainer</div>;
-  }
-  
+import PortfoliosComponent from "./portfolios";
+export default PortfoliosComponent;

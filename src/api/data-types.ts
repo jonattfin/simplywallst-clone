@@ -37,8 +37,9 @@ export interface Risks {
   description: string;
 }
 
-export interface DashboardDataType {
+export interface GenericDatastore {
   getCompanyFacade(): CompanyFacade;
+  getPortfolioFacade(): PortfolioFacade;
 }
 
 export interface CompanyFacade {
@@ -59,3 +60,17 @@ export interface LineDataType {
   id: string;
   data: PointType[];
 }
+
+export interface Portfolio {
+  id: number
+  name: string;
+  image: string;
+  created: Date;
+  numberOfStocks: number;
+  description: string;
+}
+
+export interface PortfolioFacade {
+  portfolios: Portfolio[]
+}
+

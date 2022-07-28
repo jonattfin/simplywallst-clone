@@ -17,11 +17,15 @@ export const parameters = {
     defaultViewport: "fhd",
   },
   backgrounds: {
-    default: "SimplyWallSt",
+    default: "Light-SimplyWallSt",
     values: [
       {
-        name: "SimplyWallSt",
+        name: "Light-SimplyWallSt",
         value: whiteBackgroundColor,
+      },
+      {
+        name: "Dark-SimplyWallSt",
+        value: blackBackgroundColor,
       },
     ],
   },

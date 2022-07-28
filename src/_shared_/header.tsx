@@ -17,10 +17,10 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 const pages = [
   "Home",
+  "Portfolios",
   "Markets",
   "Discover",
   "Watchlist",
-  "Portfolios",
   "Screener",
 ];
 
@@ -104,10 +104,11 @@ const ResponsiveAppBar = ({
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              {pages.map((page, index) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  disabled={index >= 2}
+                  href={page.toLowerCase()}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}
@@ -136,7 +137,10 @@ const ResponsiveAppBar = ({
                 target="_blank"
                 rel="noreferrer"
               >
-                <AutoStoriesIcon fontSize="small" color="secondary"></AutoStoriesIcon>
+                <AutoStoriesIcon
+                  fontSize="small"
+                  color="secondary"
+                ></AutoStoriesIcon>
               </a>
 
               <a
@@ -162,4 +166,3 @@ const TopDiv = styled.div`
 const ExtraImage = styled.img`
   height: 50%;
 `;
-

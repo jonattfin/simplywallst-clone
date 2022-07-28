@@ -1,23 +1,95 @@
 import _ from "lodash";
 
 import {
-  DashboardDataType,
+  GenericDatastore,
   LineDataType,
   Company,
   CompanyFacade,
+  PortfolioFacade,
+  Portfolio,
 } from "./data-types";
 
-export class LocalDashboardDataType implements DashboardDataType {
+export class LocalDatastore implements GenericDatastore {
   private readonly _company!: Company;
+  private readonly _portfolios: Portfolio[];
 
   constructor() {
     const competitors = getCompetitors();
     this._company = getCompany("INGB", competitors);
+  
+    this._portfolios = getPortfolios();
   }
 
   getCompanyFacade(): CompanyFacade {
     return { company: this._company };
   }
+
+  getPortfolioFacade(): PortfolioFacade {
+    return { portfolios: this._portfolios}
+  }
+}
+
+function getPortfolios() {
+  const portolios: Portfolio[] = [
+    {
+      id: 1,
+      name: "Accel Partners",
+      image: "/forrest.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 1,
+    },
+    {
+      id: 2,
+      name: "ARK Investment Management",
+      image: "/spiderweb.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 10,
+    },
+    {
+      id: 3,
+      name: "Bill & Melinda Gates Foundation",
+      image: "/stock.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 4,
+    },
+    {
+      id: 4,
+      name: "Accel Partners",
+      image: "/forrest.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 1,
+    },
+    {
+      id: 5,
+      name: "ARK Investment Management",
+      image: "/spiderweb.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 10,
+    },
+    {
+      id: 6,
+      name: "Bill & Melinda Gates Foundation",
+      image: "/stock.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 4,
+    },
+    {
+      id: 7,
+      name: "Accel Partners",
+      image: "/forrest.jpg",
+      created: new Date(),
+      description: "",
+      numberOfStocks: 1,
+    },
+  ];
+
+  return portolios;
 }
 
 function getCompany(ticker: string, competitors: Company[] = []): Company {

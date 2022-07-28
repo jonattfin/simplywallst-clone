@@ -1,4 +1,4 @@
-import { dataTypeFactory } from "../../api/dataTypeFactory";
+import { datastoreFactory } from "../../api/datastore-factory";
 import {
   Company,
   Competitors,
@@ -14,7 +14,7 @@ export default function Index() {
   return <div></div>;
 }
 
-const dashboardDataType = dataTypeFactory.getDashboardDataType();
+const dashboardDataType = datastoreFactory.getDatastore();
 
 export const CompanyInstance = () => {
   return <Company.CompanyComponent {...{ sectionName: "Company" }} />;

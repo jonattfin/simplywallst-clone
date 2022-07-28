@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 
-import { dataTypeFactory } from "../../api/dataTypeFactory";
+import { datastoreFactory } from "../../api/datastore-factory";
 
 import {
   Company,
@@ -27,7 +27,7 @@ beforeAll(() => {
   global.ResizeObserver = require("resize-observer-polyfill");
 });
 
-const dashboardDataType = dataTypeFactory.getDashboardDataType();
+const dashboardDataType = datastoreFactory.getDatastore();
 
 describe("Dashboard components", () => {
   describe("Company", () => {
