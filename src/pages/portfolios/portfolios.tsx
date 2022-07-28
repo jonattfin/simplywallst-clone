@@ -1,12 +1,25 @@
 import styled from "@emotion/styled";
-import { Breadcrumbs, Button, Grid, Paper, Stack } from "@mui/material";
+import { Breadcrumbs, Button, Grid, Paper } from "@mui/material";
 import Link from "next/link";
+import { useState } from "react";
+
 import { datastoreFactory } from "../../api/datastore-factory";
-import { CustomCard } from "./components";
+import { AddFormPortfolio, PortfolioCard } from "./components";
 
 const datastore = datastoreFactory.getDatastore();
+const { portfolios } = datastore.getPortfolioFacade();
 
 export default function PortfoliosComponent() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <MainPaper>
       <Grid
@@ -23,7 +36,9 @@ export default function PortfoliosComponent() {
             </Breadcrumbs>
           </div>
           <h1>My Portfolios</h1>
-          <Button variant="contained">New Portfolio</Button>
+          <Button variant="contained" onClick={handleClickOpen}>
+            New Portfolio
+          </Button>
           <div>&nbsp;</div>
           <Grid
             container
@@ -31,16 +46,15 @@ export default function PortfoliosComponent() {
             justifyContent="flex-start"
             alignItems="center"
           >
-            {datastore
-              .getPortfolioFacade()
-              .portfolios.map((portfolio, index) => (
-                <Grid item xs={4} key={`p_${index}`}>
-                  <CustomCard.PortfolioCard {...{ portfolio }} />
-                </Grid>
-              ))}
+            {portfolios.map((portfolio, index) => (
+              <Grid item xs={4} key={`p_${index}`}>
+                <PortfolioCard {...{ portfolio }} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Grid>
+      <AddFormPortfolio {...{ open, handleClose }} />
     </MainPaper>
   );
 }

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Portfolio } from "../../../api/data-types";
 
-export function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
+export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
