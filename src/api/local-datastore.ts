@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _, { range } from "lodash";
 
 import {
   GenericDatastore,
@@ -16,20 +16,25 @@ export class LocalDatastore implements GenericDatastore {
   constructor() {
     const competitors = getCompetitors();
     this._company = getCompany("INGB", competitors);
-  
-    this._portfolios = getPortfolios();
+
+    this._portfolios = getPortfolios(competitors);
   }
 
   getCompanyFacade(): CompanyFacade {
     return { company: this._company };
   }
 
-  getPortfolioFacade(): PortfolioFacade {
-    return { portfolios: this._portfolios}
+  getPortfolioFacade(id: number): PortfolioFacade {
+    let portfolios = this._portfolios;
+    if (id) {
+      portfolios = portfolios.filter((p) => p.id == id);
+    }
+
+    return { portfolios };
   }
 }
 
-function getPortfolios() {
+function getPortfolios(companies: Company[]) {
   const portolios: Portfolio[] = [
     {
       id: 1,
@@ -37,7 +42,8 @@ function getPortfolios() {
       image: "/forrest.jpg",
       created: new Date(),
       description: "",
-      numberOfStocks: 1,
+      numberOfStocks: companies.length,
+      companies,
     },
     {
       id: 2,
@@ -45,7 +51,8 @@ function getPortfolios() {
       image: "/spiderweb.jpg",
       created: new Date(),
       description: "",
-      numberOfStocks: 10,
+      numberOfStocks: companies.length,
+      companies,
     },
     {
       id: 3,
@@ -53,39 +60,8 @@ function getPortfolios() {
       image: "/stock.jpg",
       created: new Date(),
       description: "",
-      numberOfStocks: 4,
-    },
-    {
-      id: 4,
-      name: "Accel Partners",
-      image: "/forrest.jpg",
-      created: new Date(),
-      description: "",
-      numberOfStocks: 1,
-    },
-    {
-      id: 5,
-      name: "ARK Investment Management",
-      image: "/spiderweb.jpg",
-      created: new Date(),
-      description: "",
-      numberOfStocks: 10,
-    },
-    {
-      id: 6,
-      name: "Bill & Melinda Gates Foundation",
-      image: "/stock.jpg",
-      created: new Date(),
-      description: "",
-      numberOfStocks: 4,
-    },
-    {
-      id: 7,
-      name: "Accel Partners",
-      image: "/forrest.jpg",
-      created: new Date(),
-      description: "",
-      numberOfStocks: 1,
+      numberOfStocks: companies.length,
+      companies,
     },
   ];
 

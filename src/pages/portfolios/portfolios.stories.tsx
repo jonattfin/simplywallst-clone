@@ -1,3 +1,4 @@
+import { PortfolioDetails } from "./portfolio-details";
 import PortfoliosComponent from "./portfolios";
 
 export default function Index() {
@@ -6,4 +7,8 @@ export default function Index() {
 
 export const PortfoliosInstance = () => {
   return <PortfoliosComponent />;
+};
+
+export const PortfolioDetailsInstance = () => {
+  return <PortfolioDetails />;
 };

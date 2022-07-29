@@ -48,7 +48,11 @@ export default function PortfoliosComponent() {
           >
             {portfolios.map((portfolio, index) => (
               <Grid item xs={4} key={`p_${index}`}>
-                <PortfolioCard {...{ portfolio }} />
+                <Link href={`/portfolios/${portfolio.id}`}>
+                  <a>
+                    <PortfolioCard {...{ portfolio }} />
+                  </a>
+                </Link>
               </Grid>
             ))}
           </Grid>

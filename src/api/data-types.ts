@@ -39,7 +39,7 @@ export interface Risks {
 
 export interface GenericDatastore {
   getCompanyFacade(): CompanyFacade;
-  getPortfolioFacade(): PortfolioFacade;
+  getPortfolioFacade(id?: number): PortfolioFacade;
 }
 
 export interface CompanyFacade {
@@ -62,15 +62,16 @@ export interface LineDataType {
 }
 
 export interface Portfolio {
-  id: number
+  id: number;
   name: string;
   image: string;
   created: Date;
   numberOfStocks: number;
   description: string;
+
+  companies: Company[];
 }
 
 export interface PortfolioFacade {
-  portfolios: Portfolio[]
+  portfolios: Portfolio[];
 }
-
