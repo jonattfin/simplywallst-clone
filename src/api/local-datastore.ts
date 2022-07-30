@@ -1,4 +1,4 @@
-import _, { range } from "lodash";
+import _, { random, range, take } from "lodash";
 
 import {
   GenericDatastore,
@@ -7,6 +7,7 @@ import {
   CompanyFacade,
   PortfolioFacade,
   Portfolio,
+  CompanyPortfolio,
 } from "./data-types";
 
 export class LocalDatastore implements GenericDatastore {
@@ -35,6 +36,15 @@ export class LocalDatastore implements GenericDatastore {
 }
 
 function getPortfolios(companies: Company[]) {
+  const companiesPortfolios: CompanyPortfolio[] = companies.map((company) => {
+    return {
+      company,
+      holding: random(500, 1000),
+      annualDividendContribution: random(10, 20),
+      annualDividendYield: random(1, 7)
+    };
+  });
+
   const portolios: Portfolio[] = [
     {
       id: 1,
@@ -42,8 +52,8 @@ function getPortfolios(companies: Company[]) {
       image: "/forrest.jpg",
       created: new Date(),
       description: "",
-      numberOfStocks: companies.length,
-      companies,
+      snowflakeValueJson: JSON.stringify(generateSnowflakeValue("")),
+      companies: companiesPortfolios,
     },
     {
       id: 2,
@@ -51,8 +61,8 @@ function getPortfolios(companies: Company[]) {
       image: "/spiderweb.jpg",
       created: new Date(),
       description: "",
-      numberOfStocks: companies.length,
-      companies,
+      snowflakeValueJson: JSON.stringify(generateSnowflakeValue("")),
+      companies: companiesPortfolios,
     },
     {
       id: 3,
@@ -60,8 +70,8 @@ function getPortfolios(companies: Company[]) {
       image: "/stock.jpg",
       created: new Date(),
       description: "",
-      numberOfStocks: companies.length,
-      companies,
+      snowflakeValueJson: JSON.stringify(generateSnowflakeValue("")),
+      companies: companiesPortfolios,
     },
   ];
 
@@ -76,12 +86,12 @@ function getCompany(ticker: string, competitors: Company[] = []): Company {
     radialBarValueJson: JSON.stringify(generateRadialBarData()),
     stocks: [
       {
-        ticker: ticker,
+        ticker: take(ticker, 4).join(""),
         exchangeName: "ENXTAM",
-        lastPrice: 9.42,
+        lastPrice: random(10, 20),
         marketCap: 35.3e9,
-        priceSevenDays: -0.1,
-        priceOneYear: -13.4,
+        priceSevenDays: random(-5, 5),
+        priceOneYear: random(-10, 20),
         lastUpdated: new Date(2022, 6, 10).toString(),
         priceHistoryJson: JSON.stringify(generateHistory({ start: 9 })),
       },

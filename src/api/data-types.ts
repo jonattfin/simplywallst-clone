@@ -66,12 +66,19 @@ export interface Portfolio {
   name: string;
   image: string;
   created: Date;
-  numberOfStocks: number;
   description: string;
 
-  companies: Company[];
+  snowflakeValueJson: string;
+  companies: CompanyPortfolio[];
 }
 
 export interface PortfolioFacade {
   portfolios: Portfolio[];
+}
+
+export interface CompanyPortfolio {
+  company: Company;
+  holding: number;
+  annualDividendYield: number;
+  annualDividendContribution: number;
 }

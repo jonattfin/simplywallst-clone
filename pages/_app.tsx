@@ -62,8 +62,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 }
 
 function getMainContainer(theme: string) {
-  const color = theme == "dark" ? blackColor : whiteColor;
+  let backgroundColor = whiteColor;
+  let color = blackColor;
+  if (theme == "dark") {
+    color = whiteColor;
+    backgroundColor = blackColor;
+  }
+
   return styled.div`
-    background-color: ${color};
+    background-color: ${backgroundColor};
+    color: ${color};
   `;
 }

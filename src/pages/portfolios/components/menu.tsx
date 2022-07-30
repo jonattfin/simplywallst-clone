@@ -3,12 +3,24 @@ import { Stack, Button, Divider } from "@mui/material";
 import { Fragment, useState } from "react";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import { Portfolio } from "../../../api/data-types";
+import { RadarComponent } from "../../../_shared_";
 
-export function MenuComponent({ portfolio }: { portfolio: Portfolio | undefined }) {
+export function MenuComponent({
+  portfolio,
+}: {
+  portfolio: Portfolio | undefined;
+}) {
   const [selectedItem, setSelectedItem] = useState(0);
 
   return (
     <Fragment>
+      <RadarWrapper>
+        <RadarContainer>
+          <RadarComponent
+            data={JSON.parse(portfolio?.snowflakeValueJson || "")}
+          />
+        </RadarContainer>
+      </RadarWrapper>
       <TitleDiv>
         <h3>{portfolio?.name}</h3>
         <div>
@@ -53,4 +65,17 @@ const TitleDiv = styled.div`
 
 const CustomDivider = styled(Divider)`
   margin: 20px;
+`;
+
+const RadarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+`;
+
+const RadarContainer = styled.div`
+  width: 150px;
+  height: 150px;
 `;
