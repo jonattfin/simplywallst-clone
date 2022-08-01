@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Divider, Stack, Switch } from "@mui/material";
+import { Stack, Switch } from "@mui/material";
 import styled from "@emotion/styled";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
@@ -108,7 +108,7 @@ const ResponsiveAppBar = ({
                 <Button
                   key={page}
                   disabled={index >= 2}
-                  href={page.toLowerCase()}
+                  href={`/${page.toLowerCase()}`}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}

@@ -31,8 +31,8 @@ import WithLoadingSpinner from "../../_shared_/data-loader";
 import RadarComponent from "../../_shared_/radar";
 
 export const GET_PORTFOLIO_DETAILS_QUERY = gql`
-  query getPortfolioData {
-    portfolio(id: 3) {
+  query getPortfolioData($id: Int!) {
+    portfolio(id: $id) {
       id
       name
       image
@@ -63,9 +63,17 @@ export function PortfolioDetailsContainer() {
   const router = useRouter();
   const { id } = router.query;
 
+  let currentId = 1;
+  if (typeof(id) == 'string') {
+    currentId = parseInt(id, 10);
+  }
+
   return WithLoadingSpinner<Portfolio>({
     WrappedComponent: PortfolioDetailsComponent,
     query: GET_PORTFOLIO_DETAILS_QUERY,
+    variables: {
+      id: currentId,
+    },
   });
 }
 
