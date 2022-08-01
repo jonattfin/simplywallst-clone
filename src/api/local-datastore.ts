@@ -36,8 +36,9 @@ export class LocalDatastore implements GenericDatastore {
 }
 
 function getPortfolios(companies: Company[]) {
-  const companiesPortfolios: CompanyPortfolio[] = companies.map((company) => {
+  const companiesPortfolios: CompanyPortfolio[] = companies.map((company, index) => {
     return {
+      id: index,
       company,
       holding: random(500, 1000),
       annualDividendContribution: random(10, 20),

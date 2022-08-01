@@ -77,8 +77,9 @@ export interface PortfolioFacade {
 }
 
 export interface CompanyPortfolio {
-  company: Company;
+  id: number;
   holding: number;
   annualDividendYield: number;
   annualDividendContribution: number;
+  company: Company;
 }
