@@ -1,7 +1,6 @@
 import { PortfolioDetailsComponent } from "./portfolio-details";
-import PortfoliosComponent from "./portfolios";
 import { datastoreFactory } from "../../api/datastore-factory";
-import { head } from "lodash";
+import { PortfoliosComponent } from "./portfolios";
 
 const datastore = datastoreFactory.getDatastore();
 
@@ -15,7 +14,7 @@ export const PortfoliosInstance = () => {
 
 export const PortfolioDetailsInstance = () => {
   const data = {
-    portfolio: head(datastore.getPortfolioFacade(1).portfolios),
+    portfolio: datastore.getPortfolioFacade(1).portfolios[0],
   };
 
   return <PortfolioDetailsComponent {...{ data }} />;
