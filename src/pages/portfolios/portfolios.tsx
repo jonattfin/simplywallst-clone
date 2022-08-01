@@ -1,24 +1,45 @@
+import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Breadcrumbs, Button, Grid, Paper } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 
-import { datastoreFactory } from "../../api/datastore-factory";
+import { PortfolioFacade } from "../../api/data-types";
+import { WithLoadingSpinner } from "../../_shared_";
 import { AddFormPortfolio, PortfolioCard } from "./components";
 
-const datastore = datastoreFactory.getDatastore();
-const { portfolios } = datastore.getPortfolioFacade();
+export const GET_PORTFOLIOS_QUERY = gql`
+  query getPortfoliosData {
+    portfolios {
+      id
+      name
+      image
+      created
+      description
 
-export default function PortfoliosComponent() {
+      companies {
+        id
+      }
+    }
+  }
+`;
+
+export function PortfoliosContainer() {
+  return WithLoadingSpinner<PortfolioFacade>({
+    WrappedComponent: PortfoliosComponent,
+    query: GET_PORTFOLIOS_QUERY,
+  });
+}
+
+export function PortfoliosComponent({
+  data,
+}: {
+  data: PortfolioFacade;
+}) {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <MainPaper>
@@ -46,7 +67,7 @@ export default function PortfoliosComponent() {
             justifyContent="flex-start"
             alignItems="center"
           >
-            {portfolios.map((portfolio, index) => (
+            {data.portfolios.map((portfolio, index) => (
               <Grid item xs={4} key={`p_${index}`}>
                 <Link href={`/portfolios/${portfolio.id}`}>
                   <a>

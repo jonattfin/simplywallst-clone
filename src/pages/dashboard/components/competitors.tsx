@@ -5,7 +5,8 @@ import { head } from "lodash";
 import { gql } from "@apollo/client";
 
 import { CompanyFacade } from "../../../api/data-types";
-import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
+import { WithLoadingSpinner } from "../../../_shared_";
+import RadarComponent from "../../../_shared_/radar";
 
 export const GET_COMPETITORS_QUERY = gql`
   query getCompetitorsData {

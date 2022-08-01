@@ -3,22 +3,22 @@ import { Stack, Button, Divider } from "@mui/material";
 import { Fragment, useState } from "react";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import { Portfolio } from "../../../api/data-types";
-import { RadarComponent } from "../../../_shared_";
+import RadarComponent from "../../../_shared_/radar";
 
-export function MenuComponent({
-  portfolio,
-}: {
-  portfolio: Portfolio | undefined;
-}) {
+export function MenuComponent({ portfolio }: { portfolio: Portfolio }) {
   const [selectedItem, setSelectedItem] = useState(0);
+
+  if (!portfolio) {
+    return <div>&nbsp;</div>;
+  }
 
   return (
     <Fragment>
       <RadarWrapper>
         <RadarContainer>
-          <RadarComponent
-            data={JSON.parse(portfolio?.snowflakeValueJson || "")}
-          />
+          {/* {portfolio.snowflakeValueJson.length > 0 && (
+            <RadarComponent data={JSON.parse(portfolio.snowflakeValueJson)} />
+          )} */}
         </RadarContainer>
       </RadarWrapper>
       <TitleDiv>

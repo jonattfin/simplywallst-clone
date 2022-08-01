@@ -1,2 +1,3 @@
-import { default as Portfolios } from "../../src/pages/portfolios";
-export default Portfolios.PortfoliosComponent;
+import { PortfoliosContainer } from "../../src/pages/portfolios/portfolios";
+
+export default PortfoliosContainer;

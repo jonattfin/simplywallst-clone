@@ -1,9 +1,14 @@
-import PortfoliosComponent from "./portfolios";
-import { PortfolioDetails } from "./portfolio-details";
+import {PortfoliosComponent, PortfoliosContainer } from "./portfolios";
+import {
+  PortfolioDetailsComponent,
+  PortfolioDetailsContainer,
+} from "./portfolio-details";
 
 const obj: any = {
   PortfoliosComponent,
-  PortfolioDetails,
+  PortfoliosContainer,
+  PortfolioDetailsComponent,
+  PortfolioDetailsContainer,
 };
 
 export default obj;

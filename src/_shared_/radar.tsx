@@ -12,13 +12,17 @@ export default function RadarComponent({ data }: { data: any }) {
     ...{ ...data },
   };
 
-  return (
-    <NoSsr>
-      <ResponsiveRadar
-        {...radarProps}
-        gridShape="linear"
-        curve="catmullRomClosed"
-      />
-    </NoSsr>
-  );
+  try {
+    return (
+      <NoSsr>
+        <ResponsiveRadar
+          {...radarProps}
+          gridShape="linear"
+          curve="catmullRomClosed"
+        />
+      </NoSsr>
+    );
+  } catch {
+    return <div></div>;
+  }
 }

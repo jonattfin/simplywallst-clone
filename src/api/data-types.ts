@@ -65,7 +65,7 @@ export interface Portfolio {
   id: number;
   name: string;
   image: string;
-  created: Date;
+  created: string;
   description: string;
 
   snowflakeValueJson: string;

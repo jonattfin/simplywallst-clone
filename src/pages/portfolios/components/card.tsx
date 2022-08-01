@@ -21,7 +21,7 @@ export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
             {portfolio.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {`Created: ${portfolio.created.toDateString()}, Includes: ${
+            {`Created: ${portfolio.created}, Includes: ${
               portfolio.companies.length
             } holdings`}
           </Typography>

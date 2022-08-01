@@ -6,8 +6,9 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { gql } from "@apollo/client";
 import { head } from "lodash";
 
-import { RadarComponent, WithLoadingSpinner } from "../../../_shared_";
+import { WithLoadingSpinner } from "../../../_shared_";
 import { CompanyFacade } from "../../../api/data-types";
+import RadarComponent from "../../../_shared_/radar";
 
 export const GET_OVERVIEW_QUERY = gql`
   query getOverviewData {

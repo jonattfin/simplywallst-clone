@@ -25,21 +25,56 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 
 import { SpecialMenu } from "./components";
-import { datastoreFactory } from "../../api/datastore-factory";
-import {
-  CompanyPortfolio,
-  Portfolio,
-} from "../../api/data-types";
-import { RadarComponent } from "../../_shared_";
+import { CompanyPortfolio, Portfolio } from "../../api/data-types";
+import { gql } from "@apollo/client";
+import WithLoadingSpinner from "../../_shared_/data-loader";
+import RadarComponent from "../../_shared_/radar";
 
-const datastore = datastoreFactory.getDatastore();
+export const GET_PORTFOLIO_DETAILS_QUERY = gql`
+  query getPortfolioData {
+    portfolio(id: 3) {
+      id
+      name
+      image
+      created
+      description
+      snowflakeValueJson
 
-export function PortfolioDetails() {
+      companies {
+        holding
+        annualDividendYield
+        annualDividendContribution
+        company {
+          name
+          snowflakeValueJson
+          stocks {
+            ticker
+            lastPrice
+            priceOneYear
+            priceSevenDays
+          }
+        }
+      }
+    }
+  }
+`;
+
+export function PortfolioDetailsContainer() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { portfolios } = datastore.getPortfolioFacade(parseInt(`${id}`));
-  const portfolio = head(portfolios);
+  return WithLoadingSpinner<Portfolio>({
+    WrappedComponent: PortfolioDetailsComponent,
+    query: GET_PORTFOLIO_DETAILS_QUERY,
+  });
+}
+
+export function PortfolioDetailsComponent({
+  data,
+}: {
+  data: { portfolio: Portfolio };
+}) {
+  const { portfolio } = data;
 
   return (
     <MainDiv>
@@ -124,9 +159,9 @@ export function PortfolioDetails() {
                 </div>
                 <MainRadarWrapperDiv>
                   <MainRadarContainer>
-                    <RadarComponent
-                      data={JSON.parse(portfolio?.snowflakeValueJson || "")}
-                    />
+                    {/* <RadarComponent
+                      data={JSON.parse(portfolio.snowflakeValueJson)}
+                    /> */}
                   </MainRadarContainer>
                 </MainRadarWrapperDiv>
               </Stack>
@@ -161,7 +196,7 @@ function CompanyCard({
       <CardHeader
         avatar={
           <RadarContainer>
-            <RadarComponent data={JSON.parse(company.snowflakeValueJson)} />
+            {/* <RadarComponent data={JSON.parse(company.snowflakeValueJson)} /> */}
           </RadarContainer>
         }
         action={
@@ -178,6 +213,7 @@ function CompanyCard({
           <div>
             <div></div>
             <TableContainer component={Paper}>
+              <div></div>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -218,7 +254,11 @@ export default function DividendTable({
   if (!portfolio) return <div></div>;
 
   const rows = portfolio.companies.map((companyPortfolio) => {
-    return createData(companyPortfolio?.company?.name || "", companyPortfolio.annualDividendYield, companyPortfolio.annualDividendContribution);
+    return createData(
+      companyPortfolio?.company?.name || "",
+      companyPortfolio.annualDividendYield,
+      companyPortfolio.annualDividendContribution
+    );
   });
 
   return (
