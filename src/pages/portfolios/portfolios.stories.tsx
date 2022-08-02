@@ -9,7 +9,11 @@ export default function Index() {
 }
 
 export const PortfoliosInstance = () => {
-  return <PortfoliosComponent {...{ data: datastore.getPortfolioFacade() }} />;
+  return (
+    <PortfoliosComponent
+      {...{ data: datastore.getPortfolioFacade(), createPortfolio: () => {} }}
+    />
+  );
 };
 
 export const PortfolioDetailsInstance = () => {
