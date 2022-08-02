@@ -3,10 +3,12 @@ import { MockedProvider } from "@apollo/client/testing";
 
 import { datastoreFactory } from "../../api/datastore-factory";
 
+import { PortfolioDetailsComponent } from "./portfolio-details";
 import {
-  PortfolioDetailsComponent,
-} from "./portfolio-details";
-import { GET_PORTFOLIOS_QUERY, PortfoliosComponent, PortfoliosContainer } from "./portfolios";
+  GET_PORTFOLIOS_QUERY,
+  PortfoliosComponent,
+  PortfoliosContainer,
+} from "./portfolios";
 
 beforeAll(() => {
   // we need to set this otherwise the graphs won't work in tests
@@ -23,8 +25,12 @@ describe("Portfolios components", () => {
     };
 
     it("PortfoliosComponent renders without error", async () => {
-      render(<PortfoliosComponent {...{ data }} />);
-      expect(await screen.findByText("Accel Partners")).toBeInTheDocument();
+      render(
+        <PortfoliosComponent
+          {...{ data, createPortfolio: () => console.log("create portfolio") }}
+        />
+      );
+      expect(await screen.findByText("Accel Partners (Usd)")).toBeInTheDocument();
     });
 
     it("PortfoliosContainer renders without error", async () => {
@@ -41,7 +47,7 @@ describe("Portfolios components", () => {
         </MockedProvider>
       );
 
-      expect(await screen.findByText("Accel Partners")).toBeInTheDocument();
+      expect(await screen.findByText("Accel Partners (Usd)")).toBeInTheDocument();
     });
   });
 
