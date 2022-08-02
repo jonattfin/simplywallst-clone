@@ -82,7 +82,7 @@ export function DividendComponent({
             divider={<Divider flexItem orientation="vertical" />}
           >
             <PieContainer>
-              <PieComponent />
+              <PieComponent {...{ data: getPayoutToShareHolders() }} />
             </PieContainer>
             <ContentDiv>
               <div>
@@ -104,7 +104,7 @@ export function DividendComponent({
             divider={<Divider flexItem orientation="vertical" />}
           >
             <PieContainer>
-              <PieComponent />
+              <PieComponent {...{ data: getFuturePayoutToShareholders() }} />
             </PieContainer>
             <ContentDiv>
               <div>
@@ -119,6 +119,20 @@ export function DividendComponent({
       </Stack>
     </div>
   );
+}
+
+function getPayoutToShareHolders() {
+  return [
+    { id: 1, label: 1, value: 82 },
+    { id: 2, label: 2, value: 18 },
+  ];
+}
+
+function getFuturePayoutToShareholders() {
+  return [
+    { id: 1, label: 1, value: 53 },
+    { id: 2, label: 2, value: 47 },
+  ];
 }
 
 const LineContainer = styled.div`

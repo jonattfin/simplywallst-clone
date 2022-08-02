@@ -24,11 +24,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 
-import { SpecialMenu } from "./components";
+import { Diversification, SpecialMenu } from "./components";
 import { CompanyPortfolio, Portfolio } from "../../api/data-types";
 import { gql } from "@apollo/client";
 import WithLoadingSpinner from "../../_shared_/data-loader";
 import RadarComponent from "../../_shared_/radar";
+import { Fragment } from "react";
 
 export const GET_PORTFOLIO_DETAILS_QUERY = gql`
   query getPortfolioData($id: Int!) {
@@ -64,7 +65,7 @@ export function PortfolioDetailsContainer() {
   const { id } = router.query;
 
   let currentId = 1;
-  if (typeof(id) == 'string') {
+  if (typeof id == "string") {
     currentId = parseInt(id, 10);
   }
 
@@ -83,6 +84,7 @@ export function PortfolioDetailsComponent({
   data: { portfolio: Portfolio };
 }) {
   const { portfolio } = data;
+  const AppComponents = getApplicationComponents();
 
   return (
     <MainDiv>
@@ -101,93 +103,121 @@ export function PortfolioDetailsComponent({
         </Grid>
         <Grid item xs={9}>
           <Stack spacing={2}>
-            <CustomPaper>
-              <div>
-                <Breadcrumbs>
-                  <Link href="/">Home</Link>
-                  <Link href="/portfolios">My Portfolios</Link>
-                  <Link href={`/portfolios/${portfolio?.id}`}>
-                    {portfolio?.name}
-                  </Link>
-                </Breadcrumbs>
-                <h1>{portfolio?.name}</h1>
-                <Stack direction="row" spacing={2}>
-                  <Button variant="contained">Edit Portfolio</Button>
-                  <Button variant="contained">More Actions</Button>
-                </Stack>
-              </div>
-              <div>
-                <h3>Market value</h3>
-                <h4>${sum(portfolio?.companies.map((c) => c.holding))}</h4>
-              </div>
-            </CustomPaper>
-            <CustomPaper>
-              <Stack
-                direction={"row"}
-                justifyContent="space-between"
-                alignItems="center"
-                padding={2}
-              >
-                <h2>Holdings ({portfolio?.companies.length})</h2>
-                <TextField label="Add company" variant="outlined" />
-              </Stack>
-
-              <Divider />
-              <Grid
-                container
-                direction="row"
-                justifyContent="flow-start"
-                alignItems="center"
-                padding={2}
-                spacing={3}
-              >
-                {portfolio?.companies.map((company, index) => (
-                  <Grid item xs={3} key={`company_${index}`}>
-                    <CompanyCard {...{ companyPortfolio: company }} />
-                  </Grid>
-                ))}
-              </Grid>
-            </CustomPaper>
-            <CustomPaper>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <div>
-                  <h1>Portfolio Summary</h1>
-                  <p>
-                    {portfolio?.name} is a USD portfolio that has returned 5.04%
-                    since inception.
-                  </p>
-                  <p>Fundamentals</p>
-                  <p>An undervalued Portfolio and income payer.</p>
-                  <p>Actions</p>
-                  <Button variant="contained">Detailed Returns Report</Button>
-                </div>
-                <MainRadarWrapperDiv>
-                  <MainRadarContainer>
-                    {/* <RadarComponent
-                      data={JSON.parse(portfolio.snowflakeValueJson)}
-                    /> */}
-                  </MainRadarContainer>
-                </MainRadarWrapperDiv>
-              </Stack>
-            </CustomPaper>
-            <CustomPaper>
-              <h1>Dividends</h1>
-              <p>The average annual dividend yield and top payers</p>
-              <p />
-              <Divider />
-              <p />
-              List of Dividend Payers
-              <p />
-              <DividendTable {...{ portfolio }} />
-            </CustomPaper>
+            {AppComponents.map((CustomComponent, index) => (
+              <CustomPaper key={`app_component_${index}`}>
+                <CustomComponent {...{ portfolio }} />
+              </CustomPaper>
+            ))}
           </Stack>
         </Grid>
       </Grid>
     </MainDiv>
+  );
+}
+
+function getApplicationComponents() {
+  return [
+    HeaderComponent,
+    HoldingsComponent,
+    PortfolioSummary,
+    Diversification,
+    Dividends,
+  ];
+}
+
+function HeaderComponent({ portfolio }: { portfolio: Portfolio }) {
+  return (
+    <Fragment>
+      <div>
+        <Breadcrumbs>
+          <Link href="/">Home</Link>
+          <Link href="/portfolios">My Portfolios</Link>
+          <Link href={`/portfolios/${portfolio?.id}`}>{portfolio?.name}</Link>
+        </Breadcrumbs>
+        <h1>{portfolio?.name}</h1>
+        <Stack direction="row" spacing={2}>
+          <Button variant="contained">Edit Portfolio</Button>
+          <Button variant="contained">More Actions</Button>
+        </Stack>
+      </div>
+      <div>
+        <h3>Market value</h3>
+        <h4>${sum(portfolio?.companies.map((c) => c.holding))}</h4>
+      </div>
+    </Fragment>
+  );
+}
+
+function HoldingsComponent({ portfolio }: { portfolio: Portfolio }) {
+  return (
+    <Fragment>
+      <Stack
+        direction={"row"}
+        justifyContent="space-between"
+        alignItems="center"
+        padding={2}
+      >
+        <h2>Holdings ({portfolio?.companies.length})</h2>
+        <TextField label="Add company" variant="outlined" />
+      </Stack>
+
+      <Divider />
+      <Grid
+        container
+        direction="row"
+        justifyContent="flow-start"
+        alignItems="center"
+        padding={2}
+        spacing={3}
+      >
+        {portfolio?.companies.map((company, index) => (
+          <Grid item xs={3} key={`company_${index}`}>
+            <CompanyCard {...{ companyPortfolio: company }} />
+          </Grid>
+        ))}
+      </Grid>
+    </Fragment>
+  );
+}
+
+function PortfolioSummary({ portfolio }: { portfolio: Portfolio }) {
+  return (
+    <Fragment>
+      <h1>Portfolio Summary</h1>
+      <Divider />
+      <p>
+        {portfolio?.name} is a USD portfolio that has returned 5.04% since
+        inception.
+      </p>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <div>
+          <p>Fundamentals</p>
+          <p>An undervalued Portfolio and income payer.</p>
+          <p>Actions</p>
+          <Button variant="contained">Detailed Returns Report</Button>
+        </div>
+        <MainRadarWrapperDiv>
+          <MainRadarContainer>
+            <RadarComponent data={JSON.parse(portfolio.snowflakeValueJson)} />
+          </MainRadarContainer>
+        </MainRadarWrapperDiv>
+      </Stack>
+    </Fragment>
+  );
+}
+
+function Dividends({ portfolio }: { portfolio: Portfolio }) {
+  return (
+    <Fragment>
+      <h1>Dividends</h1>
+      <p>The average annual dividend yield and top payers</p>
+      <p />
+      <Divider />
+      <p />
+      List of Dividend Payers
+      <p />
+      <DividendTable {...{ portfolio }} />
+    </Fragment>
   );
 }
 
@@ -204,7 +234,7 @@ function CompanyCard({
       <CardHeader
         avatar={
           <RadarContainer>
-            {/* <RadarComponent data={JSON.parse(company.snowflakeValueJson)} /> */}
+            <RadarComponent data={JSON.parse(company.snowflakeValueJson)} />
           </RadarContainer>
         }
         action={

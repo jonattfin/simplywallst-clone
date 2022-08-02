@@ -16,9 +16,7 @@ export function MenuComponent({ portfolio }: { portfolio: Portfolio }) {
     <Fragment>
       <RadarWrapper>
         <RadarContainer>
-          {/* {portfolio.snowflakeValueJson.length > 0 && (
-            <RadarComponent data={JSON.parse(portfolio.snowflakeValueJson)} />
-          )} */}
+          <RadarComponent data={JSON.parse(portfolio.snowflakeValueJson)} />
         </RadarContainer>
       </RadarWrapper>
       <TitleDiv>
