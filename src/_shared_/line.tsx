@@ -1,7 +1,6 @@
 import { NoSsr } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsiveLine } from "@nivo/line";
-import { LineDataType } from "../api/data-types";
 
 const commonProperties = {
   animate: true,

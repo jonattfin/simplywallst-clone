@@ -1,4 +1,4 @@
-import { Stack, Button, Divider } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import { useState } from "react";
 
 export function MenuComponent() {

@@ -1,4 +1,4 @@
-import _, { random, range, take } from "lodash";
+import _, { random, take } from "lodash";
 
 import {
   GenericDatastore,

@@ -24,15 +24,6 @@ const pages = [
   "Screener",
 ];
 
-// const settings: string[] = [
-//   "Profile",
-//   "Subscription & Billing",
-//   "Plans & Pricing",
-//   "Notifications",
-//   "Help Center",
-//   "Logout",
-// ];
-
 const ResponsiveAppBar = ({
   theme,
   setTheme,
