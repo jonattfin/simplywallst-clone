@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Breadcrumbs, Button, Grid, Paper } from "@mui/material";
 import Link from "next/link";
@@ -13,6 +13,7 @@ export const GET_PORTFOLIOS_QUERY = gql`
     portfolios {
       id
       name
+      currency
       image
       created
       description
@@ -24,22 +25,48 @@ export const GET_PORTFOLIOS_QUERY = gql`
   }
 `;
 
+export const CREATE_PORTFOLIO = gql`
+  mutation CreatePortfolio($createPortfolioInput: CreatePortfolioInput!) {
+    createPortfolio(createPortfolioInput: $createPortfolioInput) {
+      id
+      name
+      currency
+    }
+  }
+`;
+
 export function PortfoliosContainer() {
+  const [createPortfolio] = useMutation(CREATE_PORTFOLIO, {
+    refetchQueries: [{ query: GET_PORTFOLIOS_QUERY }],
+  });
+
   return WithLoadingSpinner<PortfolioFacade>({
     WrappedComponent: PortfoliosComponent,
     query: GET_PORTFOLIOS_QUERY,
+    otherProps: {
+      createPortfolio,
+    },
   });
 }
 
 export function PortfoliosComponent({
   data,
+  createPortfolio,
 }: {
   data: PortfolioFacade;
+  createPortfolio: any;
 }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleAdd = (name: string, currency: string) => {
+    createPortfolio({
+      variables: { createPortfolioInput: { name, currency } },
+    });
+    setOpen(false);
+  };
 
   return (
     <MainPaper>
@@ -79,7 +106,7 @@ export function PortfoliosComponent({
           </Grid>
         </Grid>
       </Grid>
-      <AddFormPortfolio {...{ open, handleClose }} />
+      <AddFormPortfolio {...{ open, handleClose, handleAdd }} />
     </MainPaper>
   );
 }

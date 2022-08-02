@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Portfolio } from "../../../api/data-types";
+import _ from "lodash";
 
 export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
   return (
@@ -18,7 +19,7 @@ export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {portfolio.name}
+            {`${portfolio.name} (${_.capitalize(portfolio.currency)})`}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {`Created: ${portfolio.created}, Includes: ${

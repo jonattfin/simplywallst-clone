@@ -16,9 +16,11 @@ import { useState } from "react";
 export default function AddFormPortolio({
   open,
   handleClose,
+  handleAdd,
 }: {
   open: boolean;
   handleClose: any;
+  handleAdd: any;
 }) {
   const [currency, setCurrency] = useState("");
   const [name, setName] = useState("");
@@ -51,16 +53,22 @@ export default function AddFormPortolio({
               onChange={handleCurrencyChange}
               fullWidth
             >
-              <MenuItem value={1}>Euro</MenuItem>
-              <MenuItem value={2}>USD</MenuItem>
-              <MenuItem value={3}>RON</MenuItem>
+              <MenuItem value={"Euro"}>Euro</MenuItem>
+              <MenuItem value={"Usd"}>Usd</MenuItem>
+              <MenuItem value={"Ron"}>Ron</MenuItem>
             </Select>
           </div>
         </Stack>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Add</Button>
+        <Button
+          onClick={() => {
+            handleAdd(name, currency);
+          }}
+        >
+          Add
+        </Button>
       </DialogActions>
     </Dialog>
   );

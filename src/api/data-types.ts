@@ -64,6 +64,7 @@ export interface LineDataType {
 export interface Portfolio {
   id: number;
   name: string;
+  currency: string;
   image: string;
   created: string;
   description: string;
