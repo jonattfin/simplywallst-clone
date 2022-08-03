@@ -25,14 +25,20 @@ export class LocalDatastore implements GenericDatastore {
 
   getWatchlistCompanies(): WatchlistCompanies {
     return {
-      companies: getCompetitors().map((competitor, index) => ({
-        id: index + 1,
-        company: competitor.name,
-        lastPrice: head(competitor.stocks)?.lastPrice,
-        fairValue: 0,
-        sevenDays: head(competitor.stocks)?.priceSevenDays,
-        oneYear: head(competitor.stocks)?.priceOneYear,
-      })),
+      companies: getCompetitors().map((competitor, index) => {
+        const stock = head(competitor.stocks);
+        return {
+          id: index + 1,
+          name: competitor.name,
+          lastPrice: stock?.lastPrice,
+          fairValue: stock?.lastPrice,
+          sevenDays: stock?.priceSevenDays,
+          oneYear: stock?.priceOneYear,
+          priceHistoryJson: stock?.priceHistoryJson,
+          snowflakeValueJson: competitor.snowflakeValueJson,
+          news: competitor.news,
+        };
+      }),
     };
   }
 
@@ -120,9 +126,16 @@ function getCompany(ticker: string, competitors: Company[] = []): Company {
     news: [
       {
         date: new Date(2022, 5, 18).toDateString(),
-        description:
-          "ING Groep N.V. commences an Equity Buyback Plan, under the authorization approved on April 25, 2022.",
+        description: `${ticker} commences an Equity Buyback Plan, under the authorization approved on April 25, 2022.`,
       },
+      {
+        date: new Date(2022, 6, 18).toDateString(),
+        description: `${ticker} provides Earnings Guidance for the Third Quarter of 2022`
+      },
+      {
+        date: new Date(2022, 7, 18).toDateString(),
+        description: `${ticker} EPS and revenues exceed analyst expectations`
+      }
     ],
     rewards: [
       {

@@ -53,10 +53,14 @@ export interface WatchlistCompanies {
 
 export interface WatchlistCompany {
   id: number;
+  name?: string,
   lastPrice?: number;
   fairValue?: number;
   sevenDays?: number;
   oneYear?: number;
+  snowflakeValueJson: string;
+  priceHistoryJson?: string,
+  news: News[]
 }
 
 export interface HistoryNews {
