@@ -18,9 +18,9 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 const pages = [
   "Home",
   "Portfolios",
+  "Watchlist",
   "Markets",
   "Discover",
-  "Watchlist",
   "Screener",
 ];
 
@@ -98,7 +98,7 @@ const ResponsiveAppBar = ({
               {pages.map((page, index) => (
                 <Button
                   key={page}
-                  disabled={index >= 2}
+                  disabled={index > 1}
                   href={`/${page.toLowerCase()}`}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >

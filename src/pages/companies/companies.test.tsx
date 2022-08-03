@@ -29,7 +29,7 @@ beforeAll(() => {
 
 const datastore = datastoreFactory.getDatastore();
 
-describe("Dashboard components", () => {
+describe("Companies components", () => {
   describe("Company", () => {
     it("CompanyComponent renders without error", () => {
       const { getByText } = render(<Company.CompanyComponent sectionName="" />);

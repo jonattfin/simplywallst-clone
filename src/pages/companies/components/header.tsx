@@ -42,7 +42,7 @@ export function HeaderComponent({ data }: { data: CompanyFacade }) {
   }
 
   return (
-    <Fragment>
+    <MainDiv>
       <div>
         <Breadcrumbs>
           <Link underline="hover" color="inherit" href="/">
@@ -122,7 +122,7 @@ export function HeaderComponent({ data }: { data: CompanyFacade }) {
           </p>
         </div>
       </Stack>
-    </Fragment>
+    </MainDiv>
   );
 }
 
@@ -138,4 +138,8 @@ const TickerDiv = styled.div`
 const LineContainer = styled.div`
   height: 30px;
   width: 400px;
+`;
+
+const MainDiv = styled.div`
+  padding: 25px;
 `;

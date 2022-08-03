@@ -18,7 +18,11 @@ import { MenuItems } from "./components/menu";
 import Head from "next/head";
 import { WithVisibility } from "../../_shared_";
 
-export function DashboardComponent() {
+export function CompanyDetailsContainer() {
+  return <CompanyDetailsComponent />;
+}
+
+export function CompanyDetailsComponent() {
   const AppComponents = getApplicationComponents();
 
   return (
@@ -36,9 +40,7 @@ export function DashboardComponent() {
       >
         <Grid item xs={12}>
           <Paper elevation={3}>
-            <InnerContainer>
-              <Header.HeaderContainer />
-            </InnerContainer>
+            <Header.HeaderContainer />
           </Paper>
         </Grid>
         <Grid item xl={2} md={2}>
@@ -80,5 +82,5 @@ function getApplicationComponents() {
 // Styled Components
 
 const InnerContainer = styled.div`
-  padding: 1% 3%;
+  padding: 1% 2%;
 `;

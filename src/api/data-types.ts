@@ -40,10 +40,23 @@ export interface Risks {
 export interface GenericDatastore {
   getCompanyFacade(): CompanyFacade;
   getPortfolioFacade(id?: number): PortfolioFacade;
+  getWatchlistCompanies(): WatchlistCompanies;
 }
 
 export interface CompanyFacade {
   company: Company;
+}
+
+export interface WatchlistCompanies {
+  companies: WatchlistCompany[];
+}
+
+export interface WatchlistCompany {
+  id: number;
+  lastPrice?: number;
+  fairValue?: number;
+  sevenDays?: number;
+  oneYear?: number;
 }
 
 export interface HistoryNews {

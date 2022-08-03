@@ -1,3 +1,3 @@
-import { PortfolioDetailsContainer } from "../../src/pages/portfolios/portfolio-details";
+import { PortfolioDetails } from "../../src/pages/portfolios";
 
-export default PortfolioDetailsContainer;
+export default PortfolioDetails;

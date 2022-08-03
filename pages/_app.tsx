@@ -49,7 +49,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 <HeaderComponent {...{ theme, setTheme }} />
               </nav>
               <main>
-                <Component {...pageProps} />
+                <InnerContainer>
+                  <Component {...pageProps} />
+                </InnerContainer>
               </main>
               <footer />
             </Grid>
@@ -74,3 +76,7 @@ function getMainContainer(theme: string) {
     color: ${color};
   `;
 }
+
+const InnerContainer = styled.div`
+  padding: 1% 0;
+`;

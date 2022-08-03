@@ -1,2 +1,2 @@
-import Dashboard from "../src/pages/dashboard";
-export default Dashboard;
+import { Companies } from "../src/pages/companies";
+export default Companies;

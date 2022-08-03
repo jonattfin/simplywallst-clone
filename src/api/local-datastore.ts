@@ -1,4 +1,5 @@
-import _, { random, take } from "lodash";
+import _, { random, take, range, head } from "lodash";
+import { faker } from "@faker-js/faker";
 
 import {
   GenericDatastore,
@@ -8,6 +9,7 @@ import {
   PortfolioFacade,
   Portfolio,
   CompanyPortfolio,
+  WatchlistCompanies,
 } from "./data-types";
 
 export class LocalDatastore implements GenericDatastore {
@@ -19,6 +21,19 @@ export class LocalDatastore implements GenericDatastore {
     this._company = getCompany("INGB", competitors);
 
     this._portfolios = getPortfolios(competitors);
+  }
+
+  getWatchlistCompanies(): WatchlistCompanies {
+    return {
+      companies: getCompetitors().map((competitor, index) => ({
+        id: index + 1,
+        company: competitor.name,
+        lastPrice: head(competitor.stocks)?.lastPrice,
+        fairValue: 0,
+        sevenDays: head(competitor.stocks)?.priceSevenDays,
+        oneYear: head(competitor.stocks)?.priceOneYear,
+      })),
+    };
   }
 
   getCompanyFacade(): CompanyFacade {
@@ -36,15 +51,17 @@ export class LocalDatastore implements GenericDatastore {
 }
 
 function getPortfolios(companies: Company[]) {
-  const companiesPortfolios: CompanyPortfolio[] = companies.map((company, index) => {
-    return {
-      id: index,
-      company,
-      holding: random(500, 1000),
-      annualDividendContribution: random(10, 20),
-      annualDividendYield: random(1, 7)
-    };
-  });
+  const companiesPortfolios: CompanyPortfolio[] = companies.map(
+    (company, index) => {
+      return {
+        id: index,
+        company,
+        holding: random(500, 1000),
+        annualDividendContribution: random(10, 20),
+        annualDividendYield: random(1, 7),
+      };
+    }
+  );
 
   const portolios: Portfolio[] = [
     {

@@ -3,7 +3,6 @@ import { MockedProvider } from "@apollo/client/testing";
 
 import { datastoreFactory } from "../../api/datastore-factory";
 
-import { PortfolioDetailsComponent } from "./portfolio-details";
 import {
   GET_PORTFOLIOS_QUERY,
   PortfoliosComponent,
@@ -30,7 +29,9 @@ describe("Portfolios components", () => {
           {...{ data, createPortfolio: () => console.log("create portfolio") }}
         />
       );
-      expect(await screen.findByText("Accel Partners (Usd)")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Accel Partners (Usd)")
+      ).toBeInTheDocument();
     });
 
     it("PortfoliosContainer renders without error", async () => {
@@ -47,7 +48,9 @@ describe("Portfolios components", () => {
         </MockedProvider>
       );
 
-      expect(await screen.findByText("Accel Partners (Usd)")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Accel Partners (Usd)")
+      ).toBeInTheDocument();
     });
   });
 
