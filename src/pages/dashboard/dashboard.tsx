@@ -16,6 +16,7 @@ import {
 import { Fragment } from "react";
 import { MenuItems } from "./components/menu";
 import Head from "next/head";
+import { WithVisibility } from "../../_shared_";
 
 export function DashboardComponent() {
   const AppComponents = getApplicationComponents();
@@ -73,7 +74,7 @@ function getApplicationComponents() {
     FinancialHealth.FinancialHealthContainer,
     Dividend.DividendContainer,
     Ownership.OwnershipContainer,
-  ];
+  ].map((Component) => WithVisibility(Component));
 }
 
 // Styled Components

@@ -23,13 +23,16 @@ import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { gql } from "@apollo/client";
+import { Fragment } from "react";
 
 import { Diversification, SpecialMenu } from "./components";
 import { CompanyPortfolio, Portfolio } from "../../api/data-types";
-import { gql } from "@apollo/client";
-import WithLoadingSpinner from "../../_shared_/data-loader";
-import RadarComponent from "../../_shared_/radar";
-import { Fragment } from "react";
+import {
+  WithLoadingSpinner,
+  RadarComponent,
+  WithVisibility,
+} from "../../_shared_";
 
 export const GET_PORTFOLIO_DETAILS_QUERY = gql`
   query getPortfolioData($id: Int!) {
@@ -122,7 +125,7 @@ function getApplicationComponents() {
     PortfolioSummary,
     Diversification,
     Dividends,
-  ];
+  ].map((Component) => WithVisibility(Component));
 }
 
 function HeaderComponent({ portfolio }: { portfolio: Portfolio }) {

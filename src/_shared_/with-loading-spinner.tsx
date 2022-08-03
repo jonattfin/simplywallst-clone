@@ -58,4 +58,6 @@ const DivWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: 20vh;
 `;
