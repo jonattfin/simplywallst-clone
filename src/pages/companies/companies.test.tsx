@@ -27,7 +27,7 @@ beforeAll(() => {
   global.ResizeObserver = require("resize-observer-polyfill");
 });
 
-const datastore = datastoreFactory.getDatastore();
+const companyFacade = datastoreFactory.getDatastore().getCompanyFacade();
 
 describe("Companies components", () => {
   describe("Company", () => {
@@ -41,7 +41,7 @@ describe("Companies components", () => {
     it("CompetitorsComponent renders without error", () => {
       const { getByText } = render(
         <Competitors.CompetitorsComponent
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getCompetitors() }}
         />
       );
       expect(getByText("ING Groep Competitors")).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getCompetitors(),
           },
         },
       };
@@ -76,7 +76,7 @@ describe("Companies components", () => {
       const { getByText } = render(
         <Dividend.DividendComponent
           sectionName=""
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getDividend() }}
         />
       );
       expect(getByText("Dividend")).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getDividend(),
           },
         },
       };
@@ -109,7 +109,7 @@ describe("Companies components", () => {
       const { getByText } = render(
         <FinancialHealth.FinancialHealthComponent
           sectionName=""
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getFinancialHealth() }}
         />
       );
       expect(getByText("Financial Health")).toBeInTheDocument();
@@ -122,7 +122,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getFinancialHealth(),
           },
         },
       };
@@ -142,7 +142,7 @@ describe("Companies components", () => {
       const { getByText } = render(
         <Fundamentals.FundamentalsComponent
           sectionName=""
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getFundamentals() }}
         />
       );
       expect(getByText("ING Groep Fundamentals Summary")).toBeInTheDocument();
@@ -155,7 +155,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getFundamentals(),
           },
         },
       };
@@ -177,7 +177,7 @@ describe("Companies components", () => {
       const { getByText } = render(
         <History.HistoryComponent
           sectionName=""
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getHistory() }}
         />
       );
       expect(getByText("Price History & Performance")).toBeInTheDocument();
@@ -190,7 +190,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getHistory(),
           },
         },
       };
@@ -212,7 +212,7 @@ describe("Companies components", () => {
       const { getByText } = render(
         <Overview.OverviewComponent
           sectionName=""
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getOverview() }}
         />
       );
       expect(getByText("About the company")).toBeInTheDocument();
@@ -225,7 +225,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getOverview(),
           },
         },
       };
@@ -245,7 +245,7 @@ describe("Companies components", () => {
       const { getByText } = render(
         <Ownership.OwnershipComponent
           sectionName=""
-          {...{ data: datastore.getCompanyFacade() }}
+          {...{ data: companyFacade.getOwnership() }}
         />
       );
       expect(
@@ -262,7 +262,7 @@ describe("Companies components", () => {
         },
         result: {
           data: {
-            company: datastore.getCompanyFacade().company,
+            ...companyFacade.getOwnership(),
           },
         },
       };
