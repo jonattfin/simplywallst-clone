@@ -22,7 +22,7 @@ export type Stock = {
 };
 
 export type News = {
-  id?: number;
+  id: number;
   date: string;
   description: string;
 };

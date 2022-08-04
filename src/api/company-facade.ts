@@ -35,17 +35,17 @@ export class CompanyFacade implements ICompanyFacade {
   getCompanies(): ICompaniesList {
     return {
       companies: this.companies.map((c, index) => {
-        const stock = head(c.stocks);
-
         return {
           id: index + 1,
           name: c.name,
-          lastPrice: stock?.lastPrice,
-          fairValue: stock?.lastPrice,
-          sevenDays: stock?.priceSevenDays,
-          oneYear: stock?.priceOneYear,
           snowflakeValueJson: c.snowflakeValueJson,
-          priceHistoryJson: stock?.priceHistoryJson,
+          stocks: c.stocks.map((s) => ({
+            lastPrice: s.lastPrice,
+            fairValue: s.lastPrice,
+            priceSevenDays: s.priceSevenDays,
+            priceOneYear: s.priceOneYear,
+            priceHistoryJson: s.priceHistoryJson,
+          })),
           news: c.news,
         };
       }),

@@ -137,16 +137,19 @@ export interface IPortfolioDetails
   extends IPortfolioBase<PortolioDetailsDataType> {}
 
 export type CompanyDataType = {
-  id: number;
-  name?: string;
-  lastPrice?: number;
-  fairValue?: number;
-  sevenDays?: number;
-  oneYear?: number;
+  id?: number;
+  name: string;
   snowflakeValueJson: string;
-  priceHistoryJson?: string;
+
+  stocks: {
+    lastPrice: number;
+    fairValue: number;
+    priceSevenDays: number;
+    priceOneYear: number;
+    priceHistoryJson: string;
+  }[];
   news: {
-    id?: number;
+    id: number;
     date: string;
     description: string;
   }[];

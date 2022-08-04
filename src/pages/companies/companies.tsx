@@ -10,21 +10,51 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
-import { datastoreFactory } from "../../api/datastore-factory";
 import Link from "next/link";
-import { LineComponent, RadarComponent } from "../../_shared_";
+import {
+  LineComponent,
+  RadarComponent,
+  WithLoadingSpinner,
+} from "../../_shared_";
 import { useState } from "react";
 import { ICompaniesList } from "../../api/graphql-types";
+import { gql } from "@apollo/client";
+import { head } from "lodash";
 
-const companyFacade = datastoreFactory.getDatastore().getCompanyFacade();
+export const GET_COMPANIES_QUERY = gql`
+  query getCompaniesData {
+    companies {
+      id
+      name
+      snowflakeValueJson
+
+      stocks {
+        lastPrice
+        priceSevenDays
+        priceOneYear
+        priceHistoryJson
+      }
+      news {
+        id
+        date
+        description
+      }
+    }
+  }
+`;
 
 export function CompaniesContainer() {
-  const data = companyFacade.getCompanies();
-  return <CompaniesComponent {...{ data }} />;
+  return WithLoadingSpinner<ICompaniesList>({
+    WrappedComponent: CompaniesComponent,
+    query: GET_COMPANIES_QUERY,
+  });
 }
 
 export function CompaniesComponent({ data }: { data: ICompaniesList }) {
   const [rowModel, setRowModel] = useState<any>(null);
+
+  const rows = getRows(data);
+
   return (
     <MainPaper>
       <h2>Companies</h2>
@@ -37,7 +67,7 @@ export function CompaniesComponent({ data }: { data: ICompaniesList }) {
         <Grid item xs={8}>
           <GridContainer>
             <DataGrid
-              rows={data.companies}
+              rows={rows}
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[5]}
@@ -51,6 +81,23 @@ export function CompaniesComponent({ data }: { data: ICompaniesList }) {
       </Grid>
     </MainPaper>
   );
+}
+
+function getRows(data: ICompaniesList) {
+  return data.companies.map((c) => {
+    const { stocks } = c;
+    const stock = head(stocks);
+
+    return {
+      id: c.id,
+      name: c.name,
+      lastPrice: stock?.lastPrice,
+      fairValue: 1,
+      priceSevenDays: stock?.priceSevenDays,
+      priceOneYear: stock?.priceOneYear,
+      priceHistoryJson: stock?.priceHistoryJson,
+    };
+  });
 }
 
 function renderSelectedCompany(rowModel: any = [], data: ICompaniesList) {
@@ -129,14 +176,14 @@ const columns: GridColDef[] = [
     align: "center",
   },
   {
-    field: "sevenDays",
+    field: "priceSevenDays",
     headerName: "7D",
     type: "number",
     width: 50,
     align: "center",
   },
   {
-    field: "oneYear",
+    field: "priceOneYear",
     headerName: "1Y",
     type: "number",
     width: 50,
