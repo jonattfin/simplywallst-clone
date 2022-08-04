@@ -1,50 +1,40 @@
-export interface Company {
-  name?: string;
-  description?: string;
+export type Company = {
+  name: string;
+  description: string;
   stocks: Stock[];
   rewards: Rewards[];
   risks: Risks[];
   news: News[];
-  competitors?: Company[];
+  competitors: Company[];
   snowflakeValueJson: string;
   radialBarValueJson: string;
 }
 
-export interface Stock {
+export type Stock = {
   ticker: string;
-  exchangeName?: string;
-  lastPrice?: number;
-  marketCap?: number;
-  priceSevenDays?: number;
-  priceOneYear?: number;
-  lastUpdated?: string;
+  exchangeName: string;
+  lastPrice: number;
+  marketCap: number;
+  priceSevenDays: number;
+  priceOneYear: number;
+  lastUpdated: string;
   priceHistoryJson: string;
 }
 
-export interface News {
+export type News = {
   id?: number;
   date: string;
   description: string;
 }
 
-export interface Rewards {
+export type Rewards = {
   id?: number;
   description: string;
 }
 
-export interface Risks {
+export type Risks = {
   id?: number;
   description: string;
-}
-
-export interface GenericDatastore {
-  getCompanyFacade(): CompanyFacade;
-  getPortfolioFacade(id?: number): PortfolioFacade;
-  getWatchlistCompanies(): WatchlistCompanies;
-}
-
-export interface CompanyFacade {
-  company: Company;
 }
 
 export interface WatchlistCompanies {
@@ -53,14 +43,14 @@ export interface WatchlistCompanies {
 
 export interface WatchlistCompany {
   id: number;
-  name?: string,
+  name?: string;
   lastPrice?: number;
   fairValue?: number;
   sevenDays?: number;
   oneYear?: number;
   snowflakeValueJson: string;
-  priceHistoryJson?: string,
-  news: News[]
+  priceHistoryJson?: string;
+  news: News[];
 }
 
 export interface HistoryNews {

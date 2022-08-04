@@ -10,7 +10,7 @@ import {
   WithLoadingSpinner,
 } from "../../../_shared_";
 import { head } from "lodash";
-import { CompanyFacade } from "../../../api/data-types";
+import { ICompanyFinancialHealth } from "../../../api/graphql-types";
 
 export const GET_FINANCIAL_HEALTH_QUERY = gql`
   query getFinancialHealthData {
@@ -28,7 +28,7 @@ export function FinancialHealthContainer({
 }: {
   sectionName: string;
 }) {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyFinancialHealth>({
     WrappedComponent: FinancialHealthComponent,
     query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },
@@ -39,7 +39,7 @@ export function FinancialHealthComponent({
   data,
   sectionName,
 }: {
-  data: CompanyFacade;
+  data: ICompanyFinancialHealth;
   sectionName: string;
 }) {
   const { company } = data;

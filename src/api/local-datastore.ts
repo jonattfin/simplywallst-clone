@@ -2,25 +2,29 @@ import _, { random, take, range, head } from "lodash";
 import { faker } from "@faker-js/faker";
 
 import {
-  GenericDatastore,
   LineDataType,
   Company,
-  CompanyFacade,
   PortfolioFacade,
   Portfolio,
   CompanyPortfolio,
   WatchlistCompanies,
-} from "./data-types";
+} from "./generic-types";
 
-export class LocalDatastore implements GenericDatastore {
+import { ICompanyFacade, IDatastore } from "./interfaces";
+import { CompanyFacade } from "./company-facade";
+
+export class LocalDatastore implements IDatastore {
   private readonly _company!: Company;
   private readonly _portfolios: Portfolio[];
+  private readonly _companyFacade: ICompanyFacade;
 
   constructor() {
     const competitors = getCompetitors();
     this._company = getCompany("INGB", competitors);
 
     this._portfolios = getPortfolios(competitors);
+
+    this._companyFacade = new CompanyFacade(this._company);
   }
 
   getWatchlistCompanies(): WatchlistCompanies {
@@ -42,8 +46,8 @@ export class LocalDatastore implements GenericDatastore {
     };
   }
 
-  getCompanyFacade(): CompanyFacade {
-    return { company: this._company };
+  getCompanyFacade(): ICompanyFacade {
+    return this._companyFacade;
   }
 
   getPortfolioFacade(id: number): PortfolioFacade {
@@ -130,12 +134,12 @@ function getCompany(ticker: string, competitors: Company[] = []): Company {
       },
       {
         date: new Date(2022, 6, 18).toDateString(),
-        description: `${ticker} provides Earnings Guidance for the Third Quarter of 2022`
+        description: `${ticker} provides Earnings Guidance for the Third Quarter of 2022`,
       },
       {
         date: new Date(2022, 7, 18).toDateString(),
-        description: `${ticker} EPS and revenues exceed analyst expectations`
-      }
+        description: `${ticker} EPS and revenues exceed analyst expectations`,
+      },
     ],
     rewards: [
       {

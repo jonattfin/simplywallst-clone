@@ -16,8 +16,8 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import { gql } from "@apollo/client";
 
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
-import { CompanyFacade } from "../../../api/data-types";
 import { head } from "lodash";
+import { ICompanyHistory } from "../../../api/graphql-types";
 
 export const GET_NEWS_QUERY = gql`
   query getNewsForCompanyData {
@@ -34,7 +34,7 @@ export const GET_NEWS_QUERY = gql`
 `;
 
 export function HistoryContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyHistory>({
     WrappedComponent: HistoryComponent,
     query: GET_NEWS_QUERY,
     otherProps: { sectionName },
@@ -45,7 +45,7 @@ export function HistoryComponent({
   data,
   sectionName,
 }: {
-  data: CompanyFacade;
+  data: ICompanyHistory;
   sectionName: string;
 }) {
   const [value, setValue] = useState(0);

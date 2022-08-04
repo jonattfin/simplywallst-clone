@@ -1,14 +1,14 @@
+import { IDatastore } from "./interfaces";
 import { LocalDatastore } from "./local-datastore";
-import { GenericDatastore } from "./data-types";
 
 export class DatastoreFactory {
-  private _datastore!: GenericDatastore;
+  private _datastore!: IDatastore;
 
   constructor() {
     this._datastore = new LocalDatastore();
   }
 
-  getDatastore(): GenericDatastore {
+  getDatastore(): IDatastore {
     return this._datastore;
   }
 }

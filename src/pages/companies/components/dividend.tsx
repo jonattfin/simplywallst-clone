@@ -9,8 +9,8 @@ import {
   PieComponent,
   WithLoadingSpinner,
 } from "../../../_shared_";
-import { CompanyFacade } from "../../../api/data-types";
 import { head } from "lodash";
+import { ICompanyDividend } from "../../../api/graphql-types";
 
 export const GET_DIVIDENDS_QUERY = gql`
   query getDividendsData {
@@ -24,7 +24,7 @@ export const GET_DIVIDENDS_QUERY = gql`
 `;
 
 export function DividendContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyDividend>({
     WrappedComponent: DividendComponent,
     query: GET_DIVIDENDS_QUERY,
     otherProps: { sectionName },
@@ -35,7 +35,7 @@ export function DividendComponent({
   data,
   sectionName,
 }: {
-  data: CompanyFacade;
+  data: ICompanyDividend;
   sectionName: string;
 }) {
   const { company } = data;

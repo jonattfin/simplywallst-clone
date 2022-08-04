@@ -4,9 +4,9 @@ import { Fragment } from "react";
 import { head } from "lodash";
 import { gql } from "@apollo/client";
 
-import { CompanyFacade } from "../../../api/data-types";
 import { WithLoadingSpinner } from "../../../_shared_";
 import RadarComponent from "../../../_shared_/radar";
+import { ICompanyCompetitors } from "../../../api/graphql-types";
 
 export const GET_COMPETITORS_QUERY = gql`
   query getCompetitorsData {
@@ -24,13 +24,13 @@ export const GET_COMPETITORS_QUERY = gql`
 `;
 
 export function CompetitorsContainer() {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyCompetitors>({
     WrappedComponent: CompetitorsComponent,
     query: GET_COMPETITORS_QUERY,
   });
 }
 
-export function CompetitorsComponent({ data }: { data: CompanyFacade }) {
+export function CompetitorsComponent({ data }: { data: ICompanyCompetitors }) {
   const { company } = data;
   const { competitors = [] } = company;
 

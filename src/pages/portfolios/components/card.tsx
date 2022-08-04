@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Portfolio } from "../../../api/data-types";
+import { Portfolio } from "../../../api/generic-types";
 import _ from "lodash";
 
 export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {

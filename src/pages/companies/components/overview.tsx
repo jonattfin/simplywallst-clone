@@ -7,8 +7,8 @@ import { gql } from "@apollo/client";
 import { head } from "lodash";
 
 import { WithLoadingSpinner } from "../../../_shared_";
-import { CompanyFacade } from "../../../api/data-types";
 import RadarComponent from "../../../_shared_/radar";
+import { ICompanyOverview } from "../../../api/graphql-types";
 
 export const GET_OVERVIEW_QUERY = gql`
   query getOverviewData {
@@ -22,6 +22,7 @@ export const GET_OVERVIEW_QUERY = gql`
         description
       }
       stocks {
+        ticker
         marketCap
       }
       snowflakeValueJson
@@ -30,7 +31,7 @@ export const GET_OVERVIEW_QUERY = gql`
 `;
 
 export function OverviewContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyOverview>({
     WrappedComponent: OverviewComponent,
     query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },
@@ -41,7 +42,7 @@ export function OverviewComponent({
   data,
   sectionName,
 }: {
-  data: CompanyFacade;
+  data: ICompanyOverview;
   sectionName: string;
 }) {
   const { company } = data;

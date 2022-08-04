@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Stack, Button, Divider } from "@mui/material";
 import { Fragment, useState } from "react";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
-import { Portfolio } from "../../../api/data-types";
+import { Portfolio } from "../../../api/generic-types";
 import RadarComponent from "../../../_shared_/radar";
 
 export function MenuComponent({ portfolio }: { portfolio: Portfolio }) {

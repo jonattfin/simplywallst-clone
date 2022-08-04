@@ -27,7 +27,7 @@ import { gql } from "@apollo/client";
 import { Fragment } from "react";
 
 import { Diversification, SpecialMenu } from "./components";
-import { CompanyPortfolio, Portfolio } from "../../api/data-types";
+import { CompanyPortfolio, Portfolio } from "../../api/generic-types";
 import {
   WithLoadingSpinner,
   RadarComponent,

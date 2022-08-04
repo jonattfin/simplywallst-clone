@@ -4,7 +4,7 @@ import { Breadcrumbs, Button, Grid, Paper } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 
-import { PortfolioFacade } from "../../api/data-types";
+import { PortfolioFacade } from "../../api/generic-types";
 import { WithLoadingSpinner } from "../../_shared_";
 import { AddFormPortfolio, PortfolioCard } from "./components";
 

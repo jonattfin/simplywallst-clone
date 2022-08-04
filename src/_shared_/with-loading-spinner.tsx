@@ -21,28 +21,28 @@ export default function WithLoadingSpinner<T>({
   variables,
   otherProps,
 }: IWithLoadingSpinner<T>) {
-  const { loading, error, data } = useQuery(query, { variables });
+  const { loading, error, data } = useQuery<T>(query, { variables });
 
   return (
     <ComponentDataLoader {...{ isLoading: loading, error, data }}>
-      <WrappedComponent {...{ data: data as T, ...otherProps }} />
+      <WrappedComponent {...{ data, ...otherProps }} />
     </ComponentDataLoader>
   );
 }
 
-interface IDataLoader {
+interface IDataLoader<T> {
   isLoading: boolean;
   error: any;
-  data: any;
+  data: T;
   children: any;
 }
 
-function ComponentDataLoader({
+function ComponentDataLoader<T>({
   isLoading,
   error,
   data,
   children,
-}: IDataLoader) {
+}: IDataLoader<T>) {
   if (isLoading)
     return (
       <DivWrapper>

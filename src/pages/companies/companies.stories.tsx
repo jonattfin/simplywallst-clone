@@ -15,6 +15,7 @@ export default function Index() {
 }
 
 const datastore = datastoreFactory.getDatastore();
+const companyFacade = datastore.getCompanyFacade();
 
 export const CompanyInstance = () => {
   return <Company.CompanyComponent {...{ sectionName: "Company" }} />;
@@ -23,7 +24,7 @@ export const CompanyInstance = () => {
 export const CompetitorsInstance = () => {
   return (
     <Competitors.CompetitorsComponent
-      {...{ data: datastore.getCompanyFacade() }}
+      {...{ data: companyFacade.getCompetitors() }}
     />
   );
 };
@@ -31,7 +32,7 @@ export const CompetitorsInstance = () => {
 export const DividendInstance = () => {
   return (
     <Dividend.DividendComponent
-      {...{ data: datastore.getCompanyFacade(), sectionName: "" }}
+      {...{ data: companyFacade.getDividend(), sectionName: "" }}
     />
   );
 };
@@ -39,7 +40,7 @@ export const DividendInstance = () => {
 export const FinancialHealthInstance = () => {
   return (
     <FinancialHealth.FinancialHealthComponent
-      {...{ data: datastore.getCompanyFacade(), sectionName: "" }}
+      {...{ data: companyFacade.getFinancialHealth(), sectionName: "" }}
     />
   );
 };
@@ -47,7 +48,7 @@ export const FinancialHealthInstance = () => {
 export const FundamentalsInstance = () => {
   return (
     <Fundamentals.FundamentalsComponent
-      {...{ data: datastore.getCompanyFacade(), sectionName: "" }}
+      {...{ data: companyFacade.getFundamentals(), sectionName: "" }}
     />
   );
 };
@@ -55,7 +56,7 @@ export const FundamentalsInstance = () => {
 export const HistoryInstance = () => {
   return (
     <History.HistoryComponent
-      {...{ data: datastore.getCompanyFacade(), sectionName: "" }}
+      {...{ data: companyFacade.getHistory(), sectionName: "" }}
     />
   );
 };
@@ -63,7 +64,7 @@ export const HistoryInstance = () => {
 export const OverviewInstance = () => {
   return (
     <Overview.OverviewComponent
-      {...{ data: datastore.getCompanyFacade(), sectionName: "" }}
+      {...{ data: companyFacade.getOverview(), sectionName: "" }}
     />
   );
 };
@@ -71,7 +72,7 @@ export const OverviewInstance = () => {
 export const OwnershipInstance = () => {
   return (
     <Ownership.OwnershipComponent
-      {...{ data: datastore.getCompanyFacade(), sectionName: "" }}
+      {...{ data: companyFacade.getOwnership(), sectionName: "" }}
     />
   );
 };

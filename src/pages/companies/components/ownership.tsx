@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import { head } from "lodash";
 import { Fragment } from "react";
+import { ICompanyOwnership } from "../../../api/graphql-types";
 
-import { CompanyFacade } from "../../../api/data-types";
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 
 export const GET_OWNERSHIP_QUERY = gql`
@@ -27,7 +27,7 @@ export const GET_OWNERSHIP_QUERY = gql`
 `;
 
 export function OwnershipContainer({ sectionName }: { sectionName: string }) {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyOwnership>({
     WrappedComponent: OwnershipComponent,
     query: GET_OWNERSHIP_QUERY,
     otherProps: { sectionName },
@@ -38,7 +38,7 @@ export function OwnershipComponent({
   data,
   sectionName,
 }: {
-  data: CompanyFacade;
+  data: ICompanyOwnership;
   sectionName: string;
 }) {
   const { company } = data;

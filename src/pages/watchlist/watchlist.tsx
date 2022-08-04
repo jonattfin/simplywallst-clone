@@ -2,7 +2,7 @@ import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import styled from "@emotion/styled";
 import { Grid, Paper } from "@mui/material";
-import { WatchlistCompanies } from "../../api/data-types";
+import { WatchlistCompanies } from "../../api/generic-types";
 
 export function WatchlistComponent({ data }: { data: WatchlistCompanies }) {
   return (

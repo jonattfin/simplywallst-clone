@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Divider } from "@mui/material";
-import { Portfolio } from "../../../api/data-types";
+import { Portfolio } from "../../../api/generic-types";
 import { PieComponent } from "../../../_shared_";
 
 export default function Diversification({

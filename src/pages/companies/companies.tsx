@@ -11,7 +11,7 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
-import { WatchlistCompanies } from "../../api/data-types";
+import { WatchlistCompanies } from "../../api/generic-types";
 import { datastoreFactory } from "../../api/datastore-factory";
 import Link from "next/link";
 import { LineComponent, RadarComponent } from "../../_shared_";

@@ -1,12 +1,11 @@
 import { Button, Breadcrumbs, Stack, Link } from "@mui/material";
 import styled from "@emotion/styled";
-import { Fragment } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import { gql } from "@apollo/client";
 import { head } from "lodash";
 
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
-import { CompanyFacade } from "../../../api/data-types";
+import { ICompanyHeader } from "../../../api/generic-types";
 
 export const GET_HEADER_QUERY = gql`
   query getHeaderData {
@@ -27,13 +26,13 @@ export const GET_HEADER_QUERY = gql`
 `;
 
 export function HeaderContainer() {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyHeader>({
     WrappedComponent: HeaderComponent,
     query: GET_HEADER_QUERY,
   });
 }
 
-export function HeaderComponent({ data }: { data: CompanyFacade }) {
+export function HeaderComponent({ data }: { data: ICompanyHeader }) {
   const { company } = data;
   const stock = head(company.stocks);
 

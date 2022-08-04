@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
+import { ICompanyFundamentals } from "../../../api/graphql-types";
 
-import { CompanyFacade } from "../../../api/data-types";
 
 import {
   RadialBarComponent,
@@ -25,7 +25,7 @@ export function FundamentalsContainer({
 }: {
   sectionName: string;
 }) {
-  return WithLoadingSpinner<CompanyFacade>({
+  return WithLoadingSpinner<ICompanyFundamentals>({
     WrappedComponent: FundamentalsComponent,
     query: GET_FUNDAMENTALS_QUERY,
     otherProps: { sectionName },
@@ -36,7 +36,7 @@ export function FundamentalsComponent({
   data,
   sectionName,
 }: {
-  data: CompanyFacade;
+  data: ICompanyFundamentals;
   sectionName: string;
 }) {
   const { company } = data;
