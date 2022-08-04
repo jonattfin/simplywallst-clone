@@ -4,10 +4,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Portfolio } from "../../../api/generic-types";
 import _ from "lodash";
+import { PortolioDataType } from "../../../api/graphql-types";
 
-export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
+export default function PortfolioCard({
+  portfolio,
+}: {
+  portfolio: PortolioDataType;
+}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -22,9 +26,7 @@ export default function PortfolioCard({ portfolio }: { portfolio: Portfolio }) {
             {`${portfolio.name} (${_.capitalize(portfolio.currency)})`}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {`Created: ${portfolio.created}, Includes: ${
-              portfolio.companies.length
-            } holdings`}
+            {`Created: ${portfolio.created}, Includes: ${portfolio.companies.length} holdings`}
           </Typography>
         </CardContent>
       </CardActionArea>

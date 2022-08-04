@@ -1,5 +1,7 @@
+import { head } from "lodash";
 import { Company } from "./generic-types";
 import {
+  ICompaniesList,
   ICompanyCompetitors,
   ICompanyDividend,
   ICompanyFinancialHealth,
@@ -9,17 +11,49 @@ import {
   ICompanyOverview,
   ICompanyOwnership,
 } from "./graphql-types";
-import { ICompanyFacade } from "./interfaces";
+
+export interface ICompanyFacade {
+  getCompetitors(): ICompanyCompetitors;
+  getDividend(): ICompanyDividend;
+  getFinancialHealth(): ICompanyFinancialHealth;
+  getFundamentals(): ICompanyFundamentals;
+  getHeader(): ICompanyHeader;
+  getHistory(): ICompanyHistory;
+  getOverview(): ICompanyOverview;
+  getOwnership(): ICompanyOwnership;
+
+  getCompanies(): ICompaniesList;
+}
 
 export class CompanyFacade implements ICompanyFacade {
-  private readonly company;
+  private readonly companies: Company[];
 
-  constructor(company: Company) {
-    this.company = company;
+  constructor(companies: Company[]) {
+    this.companies = companies;
+  }
+
+  getCompanies(): ICompaniesList {
+    return {
+      companies: this.companies.map((c, index) => {
+        const stock = head(c.stocks);
+
+        return {
+          id: index + 1,
+          name: c.name,
+          lastPrice: stock?.lastPrice,
+          fairValue: stock?.lastPrice,
+          sevenDays: stock?.priceSevenDays,
+          oneYear: stock?.priceOneYear,
+          snowflakeValueJson: c.snowflakeValueJson,
+          priceHistoryJson: stock?.priceHistoryJson,
+          news: c.news,
+        };
+      }),
+    };
   }
 
   getCompetitors(): ICompanyCompetitors {
-    const { name, competitors } = this.company;
+    const { name, competitors } = this.getCompany();
 
     return {
       company: {
@@ -35,7 +69,7 @@ export class CompanyFacade implements ICompanyFacade {
     };
   }
   getDividend(): ICompanyDividend {
-    const { name, stocks } = this.company;
+    const { name, stocks } = this.getCompany();
 
     return {
       company: {
@@ -45,7 +79,7 @@ export class CompanyFacade implements ICompanyFacade {
     };
   }
   getFinancialHealth(): ICompanyFinancialHealth {
-    const { name, stocks } = this.company;
+    const { name, stocks } = this.getCompany();
 
     return {
       company: {
@@ -55,7 +89,7 @@ export class CompanyFacade implements ICompanyFacade {
     };
   }
   getFundamentals(): ICompanyFundamentals {
-    const { name, radialBarValueJson } = this.company;
+    const { name, radialBarValueJson } = this.getCompany();
 
     return {
       company: {
@@ -65,7 +99,7 @@ export class CompanyFacade implements ICompanyFacade {
     };
   }
   getHeader(): ICompanyHeader {
-    const { name, stocks } = this.company;
+    const { name, stocks } = this.getCompany();
 
     return {
       company: {
@@ -75,7 +109,7 @@ export class CompanyFacade implements ICompanyFacade {
     };
   }
   getHistory(): ICompanyHistory {
-    const { news, stocks } = this.company;
+    const { news, stocks } = this.getCompany();
 
     return {
       company: {
@@ -86,7 +120,7 @@ export class CompanyFacade implements ICompanyFacade {
   }
   getOverview(): ICompanyOverview {
     const { name, description, snowflakeValueJson, rewards, risks, stocks } =
-      this.company;
+      this.getCompany();
 
     return {
       company: {
@@ -100,7 +134,7 @@ export class CompanyFacade implements ICompanyFacade {
     };
   }
   getOwnership(): ICompanyOwnership {
-    const { name, stocks } = this.company;
+    const { name, stocks } = this.getCompany();
 
     return {
       company: {
@@ -108,5 +142,9 @@ export class CompanyFacade implements ICompanyFacade {
         stocks,
       },
     };
+  }
+
+  private getCompany(): Company {
+    return this.companies[0];
   }
 }

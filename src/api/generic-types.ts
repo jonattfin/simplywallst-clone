@@ -8,7 +8,7 @@ export type Company = {
   competitors: Company[];
   snowflakeValueJson: string;
   radialBarValueJson: string;
-}
+};
 
 export type Stock = {
   ticker: string;
@@ -19,56 +19,40 @@ export type Stock = {
   priceOneYear: number;
   lastUpdated: string;
   priceHistoryJson: string;
-}
+};
 
 export type News = {
   id?: number;
   date: string;
   description: string;
-}
+};
 
 export type Rewards = {
   id?: number;
   description: string;
-}
+};
 
 export type Risks = {
   id?: number;
   description: string;
-}
+};
 
-export interface WatchlistCompanies {
-  companies: WatchlistCompany[];
-}
-
-export interface WatchlistCompany {
-  id: number;
-  name?: string;
-  lastPrice?: number;
-  fairValue?: number;
-  sevenDays?: number;
-  oneYear?: number;
-  snowflakeValueJson: string;
-  priceHistoryJson?: string;
-  news: News[];
-}
-
-export interface HistoryNews {
+export type HistoryNews = {
   date: string;
   text: string;
-}
+};
 
-export interface PointType {
+export type PointType = {
   x: string;
   y: number;
-}
+};
 
-export interface LineDataType {
+export type LineDataType = {
   id: string;
   data: PointType[];
-}
+};
 
-export interface Portfolio {
+export type Portfolio = {
   id: number;
   name: string;
   currency: string;
@@ -78,16 +62,12 @@ export interface Portfolio {
 
   snowflakeValueJson: string;
   companies: CompanyPortfolio[];
-}
+};
 
-export interface PortfolioFacade {
-  portfolios: Portfolio[];
-}
-
-export interface CompanyPortfolio {
+export type CompanyPortfolio = {
   id: number;
   holding: number;
   annualDividendYield: number;
   annualDividendContribution: number;
   company: Company;
-}
+};

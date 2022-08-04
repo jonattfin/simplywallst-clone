@@ -27,12 +27,16 @@ import { gql } from "@apollo/client";
 import { Fragment } from "react";
 
 import { Diversification, SpecialMenu } from "./components";
-import { CompanyPortfolio, Portfolio } from "../../api/generic-types";
 import {
   WithLoadingSpinner,
   RadarComponent,
   WithVisibility,
 } from "../../_shared_";
+import {
+  IPortfolioDetails,
+  PortolioCompanyDetailsDataType,
+  PortolioDetailsDataType,
+} from "../../api/graphql-types";
 
 export const GET_PORTFOLIO_DETAILS_QUERY = gql`
   query getPortfolioData($id: Int!) {
@@ -72,7 +76,7 @@ export function PortfolioDetailsContainer() {
     currentId = parseInt(id, 10);
   }
 
-  return WithLoadingSpinner<Portfolio>({
+  return WithLoadingSpinner<IPortfolioDetails>({
     WrappedComponent: PortfolioDetailsComponent,
     query: GET_PORTFOLIO_DETAILS_QUERY,
     variables: {
@@ -84,13 +88,13 @@ export function PortfolioDetailsContainer() {
 export function PortfolioDetailsComponent({
   data,
 }: {
-  data: { portfolio: Portfolio };
+  data: IPortfolioDetails;
 }) {
   const { portfolio } = data;
   const AppComponents = getApplicationComponents();
 
   return (
-    <MainDiv>
+    <div>
       <Grid
         container
         direction="row"
@@ -114,7 +118,7 @@ export function PortfolioDetailsComponent({
           </Stack>
         </Grid>
       </Grid>
-    </MainDiv>
+    </div>
   );
 }
 
@@ -128,7 +132,11 @@ function getApplicationComponents() {
   ].map((Component) => WithVisibility(Component));
 }
 
-function HeaderComponent({ portfolio }: { portfolio: Portfolio }) {
+function HeaderComponent({
+  portfolio,
+}: {
+  portfolio: PortolioDetailsDataType;
+}) {
   return (
     <Fragment>
       <div>
@@ -151,7 +159,11 @@ function HeaderComponent({ portfolio }: { portfolio: Portfolio }) {
   );
 }
 
-function HoldingsComponent({ portfolio }: { portfolio: Portfolio }) {
+function HoldingsComponent({
+  portfolio,
+}: {
+  portfolio: PortolioDetailsDataType;
+}) {
   return (
     <Fragment>
       <Stack
@@ -175,7 +187,7 @@ function HoldingsComponent({ portfolio }: { portfolio: Portfolio }) {
       >
         {portfolio?.companies.map((company, index) => (
           <Grid item xs={3} key={`company_${index}`}>
-            <CompanyCard {...{ companyPortfolio: company }} />
+            <CompanyCard {...{ portfolioCompany: company }} />
           </Grid>
         ))}
       </Grid>
@@ -183,7 +195,11 @@ function HoldingsComponent({ portfolio }: { portfolio: Portfolio }) {
   );
 }
 
-function PortfolioSummary({ portfolio }: { portfolio: Portfolio }) {
+function PortfolioSummary({
+  portfolio,
+}: {
+  portfolio: PortolioDetailsDataType;
+}) {
   return (
     <Fragment>
       <h1>Portfolio Summary</h1>
@@ -209,7 +225,7 @@ function PortfolioSummary({ portfolio }: { portfolio: Portfolio }) {
   );
 }
 
-function Dividends({ portfolio }: { portfolio: Portfolio }) {
+function Dividends({ portfolio }: { portfolio: PortolioDetailsDataType }) {
   return (
     <Fragment>
       <h1>Dividends</h1>
@@ -225,11 +241,11 @@ function Dividends({ portfolio }: { portfolio: Portfolio }) {
 }
 
 function CompanyCard({
-  companyPortfolio,
+  portfolioCompany,
 }: {
-  companyPortfolio: CompanyPortfolio;
+  portfolioCompany: PortolioCompanyDetailsDataType;
 }) {
-  const { company, holding } = companyPortfolio;
+  const { company, holding } = portfolioCompany;
   const stock = head(company.stocks);
 
   return (
@@ -290,7 +306,7 @@ function createData(
 export default function DividendTable({
   portfolio,
 }: {
-  portfolio?: Portfolio;
+  portfolio?: PortolioDetailsDataType;
 }) {
   if (!portfolio) return <div></div>;
 
@@ -334,11 +350,6 @@ export default function DividendTable({
 }
 
 // Styled Components
-
-const MainDiv = styled.div`
-  min-height: 100vh;
-  padding: 0px 100px;
-`;
 
 const RadarContainer = styled.div`
   width: 50px;

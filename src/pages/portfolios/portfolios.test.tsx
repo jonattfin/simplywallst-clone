@@ -15,12 +15,12 @@ beforeAll(() => {
   global.ResizeObserver = require("resize-observer-polyfill");
 });
 
-const datastore = datastoreFactory.getDatastore();
+const portfolioFacade = datastoreFactory.getDatastore().getPortfolioFacade();
 
 describe("Portfolios components", () => {
   describe("Portfolios", () => {
     const data = {
-      portfolios: datastore.getPortfolioFacade().portfolios,
+      ...portfolioFacade.getPortfoliosList(),
     };
 
     it("PortfoliosComponent renders without error", async () => {

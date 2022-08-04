@@ -1,62 +1,37 @@
 import _, { random, take, range, head } from "lodash";
-import { faker } from "@faker-js/faker";
-
 import {
   LineDataType,
   Company,
-  PortfolioFacade,
   Portfolio,
   CompanyPortfolio,
-  WatchlistCompanies,
 } from "./generic-types";
 
-import { ICompanyFacade, IDatastore } from "./interfaces";
-import { CompanyFacade } from "./company-facade";
+import { CompanyFacade, ICompanyFacade } from "./company-facade";
+import { IPortfolioFacade, PortfolioFacade } from "./portfolio-facade";
+
+export interface IDatastore {
+  getCompanyFacade(): ICompanyFacade;
+  getPortfolioFacade(): IPortfolioFacade;
+}
 
 export class LocalDatastore implements IDatastore {
-  private readonly _company!: Company;
-  private readonly _portfolios: Portfolio[];
   private readonly _companyFacade: ICompanyFacade;
+  private readonly _portfolioFacade: IPortfolioFacade;
 
   constructor() {
-    const competitors = getCompetitors();
-    this._company = getCompany("INGB", competitors);
+    const companies = getCompanies();
+    this._companyFacade = new CompanyFacade(companies);
 
-    this._portfolios = getPortfolios(competitors);
-
-    this._companyFacade = new CompanyFacade(this._company);
-  }
-
-  getWatchlistCompanies(): WatchlistCompanies {
-    return {
-      companies: getCompetitors().map((competitor, index) => {
-        const stock = head(competitor.stocks);
-        return {
-          id: index + 1,
-          name: competitor.name,
-          lastPrice: stock?.lastPrice,
-          fairValue: stock?.lastPrice,
-          sevenDays: stock?.priceSevenDays,
-          oneYear: stock?.priceOneYear,
-          priceHistoryJson: stock?.priceHistoryJson,
-          snowflakeValueJson: competitor.snowflakeValueJson,
-          news: competitor.news,
-        };
-      }),
-    };
+    const portfolios = getPortfolios(companies);
+    this._portfolioFacade = new PortfolioFacade(portfolios);
   }
 
   getCompanyFacade(): ICompanyFacade {
     return this._companyFacade;
   }
 
-  getPortfolioFacade(id: number): PortfolioFacade {
-    let portfolios = this._portfolios;
-    if (id) {
-      portfolios = portfolios.filter((p) => p.id == id);
-    }
-
-    return { portfolios };
+  getPortfolioFacade(): IPortfolioFacade {
+    return this._portfolioFacade;
   }
 }
 
@@ -159,7 +134,7 @@ export interface IHistoryData {
   numberOfYears?: number;
 }
 
-function getCompetitors() {
+function getCompanies() {
   return [
     getCompany("ABN AMRO Bank"),
     getCompany("Lloyds Banking Group"),

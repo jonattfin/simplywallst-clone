@@ -1,5 +1,4 @@
-import { IDatastore } from "./interfaces";
-import { LocalDatastore } from "./local-datastore";
+import { IDatastore, LocalDatastore } from "./local-datastore";
 
 export class DatastoreFactory {
   private _datastore!: IDatastore;

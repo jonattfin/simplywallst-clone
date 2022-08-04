@@ -2,7 +2,6 @@ import * as React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import styled from "@emotion/styled";
 import {
-  Divider,
   Grid,
   List,
   ListItem,
@@ -11,20 +10,20 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
-import { WatchlistCompanies } from "../../api/generic-types";
 import { datastoreFactory } from "../../api/datastore-factory";
 import Link from "next/link";
 import { LineComponent, RadarComponent } from "../../_shared_";
 import { useState } from "react";
+import { ICompaniesList } from "../../api/graphql-types";
 
-const datastore = datastoreFactory.getDatastore();
+const companyFacade = datastoreFactory.getDatastore().getCompanyFacade();
 
 export function CompaniesContainer() {
-  const data = datastore.getWatchlistCompanies();
+  const data = companyFacade.getCompanies();
   return <CompaniesComponent {...{ data }} />;
 }
 
-export function CompaniesComponent({ data }: { data: WatchlistCompanies }) {
+export function CompaniesComponent({ data }: { data: ICompaniesList }) {
   const [rowModel, setRowModel] = useState<any>(null);
   return (
     <MainPaper>
@@ -54,7 +53,7 @@ export function CompaniesComponent({ data }: { data: WatchlistCompanies }) {
   );
 }
 
-function renderSelectedCompany(rowModel: any = [], data: WatchlistCompanies) {
+function renderSelectedCompany(rowModel: any = [], data: ICompaniesList) {
   console.log(JSON.stringify(rowModel));
   const [id] = rowModel || [];
   if (!id) return <div>no data</div>;

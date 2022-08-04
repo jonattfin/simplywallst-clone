@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import { Breadcrumbs, Button, Grid, Paper } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+import { IPortfoliosList } from "../../api/graphql-types";
 
-import { PortfolioFacade } from "../../api/generic-types";
 import { WithLoadingSpinner } from "../../_shared_";
 import { AddFormPortfolio, PortfolioCard } from "./components";
 
@@ -40,7 +40,7 @@ export function PortfoliosContainer() {
     refetchQueries: [{ query: GET_PORTFOLIOS_QUERY }],
   });
 
-  return WithLoadingSpinner<PortfolioFacade>({
+  return WithLoadingSpinner<IPortfoliosList>({
     WrappedComponent: PortfoliosComponent,
     query: GET_PORTFOLIOS_QUERY,
     otherProps: {
@@ -53,7 +53,7 @@ export function PortfoliosComponent({
   data,
   createPortfolio,
 }: {
-  data: PortfolioFacade;
+  data: IPortfoliosList;
   createPortfolio: any;
 }) {
   const [open, setOpen] = useState(false);

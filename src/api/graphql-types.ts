@@ -90,6 +90,82 @@ export type OwnershipDataType = {
 
 export interface ICompanyOwnership extends ICompanyBase<OwnershipDataType> {}
 
+export type PortolioDataType = {
+  id: number;
+  name: string;
+  currency: string;
+  image: string;
+  created: string;
+  description: string;
+
+  companies: {
+    id: number;
+  }[];
+};
+
+export interface IPortfoliosList
+  extends IPortfoliosListBase<PortolioDataType> {}
+
+export type PortolioCompanyDetailsDataType = {
+  holding: number;
+  annualDividendYield: number;
+  annualDividendContribution: number;
+  company: {
+    name: string;
+    snowflakeValueJson: string;
+    stocks: {
+      ticker: string;
+      lastPrice: number;
+      priceOneYear: number;
+      priceSevenDays: number;
+    }[];
+  };
+};
+
+export type PortolioDetailsDataType = {
+  id: number;
+  name: string;
+  image: string;
+  created: string;
+  description: string;
+  snowflakeValueJson: string;
+
+  companies: PortolioCompanyDetailsDataType[];
+};
+
+export interface IPortfolioDetails
+  extends IPortfolioBase<PortolioDetailsDataType> {}
+
+export type CompanyDataType = {
+  id: number;
+  name?: string;
+  lastPrice?: number;
+  fairValue?: number;
+  sevenDays?: number;
+  oneYear?: number;
+  snowflakeValueJson: string;
+  priceHistoryJson?: string;
+  news: {
+    id?: number;
+    date: string;
+    description: string;
+  }[];
+};
+
+export interface ICompaniesList extends ICompaniesListBase<CompanyDataType> {}
+
+interface IPortfoliosListBase<T> {
+  portfolios: T[];
+}
+
+interface IPortfolioBase<T> {
+  portfolio: T;
+}
+
+interface ICompaniesListBase<T> {
+  companies: T[];
+}
+
 interface ICompanyBase<T> {
   company: T;
 }

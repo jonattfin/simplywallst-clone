@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import { Divider } from "@mui/material";
-import { Portfolio } from "../../../api/generic-types";
+import { PortolioDetailsDataType } from "../../../api/graphql-types";
 import { PieComponent } from "../../../_shared_";
 
 export default function Diversification({
   portfolio,
 }: {
-  portfolio: Portfolio;
+  portfolio: PortolioDetailsDataType;
 }) {
   return (
     <div>
@@ -21,7 +21,7 @@ export default function Diversification({
   );
 }
 
-function getPieData(portfolio: Portfolio) {
+function getPieData(portfolio: PortolioDetailsDataType) {
   return portfolio.companies.map((companyPortfolio) => {
     return {
       id: companyPortfolio.company.name,
