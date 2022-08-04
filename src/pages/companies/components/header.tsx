@@ -5,7 +5,7 @@ import { gql } from "@apollo/client";
 import { head } from "lodash";
 
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
-import { ICompanyHeader } from "../../../api/generic-types";
+import { ICompanyHeader } from "../../../api/graphql-types";
 
 export const GET_HEADER_QUERY = gql`
   query getHeaderData {
