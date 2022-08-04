@@ -29,8 +29,8 @@ const getTheme = () => {
 };
 
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",
-  // uri: "https://simplywallst.herokuapp.com/graphql",
+  // uri: "http://localhost:8080/graphql",
+  uri: "https://simplywallst.herokuapp.com/graphql",
   cache: new InMemoryCache(),
 });
 
