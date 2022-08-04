@@ -104,14 +104,17 @@ function getCompany(ticker: string, competitors: Company[] = []): Company {
     ],
     news: [
       {
+        id: 1,
         date: new Date(2022, 5, 18).toDateString(),
         description: `${ticker} commences an Equity Buyback Plan, under the authorization approved on April 25, 2022.`,
       },
       {
+        id: 2,
         date: new Date(2022, 6, 18).toDateString(),
         description: `${ticker} provides Earnings Guidance for the Third Quarter of 2022`,
       },
       {
+        id: 3,
         date: new Date(2022, 7, 18).toDateString(),
         description: `${ticker} EPS and revenues exceed analyst expectations`,
       },
