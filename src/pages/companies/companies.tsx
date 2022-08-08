@@ -16,7 +16,7 @@ import {
   RadarComponent,
   WithLoadingSpinner,
 } from "../../_shared_";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICompaniesList } from "../../api/graphql-types";
 import { gql } from "@apollo/client";
 import { head } from "lodash";
@@ -55,6 +55,14 @@ export function CompaniesComponent({ data }: { data: ICompaniesList }) {
 
   const rows = getRows(data);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (rows.length > 0) {
+        setRowModel([1]);
+      }
+    }, 100);
+  }, []);
+
   return (
     <MainPaper>
       <h2>Companies</h2>
@@ -71,7 +79,9 @@ export function CompaniesComponent({ data }: { data: ICompaniesList }) {
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[5]}
-              onSelectionModelChange={(model) => setRowModel(model)}
+              onSelectionModelChange={(model) => {
+                setRowModel(model);
+              }}
             />
           </GridContainer>
         </Grid>
@@ -83,7 +93,7 @@ export function CompaniesComponent({ data }: { data: ICompaniesList }) {
   );
 }
 
-function getRows(data: ICompaniesList) {
+function getRows(data: ICompaniesList): any[] {
   return data.companies.map((c) => {
     const { stocks } = c;
     const stock = head(stocks);
