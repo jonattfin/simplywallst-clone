@@ -17,12 +17,21 @@ import { Fragment } from "react";
 import { MenuItems } from "./components/menu";
 import Head from "next/head";
 import { WithVisibility } from "../../_shared_";
+import { useRouter } from "next/router";
 
 export function CompanyDetailsContainer() {
-  return <CompanyDetailsComponent />;
+  const router = useRouter();
+  const { id } = router.query;
+
+  let currentId = 1;
+  if (typeof id == "string") {
+    currentId = parseInt(id, 10);
+  }
+
+  return <CompanyDetailsComponent companyId={currentId} />;
 }
 
-export function CompanyDetailsComponent() {
+export function CompanyDetailsComponent({ companyId }: { companyId: number }) {
   const AppComponents = getApplicationComponents();
 
   return (
@@ -40,7 +49,7 @@ export function CompanyDetailsComponent() {
       >
         <Grid item xs={12}>
           <Paper elevation={3}>
-            <Header.HeaderContainer />
+            <Header.HeaderContainer companyId={companyId}/>
           </Paper>
         </Grid>
         <Grid item xl={2} md={2}>
@@ -55,6 +64,7 @@ export function CompanyDetailsComponent() {
                 <InnerContainer>
                   <CustomComponent
                     sectionName={MenuItems[index].replace(" ", "_")}
+                    companyId={companyId}
                   />
                 </InnerContainer>
               </Paper>

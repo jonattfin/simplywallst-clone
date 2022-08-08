@@ -16,8 +16,8 @@ import { ICompanyOwnership } from "../../../api/graphql-types";
 import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 
 export const GET_OWNERSHIP_QUERY = gql`
-  query getOwnershipData {
-    company(id: 1) {
+  query getOwnershipData($id: Int!) {
+    company(id: $id) {
       name
       stocks {
         priceHistoryJson
@@ -26,11 +26,20 @@ export const GET_OWNERSHIP_QUERY = gql`
   }
 `;
 
-export function OwnershipContainer({ sectionName }: { sectionName: string }) {
+export function OwnershipContainer({
+  sectionName,
+  companyId,
+}: {
+  sectionName: string;
+  companyId: number;
+}) {
   return WithLoadingSpinner<ICompanyOwnership>({
     WrappedComponent: OwnershipComponent,
     query: GET_OWNERSHIP_QUERY,
     otherProps: { sectionName },
+    variables: {
+      id: companyId,
+    },
   });
 }
 

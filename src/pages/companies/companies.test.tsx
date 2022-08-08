@@ -38,13 +38,13 @@ describe("Companies components", () => {
   });
 
   describe("Competitors", () => {
-    it("CompetitorsComponent renders without error", () => {
-      const { getByText } = render(
+    it("CompetitorsComponent renders without error", async () => {
+      render(
         <Competitors.CompetitorsComponent
           {...{ data: companyFacade.getCompetitors() }}
         />
       );
-      expect(getByText("ING Groep Competitors")).toBeInTheDocument();
+      expect(await screen.findByText(/Competitors/)).toBeInTheDocument();
     });
 
     it("CompetitorsContainer renders without error", async () => {
@@ -61,25 +61,23 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <Competitors.CompetitorsContainer />
+          <Competitors.CompetitorsContainer companyId={1} />
         </MockedProvider>
       );
 
-      expect(
-        await screen.findByText("ING Groep Competitors")
-      ).toBeInTheDocument();
+      expect(await screen.findByText(/Competitors/)).toBeInTheDocument();
     });
   });
 
   describe("Dividend", () => {
-    it("DividendComponent renders without error", () => {
-      const { getByText } = render(
+    it("DividendComponent renders without error", async () => {
+      render(
         <Dividend.DividendComponent
           sectionName=""
           {...{ data: companyFacade.getDividend() }}
         />
       );
-      expect(getByText("Dividend")).toBeInTheDocument();
+      expect(await screen.findByText(/Dividend/)).toBeInTheDocument();
     });
 
     it("DividendContainer renders without error", async () => {
@@ -96,23 +94,23 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <Dividend.DividendContainer sectionName="" />
+          <Dividend.DividendContainer sectionName="" companyId={1} />
         </MockedProvider>
       );
 
-      expect(await screen.findByText("Dividend")).toBeInTheDocument();
+      expect(await screen.findByText(/Dividend/)).toBeInTheDocument();
     });
   });
 
   describe("Financial Health", () => {
-    it("FinancialHealthComponent renders without error", () => {
-      const { getByText } = render(
+    it("FinancialHealthComponent renders without error", async () => {
+      render(
         <FinancialHealth.FinancialHealthComponent
           sectionName=""
           {...{ data: companyFacade.getFinancialHealth() }}
         />
       );
-      expect(getByText("Financial Health")).toBeInTheDocument();
+      expect(await screen.findByText(/Financial Health/)).toBeInTheDocument();
     });
 
     it("FinancialHealthContainer renders without error", async () => {
@@ -129,23 +127,28 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <FinancialHealth.FinancialHealthContainer sectionName="" />
+          <FinancialHealth.FinancialHealthContainer
+            sectionName=""
+            companyId={1}
+          />
         </MockedProvider>
       );
 
-      expect(await screen.findByText("Financial Health")).toBeInTheDocument();
+      expect(await screen.findByText(/Financial Health/)).toBeInTheDocument();
     });
   });
 
   describe("Fundamentals", () => {
-    it("FundamentalsComponent renders without error", () => {
-      const { getByText } = render(
+    it("FundamentalsComponent renders without error", async () => {
+      render(
         <Fundamentals.FundamentalsComponent
           sectionName=""
           {...{ data: companyFacade.getFundamentals() }}
         />
       );
-      expect(getByText("ING Groep Fundamentals Summary")).toBeInTheDocument();
+      expect(
+        await screen.findByText(/Fundamentals Summary/)
+      ).toBeInTheDocument();
     });
 
     it("FundamentalsContainer renders without error", async () => {
@@ -162,25 +165,27 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <Fundamentals.FundamentalsContainer sectionName="" />
+          <Fundamentals.FundamentalsContainer sectionName="" companyId={1} />
         </MockedProvider>
       );
 
       expect(
-        await screen.findByText("ING Groep Fundamentals Summary")
+        await screen.findByText(/Fundamentals Summary/)
       ).toBeInTheDocument();
     });
   });
 
   describe("History", () => {
-    it("HistoryComponent renders without error", () => {
-      const { getByText } = render(
+    it("HistoryComponent renders without error", async () => {
+      render(
         <History.HistoryComponent
           sectionName=""
           {...{ data: companyFacade.getHistory() }}
         />
       );
-      expect(getByText("Price History & Performance")).toBeInTheDocument();
+      expect(
+        await screen.findByText(/Price History & Performance/)
+      ).toBeInTheDocument();
     });
 
     it("HistoryContainer renders without error", async () => {
@@ -197,25 +202,25 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <History.HistoryContainer sectionName="" />
+          <History.HistoryContainer sectionName="" companyId={1} />
         </MockedProvider>
       );
 
       expect(
-        await screen.findByText("Price History & Performance")
+        await screen.findByText(/Price History & Performance/)
       ).toBeInTheDocument();
     });
   });
 
   describe("Overview", () => {
-    it("OverviewComponent renders without error", () => {
-      const { getByText } = render(
+    it("OverviewComponent renders without error", async () => {
+      render(
         <Overview.OverviewComponent
           sectionName=""
           {...{ data: companyFacade.getOverview() }}
         />
       );
-      expect(getByText("About the company")).toBeInTheDocument();
+      expect(await screen.findByText(/About the company/)).toBeInTheDocument();
     });
 
     it("OverviewContainer renders without error", async () => {
@@ -232,25 +237,25 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <Overview.OverviewContainer sectionName="" />
+          <Overview.OverviewContainer sectionName="" companyId={1} />
         </MockedProvider>
       );
 
-      expect(await screen.findByText("About the company")).toBeInTheDocument();
+      expect(await screen.findByText(/About the company/)).toBeInTheDocument();
     });
   });
 
   describe("Ownership", () => {
-    it("OwnershipComponent renders without error", () => {
-      const { getByText } = render(
+    it("OwnershipComponent renders without error", async () => {
+      render(
         <Ownership.OwnershipComponent
           sectionName=""
           {...{ data: companyFacade.getOwnership() }}
         />
       );
       expect(
-        getByText(
-          "Who are the major shareholders and have insiders been buying or selling?"
+        await screen.findByText(
+          /Who are the major shareholders and have insiders been buying or selling?/
         )
       ).toBeInTheDocument();
     });
@@ -269,13 +274,13 @@ describe("Companies components", () => {
 
       render(
         <MockedProvider mocks={[mock]} addTypename={false}>
-          <Ownership.OwnershipContainer sectionName="" />
+          <Ownership.OwnershipContainer sectionName="" companyId={1} />
         </MockedProvider>
       );
 
       expect(
         await screen.findByText(
-          "Who are the major shareholders and have insiders been buying or selling?"
+          /Who are the major shareholders and have insiders been buying or selling?/
         )
       ).toBeInTheDocument();
     });

@@ -4,7 +4,6 @@ import { Divider, Grid, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 import { ICompanyFundamentals } from "../../../api/graphql-types";
 
-
 import {
   RadialBarComponent,
   BarComponent,
@@ -12,8 +11,8 @@ import {
 } from "../../../_shared_";
 
 export const GET_FUNDAMENTALS_QUERY = gql`
-  query getFundamentalsData {
-    company(id: 1) {
+  query getFundamentalsData($id: Int!) {
+    company(id: $id) {
       name
       radialBarValueJson
     }
@@ -22,13 +21,18 @@ export const GET_FUNDAMENTALS_QUERY = gql`
 
 export function FundamentalsContainer({
   sectionName,
+  companyId,
 }: {
   sectionName: string;
+  companyId: number;
 }) {
   return WithLoadingSpinner<ICompanyFundamentals>({
     WrappedComponent: FundamentalsComponent,
     query: GET_FUNDAMENTALS_QUERY,
     otherProps: { sectionName },
+    variables: {
+      id: companyId,
+    },
   });
 }
 
@@ -43,7 +47,7 @@ export function FundamentalsComponent({
 
   return (
     <Fragment>
-      <h4 id={sectionName}>ING Groep Fundamentals Summary</h4>
+      <h4 id={sectionName}>{company.name} Fundamentals Summary</h4>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
           <RadialBarWrapper>

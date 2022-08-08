@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { ICompaniesList } from "../../api/graphql-types";
 import { gql } from "@apollo/client";
 import { head } from "lodash";
+import { useRouter } from "next/router";
 
 export const GET_COMPANIES_QUERY = gql`
   query getCompaniesData {
@@ -44,6 +45,8 @@ export const GET_COMPANIES_QUERY = gql`
 `;
 
 export function CompaniesContainer() {
+ 
+
   return WithLoadingSpinner<ICompaniesList>({
     WrappedComponent: CompaniesComponent,
     query: GET_COMPANIES_QUERY,

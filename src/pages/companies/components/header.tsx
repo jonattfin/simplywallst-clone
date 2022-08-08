@@ -8,8 +8,8 @@ import { LineComponent, WithLoadingSpinner } from "../../../_shared_";
 import { ICompanyHeader } from "../../../api/graphql-types";
 
 export const GET_HEADER_QUERY = gql`
-  query getHeaderData {
-    company(id: 1) {
+  query getHeaderData($id: Int!) {
+    company(id: $id) {
       name
       stocks {
         ticker
@@ -25,10 +25,13 @@ export const GET_HEADER_QUERY = gql`
   }
 `;
 
-export function HeaderContainer() {
+export function HeaderContainer({ companyId }: { companyId: number }) {
   return WithLoadingSpinner<ICompanyHeader>({
     WrappedComponent: HeaderComponent,
     query: GET_HEADER_QUERY,
+    variables: {
+      id: companyId,
+    },
   });
 }
 

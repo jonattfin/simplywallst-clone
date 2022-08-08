@@ -13,8 +13,8 @@ import { head } from "lodash";
 import { ICompanyDividend } from "../../../api/graphql-types";
 
 export const GET_DIVIDENDS_QUERY = gql`
-  query getDividendsData {
-    company(id: 1) {
+  query getDividendsData($id: Int!) {
+    company(id: $id) {
       name
       stocks {
         priceHistoryJson
@@ -23,11 +23,20 @@ export const GET_DIVIDENDS_QUERY = gql`
   }
 `;
 
-export function DividendContainer({ sectionName }: { sectionName: string }) {
+export function DividendContainer({
+  sectionName,
+  companyId,
+}: {
+  sectionName: string;
+  companyId: number;
+}) {
   return WithLoadingSpinner<ICompanyDividend>({
     WrappedComponent: DividendComponent,
     query: GET_DIVIDENDS_QUERY,
     otherProps: { sectionName },
+    variables: {
+      id: companyId,
+    },
   });
 }
 
@@ -47,7 +56,7 @@ export function DividendComponent({
         <div>
           <h4 id={sectionName}>Dividend</h4>
           <p>
-            What is ING Groep current dividend yield, its reliability and
+            What is {company.name} current dividend yield, its reliability and
             sustainability?
           </p>
         </div>
@@ -89,7 +98,7 @@ export function DividendComponent({
                 <CheckBoxIcon fontSize="small" color="success" />
                 <TitleParagraph>Earnings Coverage: </TitleParagraph>
               </div>
-              At its current payout ratio (81.7%), INGA&apos;s payments are
+              At its current payout ratio (81.7%), {company.name} payments are
               covered by earnings.
             </ContentDiv>
           </Stack>
@@ -111,7 +120,7 @@ export function DividendComponent({
                 <CheckBoxIcon fontSize="small" color="success" />
                 <TitleParagraph>Future Dividend Coverage: </TitleParagraph>
               </div>
-              INGA&apos;s dividends in 3 years are forecast to be covered by
+              {company.name} dividends in 3 years are forecast to be covered by
               earnings (53.1% payout ratio).
             </ContentDiv>
           </Stack>

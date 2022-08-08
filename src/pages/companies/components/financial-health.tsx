@@ -13,8 +13,8 @@ import { head } from "lodash";
 import { ICompanyFinancialHealth } from "../../../api/graphql-types";
 
 export const GET_FINANCIAL_HEALTH_QUERY = gql`
-  query getFinancialHealthData {
-    company(id: 1) {
+  query getFinancialHealthData($id: Int!) {
+    company(id: $id) {
       name
       stocks {
         priceHistoryJson
@@ -25,13 +25,18 @@ export const GET_FINANCIAL_HEALTH_QUERY = gql`
 
 export function FinancialHealthContainer({
   sectionName,
+  companyId
 }: {
   sectionName: string;
+  companyId: number;
 }) {
   return WithLoadingSpinner<ICompanyFinancialHealth>({
     WrappedComponent: FinancialHealthComponent,
     query: GET_FINANCIAL_HEALTH_QUERY,
     otherProps: { sectionName },
+    variables: {
+      id: companyId,
+    },
   });
 }
 
@@ -49,7 +54,7 @@ export function FinancialHealthComponent({
     <Fragment>
       <h4 id={sectionName}>Financial Health</h4>
       <p>
-        How is ING Groep&apos;s financial position? (This company is analysed
+        How is {company.name} financial position? (This company is analysed
         differently as a bank or financial institution)
       </p>
 

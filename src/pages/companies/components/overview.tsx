@@ -11,8 +11,8 @@ import RadarComponent from "../../../_shared_/radar";
 import { ICompanyOverview } from "../../../api/graphql-types";
 
 export const GET_OVERVIEW_QUERY = gql`
-  query getOverviewData {
-    company(id: 1) {
+  query getOverviewData($id: Int!) {
+    company(id: $id) {
       name
       description
       rewards {
@@ -30,11 +30,20 @@ export const GET_OVERVIEW_QUERY = gql`
   }
 `;
 
-export function OverviewContainer({ sectionName }: { sectionName: string }) {
+export function OverviewContainer({
+  sectionName,
+  companyId,
+}: {
+  sectionName: string;
+  companyId: number;
+}) {
   return WithLoadingSpinner<ICompanyOverview>({
     WrappedComponent: OverviewComponent,
     query: GET_OVERVIEW_QUERY,
     otherProps: { sectionName },
+    variables: {
+      id: companyId,
+    },
   });
 }
 

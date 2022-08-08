@@ -20,8 +20,8 @@ import { head } from "lodash";
 import { ICompanyHistory } from "../../../api/graphql-types";
 
 export const GET_NEWS_QUERY = gql`
-  query getNewsForCompanyData {
-    company(id: 1) {
+  query getNewsForCompanyData($id: Int!) {
+    company(id: $id) {
       news {
         date
         description
@@ -33,11 +33,20 @@ export const GET_NEWS_QUERY = gql`
   }
 `;
 
-export function HistoryContainer({ sectionName }: { sectionName: string }) {
+export function HistoryContainer({
+  sectionName,
+  companyId,
+}: {
+  sectionName: string;
+  companyId: number;
+}) {
   return WithLoadingSpinner<ICompanyHistory>({
     WrappedComponent: HistoryComponent,
     query: GET_NEWS_QUERY,
     otherProps: { sectionName },
+    variables: {
+      id: companyId,
+    },
   });
 }
 

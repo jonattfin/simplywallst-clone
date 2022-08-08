@@ -9,8 +9,8 @@ import RadarComponent from "../../../_shared_/radar";
 import { ICompanyCompetitors } from "../../../api/graphql-types";
 
 export const GET_COMPETITORS_QUERY = gql`
-  query getCompetitorsData {
-    company(id: 1) {
+  query getCompetitorsData($id: Int!) {
+    company(id: $id) {
       name
       competitors {
         name
@@ -23,10 +23,13 @@ export const GET_COMPETITORS_QUERY = gql`
   }
 `;
 
-export function CompetitorsContainer() {
+export function CompetitorsContainer({ companyId }: { companyId: number }) {
   return WithLoadingSpinner<ICompanyCompetitors>({
     WrappedComponent: CompetitorsComponent,
     query: GET_COMPETITORS_QUERY,
+    variables: {
+      id: companyId,
+    },
   });
 }
 
@@ -36,7 +39,7 @@ export function CompetitorsComponent({ data }: { data: ICompanyCompetitors }) {
 
   return (
     <Fragment>
-      <h4>ING Groep Competitors</h4>
+      <h4>{company.name} Competitors</h4>
       <Grid
         container
         spacing={2}
