@@ -45,8 +45,6 @@ export const GET_COMPANIES_QUERY = gql`
 `;
 
 export function CompaniesContainer() {
- 
-
   return WithLoadingSpinner<ICompaniesList>({
     WrappedComponent: CompaniesComponent,
     query: GET_COMPANIES_QUERY,
@@ -64,7 +62,7 @@ export function CompaniesComponent({ data }: { data: ICompaniesList }) {
         setRowModel([1]);
       }
     }, 100);
-  }, []);
+  }, [rows.length]);
 
   return (
     <MainPaper>

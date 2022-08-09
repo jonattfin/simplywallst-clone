@@ -11,15 +11,15 @@ import { Fragment } from "react";
 interface IWithLoadingSpinner<T> {
   WrappedComponent: any;
   query: DocumentNode | TypedDocumentNode<T, OperationVariables>;
-  variables?: any;
-  otherProps?: any;
+  variables?: {};
+  otherProps?: {};
 }
 
 export default function WithLoadingSpinner<T>({
   WrappedComponent,
   query,
-  variables,
-  otherProps,
+  variables = {},
+  otherProps = {},
 }: IWithLoadingSpinner<T>) {
   const { loading, error, data } = useQuery<T>(query, { variables });
 
